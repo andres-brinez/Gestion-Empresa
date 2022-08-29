@@ -3,8 +3,8 @@ package com.UdeA.Ciclo3.modelos;
 import javax.persistence.*;
 
 @Entity // Una entidad es la representación de información que nosotros necesitamos en nuestra aplicación.
-@Table(name="Empresa") // indicamos que será una tabla  de base de datos y su nombre
-// la entidad está relacionada con una tabla de abse de datos
+@Table(name="Empresa") // indicamos el nombre de la tabla en la base de datos
+// la entidad está relacionada con una tabla de base  de datos
 public class Empresa {
 
     // atributos, que en la tabla serán las columnas
