@@ -1,0 +1,7 @@
+¿para qué sirven los repositorios?
+ Los repositorios son las clases encargadas de gestionar el acceso a los datos
+ es decir que crea un repositorio local con la información de la entidad que se especifica
+ Trae la información de la tabla de la cual tiene referencia la entidad
+
+
+- @Repository: indica que es un repositorio
