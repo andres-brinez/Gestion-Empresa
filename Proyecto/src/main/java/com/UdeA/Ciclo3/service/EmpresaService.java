@@ -43,11 +43,13 @@ public class EmpresaService {
     }
 
     // eliminar una empresa
-    public boolean eliminarEmpresa(int id) {
-        if (empresaRepositorio.findById(id)!=null) {
-            empresaRepositorio.deleteById(id);
-            return true;
+    public boolean deleteEmpresa(Integer id) {
+        empresaRepositorio.deleteById(id);
+        // busca la empresa por el id
+        if (getEmpresaById(id) != null) {
+            // indica que la empresa no fue eliminada
+            return false;
         }
-        return false;
+        return true; // fue eliminada
     }
 }
