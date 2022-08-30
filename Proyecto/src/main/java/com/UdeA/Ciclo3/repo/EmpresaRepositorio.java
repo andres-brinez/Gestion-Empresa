@@ -1,4 +1,4 @@
-package com.UdeA.Ciclo3.Repo;
+package com.UdeA.Ciclo3.repo;
 
 import com.UdeA.Ciclo3.modelos.Empresa;
 import org.springframework.data.jpa.repository.JpaRepository;
