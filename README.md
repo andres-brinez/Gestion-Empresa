@@ -1,6 +1,5 @@
 # UDEA-3-4-Ciclo-3
-Proyecto del grupo 3 y 4 de la UDEA Mision Tic 2022 ciclo 3
-
+El proyecto se empezó a desarrollar en el 9/08/2022 , y se finalizó el.
 # Herramientas utilizadas
 
 Spring Boot - Spring Initializer
