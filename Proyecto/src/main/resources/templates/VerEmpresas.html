@@ -5,16 +5,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-
-
 </head>
 <style>
     h1{
         text-align: center;
+        color: red;
     }
 </style>
 <body>
+
+<button type="button" class="btn btn-info"><a th:href="@{/AgregarEmpresa}">Agregar Nueva Empresa</a></button>
+<button class="eliminar" type="button" >Editar</button>
+<button type="button">Eliminar</button>
+
 
 <div class="container">
     <h1> Lista de Empresas</h1>
@@ -51,13 +54,13 @@
             Estos botones salen en cada fila de la tabla, al hacer click redireccionan a la vista editarEmpresa con el id automatico
             <td><button class="eliminar" type="button" ><a th:href="@{/EditarEmpresa/{id}(id=${empresa.id})}" >Editar</a></button></td>
             <td><button type="button"><a th:href="@{/EliminarEmpresa/{id}(id=${empresa.id})}">Eliminar</a></button></td>
-            -->
-            //TODO al hacer click en el boton editar ( que será uno al lado del boton nuevo ) saldra  un aler ( o coaulquier campo de  ingresar valor) donde se tendra que ingresar el id de la empresa a eliminar  y tambien se hara con la empresa a editar
-        </tr>
-    </table>
 
-    <!-- vamos a crear un boton que sirva para agregar nuevas empresas -->
-    <button type="button" class="btn btn-info"><a th:href="@{/AgregarEmpresa}">Agregar Nueva Empresa</a></button>
+            TODO al hacer click en el boton editar ( que será uno al lado del boton nuevo ) saldra  un aler ( o coaulquier campo de  ingresar valor) donde se tendra que ingresar el id de la empresa a eliminar  y tambien se hara con la empresa a editar
+
+            -->
+        </tr>
+
+    </table>
 
 </div>
 
