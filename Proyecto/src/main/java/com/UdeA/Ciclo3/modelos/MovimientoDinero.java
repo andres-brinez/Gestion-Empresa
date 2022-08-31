@@ -1,6 +1,5 @@
 package com.UdeA.Ciclo3.modelos;
 
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
 

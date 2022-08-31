@@ -1,5 +1,4 @@
 package com.UdeA.Ciclo3.modelos;
-
 import javax.persistence.*;
 
 @Entity // Una entidad es la representación de información que nosotros necesitamos en nuestra aplicación.
