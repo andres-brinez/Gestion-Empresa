@@ -21,8 +21,17 @@ public class ControllerFull {
         List<Empresa> listaEmpresas=empresaService.getAllEmpresas();// se obtienen todas las empresas
         model.addAttribute("emplist",listaEmpresas); // el modelo emplist nos alimenta la tabla en html porque contiene todas las tablas
         model.addAttribute("mensaje",mensaje);
-        return "verEmpresas"; //Llamamos al HTML
+        return "VerEmpresas"; //Llamamos al HTML
     }
+
+    @GetMapping("/AgregarEmpresa")
+    public String nuevaEmpresa(Model model){
+        Empresa emp= new Empresa();
+        model.addAttribute("emp",emp);
+        return  "AgregarEmpresa";
+
+    }
+
 
 
 
