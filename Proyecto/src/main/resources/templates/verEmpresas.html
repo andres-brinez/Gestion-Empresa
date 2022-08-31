@@ -1,24 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><!--xmlns:th="http://www.thymeleaf.org me permite engrajar el código del MVC (java) en las platillas html    -->
 <head>
-    <title>Lista de Empresas - Ciclo3</title>
+    <title>Lista de Empresas - </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+
+
+</head>
 <style>
-    a{
-    color:white;
-    }
-    a:hover {
-    color: black;
-    text-decoration:none;
+    h1{
+        text-align: center;
     }
 </style>
-</head>
 <body>
 
 <div class="container">
@@ -38,13 +33,26 @@
         <!--Llenamos la tabla dibujada-->
         <!--En nuestro controller, creamos en viewEmpresa un modelo con un atributo llamado emplist donde esta guardada la lista de todas las empresas-->
         <tr th:each="empresa : ${emplist}">
+            <!--th indica que es de  tipo thymeleaf
+            each itera
+            empresa es el tipo de dato (clase ) que queremos iterar
+            ${emplist} es una lista de empresas, de donde trae los datos-->
+            -->
+
+            <!--En el modelo de la vista, creamos un atributo llamado id, que es el id de la empresa
+            th:text es el tipo de dato a traer
+            y le indicamos del tipo de dato indicado(empresa) se trae el valor-->
             <td th:text="${empresa.id}"></td>
             <td th:text="${empresa.nombre}"></td>
             <td th:text="${empresa.direccion}"></td>
             <td th:text="${empresa.telefono}"></td>
             <td th:text="${empresa.NIT}"></td>
-            <td><button type="button" class="btn btn-warning"><a th:href="@{/EditarEmpresa/{id}(id=${empresa.id})}">Editar</a></button></td>
-            <td><button type="button" class="btn btn-danger"><a th:href="@{/EliminarEmpresa/{id}(id=${empresa.id})}">Eliminar</a></button></td>
+            <!--
+            Estos botones salen en cada fila de la tabla, al hacer click redireccionan a la vista editarEmpresa con el id automatico
+            <td><button class="eliminar" type="button" ><a th:href="@{/EditarEmpresa/{id}(id=${empresa.id})}" >Editar</a></button></td>
+            <td><button type="button"><a th:href="@{/EliminarEmpresa/{id}(id=${empresa.id})}">Eliminar</a></button></td>
+            -->
+            //TODO al hacer click en el boton editar ( que será uno al lado del boton nuevo ) saldra  un aler ( o coaulquier campo de  ingresar valor) donde se tendra que ingresar el id de la empresa a eliminar  y tambien se hara con la empresa a editar
         </tr>
     </table>
 
@@ -55,6 +63,17 @@
 
 <script th:inline="javascript">
     window.onload=function(){
+
+        const buttonEliminar = document.querySelector('.eliminar');
+        console.log(buttonEliminar);
+        // redireciona a la página indicada con el atributo id
+        buttonEliminar.addEventListener('click', function(e){
+            e.preventDefault();
+            let id = prompt("Ingrese el id de la empresa a eidtar");
+            console.log(id);
+            window.location.href = "/EditarEmpresa/"+id;
+        });
+
 
         var msg= [[${mensaje}]];
         if (msg == "saveOK"){
@@ -75,6 +94,8 @@
             "showMethod":"fadeIn",
             "hideMethod":"fadeOut",
         }
+
+
 
 
     }

@@ -15,11 +15,11 @@ public class ControllerFull {
     @Autowired // injectar otra dependencia
     EmpresaService empresaService;
 
+    @GetMapping({"/","/VerEmpresas"})// (/) es la página de inicio (home)
     // cuando se llame a cualquiera de  los dos recursos se ejecuta ese metodo
-    @GetMapping({"/","/VerEmpresas"})// / es la página de inicio
     public String viewEmpresas(Model model, @ModelAttribute("mensaje") String mensaje){ // se  ingresa cualquier tipo de datos tipo modelo
         List<Empresa> listaEmpresas=empresaService.getAllEmpresas();// se obtienen todas las empresas
-        model.addAttribute("emplist",listaEmpresas);
+        model.addAttribute("emplist",listaEmpresas); // el modelo emplist nos alimenta la tabla en html porque contiene todas las tablas
         model.addAttribute("mensaje",mensaje);
         return "verEmpresas"; //Llamamos al HTML
     }
