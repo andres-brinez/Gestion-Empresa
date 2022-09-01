@@ -24,17 +24,19 @@
   <br>
   <!--Crear formulario para llenar los datos de la empresa y guardarlo en el objeto emp -->
   <form th:action="@{/ActualizarEmpresa}" th:object="${emp}" method="post">
+  <!-- action es lo que se va a ejecutar cuando se envie el formulario-->
+    <!--el objeto es de donde se trae la información, es decir el modelo declarado en el controller-->
+    <!--  th:field="*{nombre del valor a traer }" cual información traer-->
 
     <!--Campo para id-->
     <div class="row">
       <div class="form-group col-md-12">
         <label class="col-md-3" for="id">ID de la Empresa:</label>
         <div class="col-md-6">
-          <input type="text" th:field="*{id}" class="form-control" id="id" required="required" readonly></div>
+          <!-- readonly no permite editar el  campo  -->
+          <input th:field="*{id}" class="form-control" id="id" required="required" readonly></div>
       </div>
     </div>
-
-
 
     <!--Campo para nombre-->
     <div class="row">
@@ -73,7 +75,7 @@
     </div>
 
 
-    <!--Boton para enviar todo y ejecutar accion -->
+    <!--Boton para enviar all y ejecutar accion -->
     <div class="row">
       <div class="col-md-2">
         <button class="btn btn-success">Actualizar Empresa</button>
@@ -83,7 +85,9 @@
   </form>
 
   <br>
+  // redireciona a una página antes de la página actual
   <a href="javascript: history.go(-1)" class="btn btn-info" role="button">Atrás</a>
+
 
 </div>
 </body>

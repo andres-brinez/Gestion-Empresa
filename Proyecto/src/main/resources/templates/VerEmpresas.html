@@ -15,24 +15,23 @@
 <body>
 
 <button type="button" class="btn btn-info"><a th:href="@{/AgregarEmpresa}">Agregar Nueva Empresa</a></button>
-<button class="eliminar" type="button" >Editar</button>
-<button type="button">Eliminar</button>
+<button class="btnEditar" type="button" >Editar</button>
+<button class="btnEliminar" type="button">Eliminar</button>
 
 
 <div class="container">
     <h1> Lista de Empresas</h1>
     <!--Dibujamos la tabla-->
-    <br><table class="table table-bordered">
+    <br>
+    <table class="table table-bordered">
         <tr>
             <th>ID</th>
             <th>Nombre</th>
             <th>Dirección</th>
             <th>Telefono</th>
             <th>NIT</th>
-            <th>Editar</th>
-            <th>Eliminar</th>
-        </tr>
 
+        </tr>
         <!--Llenamos la tabla dibujada-->
         <!--En nuestro controller, creamos en viewEmpresa un modelo con un atributo llamado emplist donde esta guardada la lista de todas las empresas-->
         <tr th:each="empresa : ${emplist}">
@@ -40,12 +39,11 @@
             each itera
             empresa es el tipo de dato (clase ) que queremos iterar
             ${emplist} es una lista de empresas, de donde trae los datos-->
-            -->
 
             <!--En el modelo de la vista, creamos un atributo llamado id, que es el id de la empresa
             th:text es el tipo de dato a traer
             y le indicamos del tipo de dato indicado(empresa) se trae el valor-->
-            <td th:text="${empresa.id}"></td>
+            <td class="idEmpresa" th:text="${empresa.id}"></td>
             <td th:text="${empresa.nombre}"></td>
             <td th:text="${empresa.direccion}"></td>
             <td th:text="${empresa.telefono}"></td>
@@ -56,7 +54,6 @@
             <td><button type="button"><a th:href="@{/EliminarEmpresa/{id}(id=${empresa.id})}">Eliminar</a></button></td>
 
             TODO al hacer click en el boton editar ( que será uno al lado del boton nuevo ) saldra  un aler ( o coaulquier campo de  ingresar valor) donde se tendra que ingresar el id de la empresa a eliminar  y tambien se hara con la empresa a editar
-
             -->
         </tr>
 
@@ -66,17 +63,50 @@
 
 <script th:inline="javascript">
     window.onload=function(){
+        const buttonEditar = document.querySelector('.btnEditar');
 
-        const buttonEliminar = document.querySelector('.eliminar');
-        console.log(buttonEliminar);
-        // redireciona a la página indicada con el atributo id
-        buttonEliminar.addEventListener('click', function(e){
+        buttonEditar.addEventListener('click', function(e){
+
             e.preventDefault();
-            let id = prompt("Ingrese el id de la empresa a eidtar");
-            console.log(id);
-            window.location.href = "/EditarEmpresa/"+id;
+
+            const cantidad_id= document.getElementsByClassName("idEmpresa").length;
+
+            let idIngresado = parseInt(prompt("Ingrese el id de la empresa a editar"));
+
+            console.log("idIngresado", idIngresado, typeof(idIngresado));
+
+
+             if (idIngresado>cantidad_id){
+
+                 alert("El id de la empresa no es valido")
+             }
+
+            // TODO : hacer verificacion si no se  ingresa ningun valor en el promp
+            //TODO hacer  en una funcion los metodos de validaación al momento de  ingresar el id de la empresa
+
+            else{
+
+                     //redireciona a la página indicada con el atributo id
+                     window.location.href = "/EditarEmpresa/"+idIngresado;
+                 }
+
+
         });
 
+        const buttonEliminar = document.querySelector(".btnEliminar")
+        buttonEliminar.addEventListener("click", function(e) {
+
+            const cantidad_id= document.getElementsByClassName("idEmpresa").length;
+
+            let idIngresado = parseInt(prompt("Ingrese el id de la empresa a editar"));
+            prompt("Desea Eliminar la empresa?")
+
+            //redireciona a la página indicada con el atributo id
+            window.location.href = "/EliminarEmpresa/"+idIngresado;
+
+
+
+        })
 
         var msg= [[${mensaje}]];
         if (msg == "saveOK"){
