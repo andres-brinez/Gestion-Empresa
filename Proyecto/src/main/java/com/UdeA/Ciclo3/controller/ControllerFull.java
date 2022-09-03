@@ -67,6 +67,7 @@ public class ControllerFull {
     }
 
     @GetMapping("/EliminarEmpresa/{id}")
+    // @PathVariable indica se va a recibir un parametro por una ruta a web
     public String EliminarEmpresa(@PathVariable Integer id) {
         if (empresaService.deleteEmpresa(id)) {
             // si lo eliminar

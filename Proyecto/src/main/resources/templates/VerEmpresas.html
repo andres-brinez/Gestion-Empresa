@@ -25,6 +25,7 @@
     <br>
     <table class="table table-bordered">
         <tr>
+            <th></th>
             <th>ID</th>
             <th>Nombre</th>
             <th>Dirección</th>
@@ -41,19 +42,24 @@
             ${emplist} es una lista de empresas, de donde trae los datos-->
 
             <!--En el modelo de la vista, creamos un atributo llamado id, que es el id de la empresa
-            th:text es el tipo de dato a traer
+            th:text es el tipo de dato a traer en tipo de texto
             y le indicamos del tipo de dato indicado(empresa) se trae el valor-->
+            <td><input type="checkbox" name="check"  class="checkbox" th:value="${empresa.id}"></td><!-- el value es el id de la empresa-->
             <td class="idEmpresa" th:text="${empresa.id}"></td>
             <td th:text="${empresa.nombre}"></td>
             <td th:text="${empresa.direccion}"></td>
             <td th:text="${empresa.telefono}"></td>
             <td th:text="${empresa.NIT}"></td>
+            <!--checkbox-->
+
+
             <!--
             Estos botones salen en cada fila de la tabla, al hacer click redireccionan a la vista editarEmpresa con el id automatico
             <td><button class="eliminar" type="button" ><a th:href="@{/EditarEmpresa/{id}(id=${empresa.id})}" >Editar</a></button></td>
             <td><button type="button"><a th:href="@{/EliminarEmpresa/{id}(id=${empresa.id})}">Eliminar</a></button></td>
 
             TODO al hacer click en el boton editar ( que será uno al lado del boton nuevo ) saldra  un aler ( o coaulquier campo de  ingresar valor) donde se tendra que ingresar el id de la empresa a eliminar  y tambien se hara con la empresa a editar
+            TODO poner  un icono de seleccionar  al lado de cada fila
             -->
         </tr>
 
@@ -63,32 +69,46 @@
 
 <script th:inline="javascript">
     window.onload=function(){
+
+        // seleccionar solo un checkbox
+        let checkboxes = document.querySelectorAll('input[type="checkbox"]')
+
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                checkboxes.forEach(function(otherCheckbox) {
+                    if (otherCheckbox !== checkbox)
+                        otherCheckbox.checked = false
+                })
+            })
+        })
+
+
+        //boton editar Empresa
         const buttonEditar = document.querySelector('.btnEditar');
 
         buttonEditar.addEventListener('click', function(e){
 
-            e.preventDefault();
+            try{
 
-            const cantidad_id= document.getElementsByClassName("idEmpresa").length;
+                // saber cual checkbox esta seleccionado
+                let checkboxSeleccionado = document.querySelector('input[type="checkbox"]:checked');
+                // el value del checkbox es el id de la empresa
+                let idEmpresa = checkboxSeleccionado.value;
 
-            let idIngresado = parseInt(prompt("Ingrese el id de la empresa a editar"));
 
-            console.log("idIngresado", idIngresado, typeof(idIngresado));
+                //redireciona a la página indicada con el atributo id
+                window.location.href = "/EditarEmpresa/"+idEmpresa;
 
 
-             if (idIngresado>cantidad_id){
+            }
+            catch (e) {
 
-                 alert("El id de la empresa no es valido")
-             }
+                alert("No hay ninguna Empresa  seleccionada");
+            }
 
-            // TODO : hacer verificacion si no se  ingresa ningun valor en el promp
-            //TODO hacer  en una funcion los metodos de validaación al momento de  ingresar el id de la empresa
 
-            else{
 
-                     //redireciona a la página indicada con el atributo id
-                     window.location.href = "/EditarEmpresa/"+idIngresado;
-                 }
+
 
 
         });
@@ -96,14 +116,29 @@
         const buttonEliminar = document.querySelector(".btnEliminar")
         buttonEliminar.addEventListener("click", function(e) {
 
-            const cantidad_id= document.getElementsByClassName("idEmpresa").length;
 
-            let idIngresado = parseInt(prompt("Ingrese el id de la empresa a editar"));
-            prompt("Desea Eliminar la empresa?")
+            try{
 
-            //redireciona a la página indicada con el atributo id
-            window.location.href = "/EliminarEmpresa/"+idIngresado;
+                // saber cual checkbox esta seleccionado
+                let checkboxSeleccionado = document.querySelector('input[type="checkbox"]:checked');
 
+                // el value del checkbox es el id de la empresa
+                let idEmpresa = checkboxSeleccionado.value;
+
+                // confirmar si se quiere eliminar la empresa
+                let confirmacion = confirm("¿Está seguro que desea eliminar la empresa?");
+                if(confirmacion){
+                    //redireciona a la página indicada con el atributo id
+                    window.location.href = "/EliminarEmpresa/"+idEmpresa;
+                }
+
+
+
+            }
+            catch (e) {
+
+                alert("No hay ninguna Empresa  seleccionada");
+            }
 
 
         })

@@ -23,6 +23,7 @@
   <h1> Edite aqui los datos de Empresa</h1>
   <br>
   <!--Crear formulario para llenar los datos de la empresa y guardarlo en el objeto emp -->
+
   <form th:action="@{/ActualizarEmpresa}" th:object="${emp}" method="post">
   <!-- action es lo que se va a ejecutar cuando se envie el formulario-->
     <!--el objeto es de donde se trae la información, es decir el modelo declarado en el controller-->
