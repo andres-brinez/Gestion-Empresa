@@ -4,6 +4,8 @@
     <title>Lista de Empresas - </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Mostrar Alertas  -->
+
 
 </head>
 <style>
@@ -58,43 +60,46 @@
             <td><button class="eliminar" type="button" ><a th:href="@{/EditarEmpresa/{id}(id=${empresa.id})}" >Editar</a></button></td>
             <td><button type="button"><a th:href="@{/EliminarEmpresa/{id}(id=${empresa.id})}">Eliminar</a></button></td>
 
-            TODO al hacer click en el boton editar ( que será uno al lado del boton nuevo ) saldra  un aler ( o coaulquier campo de  ingresar valor) donde se tendra que ingresar el id de la empresa a eliminar  y tambien se hara con la empresa a editar
-            TODO poner  un icono de seleccionar  al lado de cada fila
+
             -->
         </tr>
 
     </table>
 
 </div>
-<!-- Mostrar los menajes -->
+<!-- Mostrar los mensajes que se pusieron en el controlador -->
 <script th:inline="javascript"> /*inline es para que se ejecute el codigo javascript con thymeleaf, lo que traemos desde el controlador */
     window.onload=function(){
 
+        let msg= [[${mensaje}]]; // [[${mensaje}]] indica que es  lo que viene de afuera , en este caso en el controlador  le  pusmos como nombre mensaje
 
-        // mostrar los mensajes
-        let msg= [[${mensaje}]];
-        if (msg == "saveOK"){
-            Command : toastr["success"]("Empresa creada con éxito!")
+        //TODO cambiar el tipo de alerta que aparece
+
+        // verificar que tipo de mensaje se recibe  desde el controlador
+        // toastr es una libreria de javascript que permite mostrar mensajes de alerta
+        if (msg === "saveOk"){
+            alert("Empresa guardada con exito");
+            //Command : toastr["success"]("Empresa creada con éxito!")
             }
-        else if (msg == "updateOK"){
-            Command : toastr["success"]("Empresa actualizada con éxito!")
+        else if (msg === "updateOk"){
+            alert("Empresa actualizada con exito");
+            //Command : toastr["success"]("Empresa actualizada con éxito!")
         }
-        else if (msg == "deleteOK"){
-            Command : toastr["error"]("Empresa eliminada con éxito!")
+        else if (msg === "deleteOk"){
+            alert("Empresa eliminada con exito");
+            //Command : toastr["error"]("Empresa eliminada con éxito!")
         }
-        else if (msg == "deleteError"){
-            Command : toastr["error"]("Empresa no ha sido eliminada!")
+        else if (msg === "deleteError"){
+            alert("Error al eliminar la empresa ");
+            //Command : toastr["error"]("Empresa no ha sido eliminada!")
         }
-        toastr.options={
+       /* toastr.options={
             "positionClass": "toast-top-right",
             "showDuration":"300",
             "showMethod":"fadeIn",
             "hideMethod":"fadeOut",
         }
-
-
-
-
+        */
     }
 
 </script>
