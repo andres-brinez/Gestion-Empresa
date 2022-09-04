@@ -74,6 +74,7 @@
         let msg= [[${mensaje}]]; // [[${mensaje}]] indica que es  lo que viene de afuera , en este caso en el controlador  le  pusmos como nombre mensaje
 
         //TODO cambiar el tipo de alerta que aparece
+        //TODO agrgar las alertas a los otros archivos
 
         // verificar que tipo de mensaje se recibe  desde el controlador
         // toastr es una libreria de javascript que permite mostrar mensajes de alerta
@@ -94,10 +95,10 @@
             //Command : toastr["error"]("Empresa no ha sido eliminada!")
         }
        /* toastr.options={
-            "positionClass": "toast-top-right",
-            "showDuration":"300",
-            "showMethod":"fadeIn",
-            "hideMethod":"fadeOut",
+            "positionClass": "toast-top-right", posicion de la alerta
+            "showDuration":"300", para que dura 3 segundos
+            "showMethod":"fadeIn", como debe aparecer
+            "hideMethod":"fadeOut", como debe desaparecer
         }
         */
     }
