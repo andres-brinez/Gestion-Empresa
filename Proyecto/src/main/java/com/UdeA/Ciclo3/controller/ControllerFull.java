@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
+// controller devuelve  un template para una ruta
 public class ControllerFull {
     @Autowired // injectar otra dependencia
     EmpresaService empresaService;
@@ -50,7 +51,7 @@ public class ControllerFull {
     }
 
     @GetMapping("/EditarEmpresa/{id}")
-    // @PathVariable | que es tipo de una ruta
+    // @PathVariable | que el id es el que viene en la ruta
     public String EditarEmpresa(Model model, @PathVariable Integer id,@ModelAttribute("mensaje") String mensaje) {
         //trae la empresa por el id
         Empresa emp= empresaService.getEmpresaById(id);
@@ -88,6 +89,9 @@ public class ControllerFull {
         redirectAttributes.addFlashAttribute("mensaje","deleteError");
         return "redirect:/VerEmpresas";
     }
+
+    // TODO ver todos  los empleados de  una empresa en una table , se debe seleccinar la empresa y mostrar los empleados- clase 13 1:10
+    // TODO mostrar todos  los  usuarios (empleados) registrados clase 13, seria igual al servicio de empresas pero con empleados
 
 
 
