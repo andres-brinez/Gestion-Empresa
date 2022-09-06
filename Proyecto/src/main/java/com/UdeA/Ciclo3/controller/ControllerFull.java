@@ -92,6 +92,9 @@ public class ControllerFull {
 
     // TODO ver todos  los empleados de  una empresa en una table , se debe seleccinar la empresa y mostrar los empleados- clase 13 1:10
     // TODO mostrar todos  los  usuarios (empleados) registrados clase 13, seria igual al servicio de empresas pero con empleados
+    // TODO consultar movimietos  por emepleados , clase minuto 24
+    // TODO  consultar movimientos  por empresa clase 16 minuto 24
+    // TODO  se  puede hacer filtros  por fechas , tipo de empleados , se hace con la sentencia sql
 
 
 
