@@ -10,7 +10,9 @@ public class MovimientoDinero {
     // atributos- columnas de  la tabla
 
     @Id // este atributo es una primary key
-    @GeneratedValue(strategy = GenerationType.AUTO) // es  un valor auto incrementable
+    //@GeneratedValue(strategy = GenerationType.AUTO) // es  un valor auto incrementable
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Se basa en una columna de base de datos con incremento automático y permite que la base de datos genere un nuevo valor con cada operación de inserción
+
     private int id;
 
     private long  monto;

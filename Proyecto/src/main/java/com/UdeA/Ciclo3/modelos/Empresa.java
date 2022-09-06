@@ -14,7 +14,9 @@ public class Empresa {
     private String telefono;
     private String NIT;
     @Id // indicamos que este atributo (id)  será la clave primaria de la tabla
-    @GeneratedValue(strategy = GenerationType.AUTO) // indicamos que este valor de la tabla (id) será autoincrementable
+    //@GeneratedValue(strategy = GenerationType.AUTO) // indicamos que este valor de la tabla (id) será autoincrementable
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Se basa en una columna de base de datos con incremento automático y permite que la base de datos genere un nuevo valor con cada operación de inserción
+
     private int id;
 
     // constructor

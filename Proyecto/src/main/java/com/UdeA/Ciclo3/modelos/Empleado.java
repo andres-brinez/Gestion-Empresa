@@ -7,7 +7,9 @@ import javax.persistence.*;
 public class Empleado {
 
     @Id // indica que es la llave primaria
-    @GeneratedValue(strategy = GenerationType.AUTO) // el id se auto incrementa
+    //@GeneratedValue(strategy = GenerationType.AUTO)  el id se auto incrementa
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Se basa en una columna de base de datos con incremento automático y permite que la base de datos genere un nuevo valor con cada operación de inserción
+
     private  int id;
 
     private String nombre;
