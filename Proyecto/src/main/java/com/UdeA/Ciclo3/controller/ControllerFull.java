@@ -32,7 +32,7 @@ public class ControllerFull {
         List<Empresa> listaEmpresas=empresaService.getAllEmpresas();// se obtienen todas las empresas
         model.addAttribute("emplist",listaEmpresas); // el modelo emplist nos alimenta la tabla en html porque contiene todas las tablas
         model.addAttribute("mensaje",mensaje); // añade el mensaje al modelo para poder visualizarlo en html
-        return "VerEmpresas"; //redirect a la página
+        return "Empresa/VerEmpresas"; //redirect a la página
     }
 
     @GetMapping("/AgregarEmpresa")
@@ -40,10 +40,10 @@ public class ControllerFull {
         Empresa emp= new Empresa();
         model.addAttribute("emp",emp);
         model.addAttribute("mensaje",mensaje);
-        return  "AgregarEmpresa";
+        return  "Empresa/AgregarEmpresa";
     }
 
-    // REDIRECCIONAR- metodo post
+    // REDIRECCIONAR- a un servicio (mapping) y no a una pagina html
     @PostMapping("/GuardarEmpresa")
     // redirreciona un servicio y no un templete
     public String guardarEmpresa(Empresa emp, RedirectAttributes redirectAttributes){
@@ -66,7 +66,7 @@ public class ControllerFull {
         Empresa emp= empresaService.getEmpresaById(id);
         model.addAttribute("emp",emp);
         model.addAttribute("mensaje",mensaje);
-        return "EditarEmpresa";
+        return "Empresa/EditarEmpresa";
 
     }
 
@@ -108,7 +108,7 @@ public class ControllerFull {
         List<Empleado> listaEmpleados=empleadoService.getAllEmpleados(); // lista de empleados donde seran guardados todos
         model.addAttribute("emplelist",listaEmpleados); // guarda en un objeto (modelo ) los empleados  para  poder usarlos con thimleaf en html
         model.addAttribute("mensaje",mensaje);// guarda el mensaje para poder usarlo en html
-        return "VerEmpleados"; //Llamamos al HTML
+        return "Empleado/VerEmpleados"; //Llamamos al HTML
     }
 
     @GetMapping("/AgregarEmpleado")
@@ -119,7 +119,7 @@ public class ControllerFull {
         // lista de las empresas  para mostrar en el html
         List<Empresa> listaEmpresas= empresaService.getAllEmpresas();
         model.addAttribute("emprelist",listaEmpresas);
-        return "AgregarEmpleado"; //Llamar HTML
+        return "Empleado/AgregarEmpleado"; //Llamar HTML
     }
 
     @PostMapping("/GuardarEmpleado")
@@ -146,7 +146,7 @@ public class ControllerFull {
         // lista de las empresas  para mostrar en el html
         List<Empresa> listaEmpresas= empresaService.getAllEmpresas();
         model.addAttribute("emprelist",listaEmpresas);
-        return "EditarEmpleado/";
+        return "Empleado/EditarEmpleado";
     }
 
     @PostMapping("/ActualizarEmpleado")
@@ -176,7 +176,7 @@ public class ControllerFull {
     public String verEmpleadosPorEmpresa(@PathVariable("id") Integer id, Model model){
         List<Empleado> listaEmpleados = empleadoService.obtenerPorEmpresa(id); // lista de empleados
         model.addAttribute("emplelist",listaEmpleados); // envía en un objeto la lista de todos los empleados de una empresa especirficada en el id
-        return "verEmpleados"; //Llamamos al html con el emplelist de los empleados filtrados
+        return "Empleado/verEmpleados"; //Llamamos al html con el emplelist de los empleados filtrados
     }
 
 
