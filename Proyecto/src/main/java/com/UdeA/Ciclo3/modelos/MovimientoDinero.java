@@ -21,7 +21,7 @@ public class MovimientoDinero {
     // Relacion- muchos a uno
     // un usuario (empleado ) pude hacer muchos movimientod
     @ManyToOne
-    @JoinColumn(name = "empresa_id")
+    @JoinColumn(name = "empleado_id")
     private Empleado usuario;
 
     // constructor
