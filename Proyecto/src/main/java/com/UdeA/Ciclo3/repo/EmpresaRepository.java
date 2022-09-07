@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface EmpresaRepository extends JpaRepository <Empresa,Integer>{
 // trae la información que está en  la tabla relacionada con la entidad Empresa
 // hereda todo de JpaRepository que es eliminar, editar, guardar, actualizar, buscar por id, buscar todos, etc
-
+// como jpaRepository ya tiene los metodos de crud no es necesario crearlos
 }
