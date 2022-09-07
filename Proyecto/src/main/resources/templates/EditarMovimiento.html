@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Editar Movimiento </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    a{
+    color:white;
+    }
+    a:hover {
+    color: black;
+    text-decoration:none;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1> Modifique aqui los datos del movimiento</h1>
+  <br>
+  <!--Crear formulario para llenar los datos del  movimiento y guardarlo en el objeto mov
+  al enviar el formulario ejecuta el servicio GuardarMovimiento-->
+  <form th:action="@{/ActualizarMovimiento}" th:object="${mov}" method="post">
+
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label class="col-md-3" for="id">ID del Movimiento:</label>
+        <div class="col-md-6">
+          <!-- readonly no permite editar el  campo  -->
+          <input th:field="*{id}" class="form-control" id="id" required="required" readonly>
+        </div>
+      </div>
+    </div>
+
+    <!--Campo para Valorr-->
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label class="col-md-3" for="valor">Valor del movimiento:</label>
+        <div class="col-md-6">
+          <input type="number" th:field="*{monto}" class="form-control" id="valor" required="required"></div>
+      </div>
+    </div>
+
+    <!--Campo para Concepto-->
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label class="col-md-3" for="rol">Concepto de la movimiento:</label>
+        <div class="col-md-6">
+          <select th:field="*{concepto}" class="form-control" id="concepto" required="required">
+            <!-- el value  es el valor a guardar en el campo rol del objeto movimiento-->
+            <option th:value=1>Gastos operativos</option>
+            <option th:value=2>Sueldos</option>
+            <option th:value=3>Maquinaria y equipo</option>
+            <option th:value=4>Limpieza</option>
+            <option th:value=5>Publicidad</option>
+            <option th:value=6>Caja Menor</option>
+            <option th:value=7>Tributarios</option>
+            <option th:value=8>Servicios publicos</option>
+            <option th:value=9>Cafeteria</option>
+            <option th:value=10>Papeleria</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!--Campo para Usuario Responsable-->
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label class="col-md-3" for="usuario">Usuario Responsable :</label>
+        <div class="col-md-6">
+        <!-- el select va a alimentar el campo usuario del ebjeto movimiento -->
+        <select th:field="*{usuario}" class="form-control" id="usuario" required="required">
+          <!-- movlist es donde está la lista de los empleados
+          itera la lista de empresas (emplelist) y muestra la empresa con el nombre
+          al seleccionar la empresa se guarda el id-->
+          <option th:each="empleado : ${emplelist}" th:text="${empleado.nombre}" th:value="${empleado.id}"></option>
+        </select>
+    </div>
+
+    <!--Boton para enviar all y ejecutar la accion que se especifica en el form -->
+    <div class="row">
+      <div class="col-md-2">
+        <button class="btn btn-success">Actualizar movimiento</button>
+      </div>
+    </div>
+
+  </form>
+
+  <br>
+  <!--regresa a la página anterior-->
+  <a href="javascript: history.go(-1)" class="btn btn-info" role="button">Atrás</a>
+
+</div>
+</body>
+</html>
+<-->
