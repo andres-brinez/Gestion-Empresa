@@ -21,6 +21,7 @@
 <button type="button" class="btn btn-info"><a th:href="@{/AgregarEmpleado}">Agregar Nuevo Empleado</a></button>
 <button class="btnEditar" type="button" >Editar</button>
 <button class="btnEliminar" type="button">Eliminar</button>
+<button class="btnMovimientos" type="button">Ver Movimientos</button>
 
 
 <div class="container">
@@ -118,7 +119,7 @@
 
 </script>
 
-<!--Validar los botones editar y eliminar-->
+<!--Validar los botones -->
 <script>
 
     // seleccionar solo un checkbox
@@ -183,6 +184,34 @@
                 window.location.href = "/EliminarEmpleado/"+idempleado;
             }
 
+
+
+        }
+        catch (e) {
+
+            alert("No hay ninguna empleado  seleccionada");
+        }
+
+
+    })
+
+    // Ver los movimientos del empleado seleccionado
+    const buttonMovimiento = document.querySelector(".btnMovimientos")
+    buttonMovimiento.addEventListener("click", function(e) {
+
+
+        try{
+
+            // saber cual checkbox esta seleccionado
+            let checkboxSeleccionado = document.querySelector('input[type="checkbox"]:checked');
+
+            // el value del checkbox es el id de la empleado
+            let idempleado = checkboxSeleccionado.value;
+
+
+                //redireciona a la página indicada con el atributo id
+
+                window.location.href = "Empleado/"+idempleado+"/Movimientos";
 
 
         }
