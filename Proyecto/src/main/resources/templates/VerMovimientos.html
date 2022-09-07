@@ -16,108 +16,109 @@
 </style>
 <body><!-- al usar th indica que se va a trabajaer con thymeleaf-->
 
-<button type="button" class="btn btn-info"><a th:href="@{/AgregarMovimiento}">Agregar Nueva movimiento</a></button>
-<button class="btnEditar" type="button" >Editar</button>
-<button class="btnEliminar" type="button">Eliminar</button>
-<button type="button"><a th:href="@{/VerEmpresas}">Ver Empresas</a></button>
-<button type="button"><a th:href="@{/VerEmpleados}">Ver empleados</a></button>
+    <button type="button" class="btn btn-info"><a th:href="@{/AgregarMovimiento}">Agregar Nueva movimiento</a></button>
+    <button class="btnEditar" type="button" >Editar</button>
+    <button class="btnEliminar" type="button">Eliminar</button>
+    <button type="button"><a th:href="@{/VerEmpresas}">Ver Empresas</a></button>
+    <button type="button"><a th:href="@{/VerEmpleados}">Ver empleados</a></button>
+
+    <div class="container">
+        <h1> Lista de Movimientos</h1>
+        <!--Dibujamos la tabla-->
+        <br>
+        <table class="table table-bordered">
+            <tr>
+                <th></th>
+                <th>ID</th>
+                <th>Valor</th>
+                <th>Concepto</th>
+                <th>Usuario Responsable</th>
+
+            </tr>
+            <!--Llenamos la tabla dibujada-->
+            <!--En nuestro controller, creamos en viewmovimiento un modelo con un atributo llamado emplist donde esta guardada la lista de todas las movimientos-->
+            <tr th:each="movimiento : ${movlist}">
+                <!--th indica que es de  tipo thymeleaf
+                each itera
+                movimiento es el tipo de dato (clase ) que queremos iterar
+                ${emplist} es una lista de movimientos, de donde trae los datos-->
+
+                <!--En el modelo de la vista, creamos un atributo llamado id, que es el id de la movimiento
+                th:text es el tipo de dato a traer en tipo de texto
+                y le indicamos del tipo de dato indicado(movimiento) se trae el valor-->
+                <td><input type="checkbox" name="check"  class="checkbox" th:value="${movimiento.id}"></td><!-- el value es el id de la movimiento-->
+                <td class="idmovimiento" th:text="${movimiento.id}"></td>
+                <td th:text="${movimiento.monto}"></td>
+                <!--paa saber que Movimiento es -->
+                <td th:if="${movimiento.concepto == '1'}"> Gastos operativos</td>
+                <td th:if="${movimiento.concepto == '2'}">Sueldos</td>
+                <td th:if="${movimiento.concepto == '3'}" >Maquinaria y equipo</td>
+                <td th:if="${movimiento.concepto == '4'}" >Limpieza</td>
+                <td th:if="${movimiento.concepto == '5'}" >Publicidad</td>
+                <td th:if="${movimiento.concepto == '6'}" >Caja Menor</td>
+                <td th:if="${movimiento.concepto == '7'}" >Tributarios</td>
+                <td th:if="${movimiento.concepto == '8'}" >Servicios publicos</td>
+                <td th:if="${movimiento.concepto == '9'}" >Cafeteria</td>
+                <td th:if="${movimiento.concepto == '10'}" >Papeleria</td>
+
+                <td th:text="${movimiento.usuario.nombre}"></td>
 
 
-<div class="container">
-    <h1> Lista de Movimientos</h1>
-    <!--Dibujamos la tabla-->
-    <br>
-    <table class="table table-bordered">
-        <tr>
-            <th></th>
-            <th>ID</th>
-            <th>Valor</th>
-            <th>Concepto</th>
-            <th>Usuario Responsable</th>
-
-        </tr>
-        <!--Llenamos la tabla dibujada-->
-        <!--En nuestro controller, creamos en viewmovimiento un modelo con un atributo llamado emplist donde esta guardada la lista de todas las movimientos-->
-        <tr th:each="movimiento : ${movlist}">
-            <!--th indica que es de  tipo thymeleaf
-            each itera
-            movimiento es el tipo de dato (clase ) que queremos iterar
-            ${emplist} es una lista de movimientos, de donde trae los datos-->
-
-            <!--En el modelo de la vista, creamos un atributo llamado id, que es el id de la movimiento
-            th:text es el tipo de dato a traer en tipo de texto
-            y le indicamos del tipo de dato indicado(movimiento) se trae el valor-->
-            <td><input type="checkbox" name="check"  class="checkbox" th:value="${movimiento.id}"></td><!-- el value es el id de la movimiento-->
-            <td class="idmovimiento" th:text="${movimiento.id}"></td>
-            <td th:text="${movimiento.monto}"></td>
-            <!--paa saber que rol es-->
-            <td th:if = "${movimiento.concepto == '1'}" th:text="Gastos operativos"></td>
-            <td th:if = "${movimiento.concepto == '2'}" th:text="Sueldos"></td>
-            <td th:if = "${movimiento.concepto == '3'}" th:text="Maquinaria y equipo"></td>
-            <td th:if = "${movimiento.concepto == '4'}" th:text="Limpieza"></td>
-            <td th:if = "${movimiento.concepto == '5'}" th:text="Publicidad"></td>
-            <td th:if = "${movimiento.concepto == '6'}" th:text="Caja Menor"></td>
-            <td th:if = "${movimiento.concepto == '7'}" th:text="Tributarios"></td>
-            <td th:if = "${movimiento.concepto == '8'}" th:text="Servicios publicos"></td>
-            <td th:if = "${movimiento.concepto == '9'}" th:text="Cafeteria"></td>
-            <td th:if = "${movimiento.concepto == '10'}" th:text="Papeleria"></td>
-
-            <td th:text="${movimiento.usuario.nombre}"></td>
+                <!--
+                Estos botones salen en cada fila de la tabla, al hacer click redireccionan a la vista editarmovimiento con el id automatico
+                <td><button class="eliminar" type="button" ><a th:href="@{/Editarmovimiento/{id}(id=${movimiento.id})}" >Editar</a></button></td>
+                <td><button type="button"><a th:href="@{/Eliminarmovimiento/{id}(id=${movimiento.id})}">Eliminar</a></button></td>
 
 
-            <!--
-            Estos botones salen en cada fila de la tabla, al hacer click redireccionan a la vista editarmovimiento con el id automatico
-            <td><button class="eliminar" type="button" ><a th:href="@{/Editarmovimiento/{id}(id=${movimiento.id})}" >Editar</a></button></td>
-            <td><button type="button"><a th:href="@{/Eliminarmovimiento/{id}(id=${movimiento.id})}">Eliminar</a></button></td>
+                -->
+            </tr>
+
+        </table>
 
 
-            -->
-        </tr>
+    </div>
 
-    </table>
 
-</div>
+    <!-- Mostrar los mensajes que se pusieron en el controlador -->
+    <script th:inline="javascript"> /*inline es para que se ejecute el codigo javascript con thymeleaf, lo que traemos desde el controlador */
+        window.onload=function(){
 
-<!-- Mostrar los mensajes que se pusieron en el controlador -->
-<script th:inline="javascript"> /*inline es para que se ejecute el codigo javascript con thymeleaf, lo que traemos desde el controlador */
-    window.onload=function(){
+            let msg= [[${mensaje}]]; // [[${mensaje}]] indica que es  lo que viene de afuera , en este caso en el controlador  le  pusmos como nombre mensaje
 
-        let msg= [[${mensaje}]]; // [[${mensaje}]] indica que es  lo que viene de afuera , en este caso en el controlador  le  pusmos como nombre mensaje
+            //TODO cambiar el tipo de alerta que aparece
+            //TODO agrgar las alertas a los otros archivos
 
-        //TODO cambiar el tipo de alerta que aparece
-        //TODO agrgar las alertas a los otros archivos
-
-        // verificar que tipo de mensaje se recibe  desde el controlador
-        // toastr es una libreria de javascript que permite mostrar mensajes de alerta
-        if (msg === "saveOk"){
-            alert("movimiento guardada con exito");
-            //Command : toastr["success"]("movimiento creada con éxito!")
+            // verificar que tipo de mensaje se recibe  desde el controlador
+            // toastr es una libreria de javascript que permite mostrar mensajes de alerta
+            if (msg === "saveOk"){
+                alert("movimiento guardada con exito");
+                //Command : toastr["success"]("movimiento creada con éxito!")
+                }
+            else if (msg === "updateOk"){
+                alert("movimiento actualizada con exito");
+                //Command : toastr["success"]("movimiento actualizada con éxito!")
             }
-        else if (msg === "updateOk"){
-            alert("movimiento actualizada con exito");
-            //Command : toastr["success"]("movimiento actualizada con éxito!")
+            else if (msg === "deleteOk"){
+                alert("movimiento eliminada con exito");
+                //Command : toastr["error"]("movimiento eliminada con éxito!")
+            }
+            else if (msg === "deleteError"){
+                alert("Error al eliminar la movimiento ");
+                //Command : toastr["error"]("movimiento no ha sido eliminada!")
+            }
+           /* toastr.options={
+                "positionClass": "toast-top-right", posicion de la alerta
+                "showDuration":"300", para que dura 3 segundos
+                "showMethod":"fadeIn", como debe aparecer
+                "hideMethod":"fadeOut", como debe desaparecer
+            }
+            */
         }
-        else if (msg === "deleteOk"){
-            alert("movimiento eliminada con exito");
-            //Command : toastr["error"]("movimiento eliminada con éxito!")
-        }
-        else if (msg === "deleteError"){
-            alert("Error al eliminar la movimiento ");
-            //Command : toastr["error"]("movimiento no ha sido eliminada!")
-        }
-       /* toastr.options={
-            "positionClass": "toast-top-right", posicion de la alerta
-            "showDuration":"300", para que dura 3 segundos
-            "showMethod":"fadeIn", como debe aparecer
-            "hideMethod":"fadeOut", como debe desaparecer
-        }
-        */
-    }
 
-</script>
+    </script>
 
-<!--Validar los botones editar eliminar empleados-->
-<script>
+    <!--Validar los botones editar eliminar empleados-->
+    <script>
 
     // seleccionar solo un checkbox
     let checkboxes = document.querySelectorAll('input[type="checkbox"]')
@@ -195,7 +196,6 @@
     });
 
 </script>
-
 
 </body>
 </html>
