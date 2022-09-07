@@ -14,11 +14,12 @@
         color: red;
     }
 </style>
-<body>
+<body><!-- al usar th indica que se va a trabajaer con thymeleaf-->
 
 <button type="button" class="btn btn-info"><a th:href="@{/AgregarEmpresa}">Agregar Nueva Empresa</a></button>
 <button class="btnEditar" type="button" >Editar</button>
 <button class="btnEliminar" type="button">Eliminar</button>
+<button class="btnEmpleados" type="button">Ver empleados</button>
 
 
 <div class="container">
@@ -65,8 +66,10 @@
         </tr>
 
     </table>
-
+    <!-- btn para ver la lista de empleados -->
+    <button type="button"><a th:href="@{/VerEmpleados}">Ver empleados</a></button>
 </div>
+
 <!-- Mostrar los mensajes que se pusieron en el controlador -->
 <script th:inline="javascript"> /*inline es para que se ejecute el codigo javascript con thymeleaf, lo que traemos desde el controlador */
     window.onload=function(){
@@ -105,7 +108,7 @@
 
 </script>
 
-<!--Validar los botones editar y eliminar-->
+<!--Validar los botones editar eliminar empleados-->
 <script>
 
     // seleccionar solo un checkbox
@@ -121,10 +124,10 @@
     })
 
 
-    //boton editar Empresa
-    const buttonEditar = document.querySelector('.btnEditar');
+    //boton Ver empleados
+    const buttonEmpleados = document.querySelector('.btnEmpleados');
 
-    buttonEditar.addEventListener('click', function(e){
+    buttonEmpleados.addEventListener('click', function(e){
 
         try{
 
@@ -135,7 +138,7 @@
 
 
             //redireciona a la página indicada con el atributo id
-            window.location.href = "/EditarEmpresa/"+idEmpresa;
+            window.location.href = "/Empresa/"+idEmpresa+"/Empleados";
 
 
         }
@@ -180,6 +183,37 @@
 
 
     })
+
+    //boton editar Empresa
+    const buttonEditar = document.querySelector('.btnEditar');
+
+    buttonEditar.addEventListener('click', function(e){
+
+        try{
+
+            // saber cual checkbox esta seleccionado
+            let checkboxSeleccionado = document.querySelector('input[type="checkbox"]:checked');
+            // el value del checkbox es el id de la empresa
+            let idEmpresa = checkboxSeleccionado.value;
+
+
+            //redireciona a la página indicada con el atributo id
+            window.location.href = "/EditarEmpresa/"+idEmpresa;
+
+
+        }
+        catch (e) {
+
+            alert("No hay ninguna Empresa  seleccionada");
+        }
+
+
+
+
+
+
+    });
+
 </script>
 
 
