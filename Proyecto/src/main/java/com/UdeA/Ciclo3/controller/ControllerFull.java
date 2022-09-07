@@ -188,7 +188,7 @@ public class ControllerFull {
         List<MovimientoDinero> listaMovimientos= movimientosService.getAllMovimientos();
         model.addAttribute("movlist",listaMovimientos);
         model.addAttribute("mensaje",mensaje);
-        return "VerMovimientos"; //Llamamos al HTML
+        return "Movimiento/VerMovimientos"; //Llamamos al HTML
     }
 
     //Controlador que nos lleva al template donde podremos crear un nuevo movimiento
