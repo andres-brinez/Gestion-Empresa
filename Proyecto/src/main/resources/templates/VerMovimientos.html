@@ -50,9 +50,19 @@
             <td><input type="checkbox" name="check"  class="checkbox" th:value="${movimiento.id}"></td><!-- el value es el id de la movimiento-->
             <td class="idmovimiento" th:text="${movimiento.id}"></td>
             <td th:text="${movimiento.monto}"></td>
-            <td th:text="${movimiento.concepto}"></td>
-            <td th:text="${movimiento.usuario}"></td>
-            <!--checkbox-->
+            <!--paa saber que rol es-->
+            <td th:if = "${movimiento.concepto == '1'}" th:text="Gastos operativos"></td>
+            <td th:if = "${movimiento.concepto == '2'}" th:text="Sueldos"></td>
+            <td th:if = "${movimiento.concepto == '3'}" th:text="Maquinaria y equipo"></td>
+            <td th:if = "${movimiento.concepto == '4'}" th:text="Limpieza"></td>
+            <td th:if = "${movimiento.concepto == '5'}" th:text="Publicidad"></td>
+            <td th:if = "${movimiento.concepto == '6'}" th:text="Caja Menor"></td>
+            <td th:if = "${movimiento.concepto == '7'}" th:text="Tributarios"></td>
+            <td th:if = "${movimiento.concepto == '8'}" th:text="Servicios publicos"></td>
+            <td th:if = "${movimiento.concepto == '9'}" th:text="Cafeteria"></td>
+            <td th:if = "${movimiento.concepto == '10'}" th:text="Papeleria"></td>
+
+            <td th:text="${movimiento.usuario.nombre}"></td>
 
 
             <!--
