@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><!--xmlns:th="http://www.thymeleaf.org me permite engrajar el código del MVC (java) en las platillas html    -->
+<head>
+    <title>Lista de Movimientod - </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Mostrar Alertas  -->
+
+
+</head>
+<style>
+    h1{
+        text-align: center;
+        color: red;
+    }
+</style>
+<body><!-- al usar th indica que se va a trabajaer con thymeleaf-->
+
+<button type="button" class="btn btn-info"><a th:href="@{/Agregarmovimiento}">Agregar Nueva movimiento</a></button>
+<button class="btnEditar" type="button" >Editar</button>
+<button class="btnEliminar" type="button">Eliminar</button>
+<button type="button"><a th:href="@{/VerEmpresas}">Ver Empresas</a></button>
+<button type="button"><a th:href="@{/VerEmpleados}">Ver empleados</a></button>
+
+
+<div class="container">
+    <h1> Lista de Movimientos</h1>
+    <!--Dibujamos la tabla-->
+    <br>
+    <table class="table table-bordered">
+        <tr>
+            <th></th>
+            <th>ID</th>
+            <th>Valor</th>
+            <th>Concepto</th>
+            <th>Usuario Responsable</th>
+
+        </tr>
+        <!--Llenamos la tabla dibujada-->
+        <!--En nuestro controller, creamos en viewmovimiento un modelo con un atributo llamado emplist donde esta guardada la lista de todas las movimientos-->
+        <tr th:each="movimiento : ${movlist}">
+            <!--th indica que es de  tipo thymeleaf
+            each itera
+            movimiento es el tipo de dato (clase ) que queremos iterar
+            ${emplist} es una lista de movimientos, de donde trae los datos-->
+
+            <!--En el modelo de la vista, creamos un atributo llamado id, que es el id de la movimiento
+            th:text es el tipo de dato a traer en tipo de texto
+            y le indicamos del tipo de dato indicado(movimiento) se trae el valor-->
+            <td><input type="checkbox" name="check"  class="checkbox" th:value="${movimiento.id}"></td><!-- el value es el id de la movimiento-->
+            <td class="idmovimiento" th:text="${movimiento.id}"></td>
+            <td th:text="${movimiento.monto}"></td>
+            <td th:text="${movimiento.concepto}"></td>
+            <td th:text="${movimiento.usuario}"></td>
+            <!--checkbox-->
+
+
+            <!--
+            Estos botones salen en cada fila de la tabla, al hacer click redireccionan a la vista editarmovimiento con el id automatico
+            <td><button class="eliminar" type="button" ><a th:href="@{/Editarmovimiento/{id}(id=${movimiento.id})}" >Editar</a></button></td>
+            <td><button type="button"><a th:href="@{/Eliminarmovimiento/{id}(id=${movimiento.id})}">Eliminar</a></button></td>
+
+
+            -->
+        </tr>
+
+    </table>
+
+</div>
+
+<!-- Mostrar los mensajes que se pusieron en el controlador -->
+<script th:inline="javascript"> /*inline es para que se ejecute el codigo javascript con thymeleaf, lo que traemos desde el controlador */
+    window.onload=function(){
+
+        let msg= [[${mensaje}]]; // [[${mensaje}]] indica que es  lo que viene de afuera , en este caso en el controlador  le  pusmos como nombre mensaje
+
+        //TODO cambiar el tipo de alerta que aparece
+        //TODO agrgar las alertas a los otros archivos
+
+        // verificar que tipo de mensaje se recibe  desde el controlador
+        // toastr es una libreria de javascript que permite mostrar mensajes de alerta
+        if (msg === "saveOk"){
+            alert("movimiento guardada con exito");
+            //Command : toastr["success"]("movimiento creada con éxito!")
+            }
+        else if (msg === "updateOk"){
+            alert("movimiento actualizada con exito");
+            //Command : toastr["success"]("movimiento actualizada con éxito!")
+        }
+        else if (msg === "deleteOk"){
+            alert("movimiento eliminada con exito");
+            //Command : toastr["error"]("movimiento eliminada con éxito!")
+        }
+        else if (msg === "deleteError"){
+            alert("Error al eliminar la movimiento ");
+            //Command : toastr["error"]("movimiento no ha sido eliminada!")
+        }
+       /* toastr.options={
+            "positionClass": "toast-top-right", posicion de la alerta
+            "showDuration":"300", para que dura 3 segundos
+            "showMethod":"fadeIn", como debe aparecer
+            "hideMethod":"fadeOut", como debe desaparecer
+        }
+        */
+    }
+
+</script>
+
+<!--Validar los botones editar eliminar empleados-->
+<script>
+
+    // seleccionar solo un checkbox
+    let checkboxes = document.querySelectorAll('input[type="checkbox"]')
+
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            checkboxes.forEach(function(otherCheckbox) {
+                if (otherCheckbox !== checkbox)
+                    otherCheckbox.checked = false
+            })
+        })
+    })
+
+
+
+
+    const buttonEliminar = document.querySelector(".btnEliminar")
+    buttonEliminar.addEventListener("click", function(e) {
+
+
+        try{
+
+            // saber cual checkbox esta seleccionado
+            let checkboxSeleccionado = document.querySelector('input[type="checkbox"]:checked');
+
+            // el value del checkbox es el id de la movimiento
+            let idmovimiento = checkboxSeleccionado.value;
+
+            // confirmar si se quiere eliminar la movimiento
+            let confirmacion = confirm("¿Está seguro que desea eliminar la movimiento?");
+            if(confirmacion){
+                //redireciona a la página indicada con el atributo id
+                window.location.href = "/EliminarMovimiento/"+idmovimiento;
+            }
+
+
+
+        }
+        catch (e) {
+
+            alert("No hay ninguna movimiento  seleccionada");
+        }
+
+
+    })
+
+    //boton editar movimiento
+    const buttonEditar = document.querySelector('.btnEditar');
+
+    buttonEditar.addEventListener('click', function(e){
+
+        try{
+
+            // saber cual checkbox esta seleccionado
+            let checkboxSeleccionado = document.querySelector('input[type="checkbox"]:checked');
+            // el value del checkbox es el id de la movimiento
+            let idmovimiento = checkboxSeleccionado.value;
+
+
+            //redireciona a la página indicada con el atributo id
+            window.location.href = "/EditarMovimiento/"+idmovimiento;
+
+
+        }
+        catch (e) {
+
+            alert("No hay ninguna movimiento  seleccionada");
+        }
+
+
+
+
+
+
+    });
+
+</script>
+
+
+</body>
+</html>
