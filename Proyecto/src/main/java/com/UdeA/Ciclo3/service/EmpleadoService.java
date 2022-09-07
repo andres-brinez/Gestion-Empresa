@@ -23,28 +23,38 @@ public class EmpleadoService {
         return EmpleadoList;
     }
 
-    // Metodo para ver todos los empleados registrados
-    public Optional<Empleado> getgetEmpleadoById(Integer id){
-        //Metodo que me trae un objeto de tipo Empleado cuando cuento con el id de la misma
+    // Metodo para Buscar empleado por  id usando metodos heredados del jpaRepository
+    // optional significa que puede o no retornar un valor
+    public Optional<Empleado> getEmpleadoById(Integer id){
+
         return empleadoRepository.findById(id);
     }
 
-    //Metodo para guardar o actualizar objetos de tipo Empleado
+    //Metodo para guardar o actualizar un  Empleado
     public boolean saveOrUpdateEmpleado(Empleado Empleado){
         Empleado emp=empleadoRepository.save(Empleado);
         if (empleadoRepository.findById(emp.getId())!=null){
+            // si el empleado existe, es decir que se creó o actualizó
             return true;
         }
+        // si el empleado no existe, significa que hay un error
         return false;
     }
 
-    //Metodo para eliminar Empleados registradas teniendo el id
+    //Metodo para eliminar Empleados
     public boolean deleteEmpleado(Integer id){
-        empleadoRepository.deleteById(id);  //Eliminar
+        empleadoRepository.deleteById(id);  //Elimina el empleado con el id que se le pasa
 
         if (empleadoRepository.findById(id)!=null){  //Verificacion del servicio eliminacion
+            /// si el empleado existe hubo un error porque no se eliminó
             return true;
         }
+        // si el empleado no existe, es decir que se elimino correctamente
         return false;
+    }
+
+    //Metodo para buscar empleados por empresa
+    public ArrayList<Empleado> obtenerPorEmpresa(Integer id){
+        return empleadoRepository.findByEmpresa(id);
     }
 }
