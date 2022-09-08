@@ -25,7 +25,18 @@ public class ControllerFull {
     MovimientosService movimientosService;
     // EMPRESAS
 
-    @GetMapping({"/","/VerEmpresas"})// (/) es la página de inicio (home)
+    @GetMapping({"/","Login"})
+    public String  login (){
+        return "Login";
+    }
+
+    @GetMapping({"/Register"})
+    public String  Register (){
+        return "Register";
+    }
+
+
+    @GetMapping({"/VerEmpresas"})// (/) es la página de inicio (home)
     // cuando se llame a cualquiera de  los dos recursos se ejecuta ese metodo
     //  @ModelAttribute("mensaje") indica que va a recibir un mensaje del un objeto Modelo (Model) que se guarda como  mensaje
     public String viewEmpresas( Model model, @ModelAttribute("mensaje") String mensaje){ // se  ingresa cualquier tipo de datos tipo modelo
@@ -48,7 +59,7 @@ public class ControllerFull {
     // redirreciona un servicio y no un templete
     public String guardarEmpresa(Empresa emp, RedirectAttributes redirectAttributes){
 
-        if(empresaService.saveOrUpdateEmpresa(emp)==true) {
+        if(empresaService.saveOrUpdateEmpresa(emp)) {
             //creó la empresa
             redirectAttributes.addFlashAttribute("mensaje","saveOk"); // se crea un mensaje y se envia a la vista
             // redirreciona la página
@@ -73,7 +84,7 @@ public class ControllerFull {
     @PostMapping("/ActualizarEmpresa")
     public String ActualizarEmpresa(Empresa emp, RedirectAttributes redirectAttributes ) {
 
-        if(empresaService.saveOrUpdateEmpresa(emp)==true) {
+        if(empresaService.saveOrUpdateEmpresa(emp)) {
             //actualizó la empresa
             redirectAttributes.addFlashAttribute("mensaje","updateOk");
             // redirreciona la página
@@ -125,7 +136,7 @@ public class ControllerFull {
     @PostMapping("/GuardarEmpleado")
     public String guardarEmpleado(Empleado empl, RedirectAttributes redirectAttributes){
         // si se guardó el empleado
-        if(empleadoService.saveOrUpdateEmpleado(empl)==true){
+        if(empleadoService.saveOrUpdateEmpleado(empl)){
             // mensaje a mostrar em html
             redirectAttributes.addFlashAttribute("mensaje","saveOK");
             return "redirect:/VerEmpleados";
@@ -176,7 +187,7 @@ public class ControllerFull {
     public String verEmpleadosPorEmpresa(@PathVariable("id") Integer id, Model model){
         List<Empleado> listaEmpleados = empleadoService.obtenerPorEmpresa(id); // lista de empleados
         model.addAttribute("emplelist",listaEmpleados); // envía en un objeto la lista de todos los empleados de una empresa especirficada en el id
-        return "Empleado/verEmpleados"; //Llamamos al html con el emplelist de los empleados filtrados
+        return "Empleado/VerEmpleados"; //Llamamos al html con el emplelist de los empleados filtrados
     }
 
 
@@ -200,7 +211,7 @@ public class ControllerFull {
         // guarda todos los empleados en una lista para mostrarlos en el html
         List<Empleado> listaEmpleados= empleadoService.getAllEmpleados();
         model.addAttribute("emplelist",listaEmpleados);
-        return "AgregarMovimiento"; //Llamar HTML
+        return "Movimiento/AgregarMovimiento"; //Llamar HTML
     }
 
     @PostMapping("/GuardarMovimiento")
@@ -224,7 +235,7 @@ public class ControllerFull {
         // lista de empleados para mostrar en el html
         List<Empleado> listaEmpleados= empleadoService.getAllEmpleados();
         model.addAttribute("emplelist",listaEmpleados);
-        return "EditarMovimiento";
+        return "Movimiento/EditarMovimiento";
     }
 
     @PostMapping("/ActualizarMovimiento")
@@ -252,7 +263,7 @@ public class ControllerFull {
     public String movimientosPorEmpleado(@PathVariable("id")Integer id, Model model){
         List<MovimientoDinero> movlist = movimientosService.obtenerPorEmpleado(id);
         model.addAttribute("movlist",movlist);
-        return "VerMovimientos"; //Llamamos al HTML
+        return "Movimiento/VerMovimientos"; //Llamamos al HTML
     }
 
     //Filtro de movimientos por empresa
@@ -260,7 +271,7 @@ public class ControllerFull {
     public String movimientosPorEmpresa(@PathVariable("id")Integer id, Model model){
         List<MovimientoDinero> movlist = movimientosService.obtenerPorEmpresa(id);
         model.addAttribute("movlist",movlist);
-        return "VerMovimientos"; //Llamamos al HTML
+        return "Movimiento/VerMovimientos"; //Llamamos al HTML
     }
 
 
