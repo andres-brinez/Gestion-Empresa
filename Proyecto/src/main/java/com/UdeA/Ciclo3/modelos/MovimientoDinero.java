@@ -1,7 +1,11 @@
 package com.UdeA.Ciclo3.modelos;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.util.Date;
+
 
 @Entity // más  información en la clase Empresa
 @Table(name="Movimientos")  // indica que esta entidad es  una tabla  y cúal es el nombre
@@ -24,29 +28,59 @@ public class MovimientoDinero {
     @JoinColumn(name = "empleado_id")
     private Empleado usuario;
 
+    // Postgres tiene el siguiente formato de fecha AAAA-MM-DD
+    @DateTimeFormat(pattern="yyyy-MM-dd") // da el formato en el que se vá a guardar la fecha en la base de datos
+    private Date fecha;
+
     // constructor
-    public MovimientoDinero() {}
-    public MovimientoDinero(long monto, String concepto, Empleado usuario) {
+    public MovimientoDinero() {
+    }
+
+    public MovimientoDinero(int id, long monto, String concepto, Empleado usuario, Date fecha) {
+        this.id = id;
         this.monto = monto;
         this.concepto = concepto;
         this.usuario = usuario;
+        this.fecha = fecha;
     }
 
-    // getters and setters
+    // getters
 
-    public int getId() {return id;}
+    public int getId() {
+        return id;
+    }
 
-    public void setId(int id) {this.id = id;}
+    public long getMonto() {
+        return monto;
+    }
 
-    public long getMonto() {return monto;}
+    public String getConcepto() {
+        return concepto;
+    }
 
-    public void setMonto(long monto) {this.monto = monto;}
+    public Empleado getUsuario() {
+        return usuario;
+    }
 
-    public String getConcepto() {return concepto;}
+    public Date getFecha() {
+        return fecha;
+    }
 
-    public void setConcepto(String concepto) {this.concepto = concepto;}
+    // setters
 
-    public Empleado getUsuario() {return usuario;}
+    public void setMonto(long monto) {
+        this.monto = monto;
+    }
 
-    public void setUsuario(Empleado usuario) {this.usuario = usuario;}
+    public void setConcepto(String concepto) {
+        this.concepto = concepto;
+    }
+
+    public void setUsuario(Empleado usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
 }
