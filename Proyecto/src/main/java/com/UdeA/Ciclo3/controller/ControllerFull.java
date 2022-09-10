@@ -213,7 +213,7 @@ public class ControllerFull {
         model.addAttribute("emplelist",listaEmpleados);
         return "Movimiento/AgregarMovimiento"; //Llamar HTML
     }
-
+/*
     @PostMapping("/GuardarMovimiento")
     public String guardarMovimiento(MovimientoDinero mov, RedirectAttributes redirectAttributes){
         if(movimientosService.saveOrUpdateMovimiento(mov)){
@@ -225,7 +225,7 @@ public class ControllerFull {
         redirectAttributes.addFlashAttribute("mensaje","saveError");
         return "redirect:/AgregarMovimiento";
     }
-
+*/
     @GetMapping("/EditarMovimiento/{id}")
     public String editarMovimento(Model model, @PathVariable Integer id, @ModelAttribute("mensaje") String mensaje){
         MovimientoDinero mov=movimientosService.getMovimientoById(id);

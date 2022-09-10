@@ -49,7 +49,9 @@
                 y le indicamos del tipo de dato indicado(movimiento) se trae el valor-->
                 <td><input type="checkbox" name="check"  class="checkbox" th:value="${movimiento.id}"></td><!-- el value es el id de la movimiento-->
                 <td class="idmovimiento" th:text="${movimiento.id}"></td>
-                <td th:text="${movimiento.monto}"></td>
+                <!--Cambiar el formato en el que se ve el dinero del movimiento, se le agrega $ y .-->
+
+                <td class="monto" th:text="${movimiento.monto}"></td>
                 <!--paa saber que Movimiento es -->
                 <td th:if="${movimiento.concepto == '1'}"> Gastos operativos</td>
                 <td th:if="${movimiento.concepto == '2'}">Sueldos</td>
@@ -63,7 +65,7 @@
                 <td th:if="${movimiento.concepto == '10'}" >Papeleria</td>
 
                 <td th:text="${movimiento.usuario.nombre}"></td>
-                <!-- formateo de las fechas para que se vean como se quiere-->
+                <!-- formateo de las fechas para que se vean como se quiere -->
                 <td th:text="${#dates.format(movimiento.fechaMovimiento, 'dd/MM/yyyy')}"></td>
                 <td th:text="${#dates.format(movimiento.fechaRegistro, 'dd/MM/yyyy')}"></td>
 
@@ -122,6 +124,7 @@
 
 
     <script type="text/javascript" th:src="@{/js/Movimiento/ValidarBotones.js}" ></script>
+    <script type="text/javascript" th:src="@{/js/Movimiento/FormatNumeros.js}" ></script>
 
 </body>
 </html>

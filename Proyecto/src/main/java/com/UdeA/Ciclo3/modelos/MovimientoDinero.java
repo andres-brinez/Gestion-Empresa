@@ -28,6 +28,7 @@ public class MovimientoDinero {
     @JoinColumn(name = "empleado_id")
     private Empleado usuario;
 
+
     // Postgres tiene el siguiente formato de fecha AAAA-MM-DD
     @DateTimeFormat(pattern="yyyy-MM-dd") // da el formato en el que se vá a guardar la fecha en la base de datos
     private Date fechaMovimiento;
@@ -44,8 +45,11 @@ public class MovimientoDinero {
         this.monto = monto;
         this.concepto = concepto;
         this.usuario = usuario;
+
         this.fechaMovimiento = fechaMovimiento;
         this.fechaRegistro = fechaRegistro;
+
+
     }
 // getters
 
@@ -96,4 +100,5 @@ public class MovimientoDinero {
     public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
+
 }
