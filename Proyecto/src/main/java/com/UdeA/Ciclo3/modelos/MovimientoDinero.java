@@ -30,21 +30,24 @@ public class MovimientoDinero {
 
     // Postgres tiene el siguiente formato de fecha AAAA-MM-DD
     @DateTimeFormat(pattern="yyyy-MM-dd") // da el formato en el que se vá a guardar la fecha en la base de datos
-    private Date fecha;
+    private Date fechaMovimiento;
+
+    @DateTimeFormat(pattern="yyyy-MM-dd") // da el formato en el que se vá a guardar la fecha en la base de datos
+    private Date fechaRegistro;
 
     // constructor
     public MovimientoDinero() {
     }
 
-    public MovimientoDinero(int id, long monto, String concepto, Empleado usuario, Date fecha) {
+    public MovimientoDinero(int id, long monto, String concepto, Empleado usuario, Date fechaMovimiento, Date fechaRegistro) {
         this.id = id;
         this.monto = monto;
         this.concepto = concepto;
         this.usuario = usuario;
-        this.fecha = fecha;
+        this.fechaMovimiento = fechaMovimiento;
+        this.fechaRegistro = fechaRegistro;
     }
-
-    // getters
+// getters
 
     public int getId() {
         return id;
@@ -62,11 +65,17 @@ public class MovimientoDinero {
         return usuario;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public Date getFechaMovimiento() {
+        return fechaMovimiento;
     }
 
+    public Date getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+
     // setters
+
 
     public void setMonto(long monto) {
         this.monto = monto;
@@ -80,7 +89,11 @@ public class MovimientoDinero {
         this.usuario = usuario;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setFechaMovimiento(Date fechaMovimiento) {
+        this.fechaMovimiento = fechaMovimiento;
+    }
+
+    public void setFechaRegistro(Date fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 }
