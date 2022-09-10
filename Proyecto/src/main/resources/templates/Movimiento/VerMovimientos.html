@@ -33,7 +33,8 @@
                 <th>Valor</th>
                 <th>Concepto</th>
                 <th>Usuario Responsable</th>
-
+                <th>Fecha Movimiento</th>
+                <th>Fecha Registro</th>
             </tr>
             <!--Llenamos la tabla dibujada-->
             <!--En nuestro controller, creamos en viewmovimiento un modelo con un atributo llamado emplist donde esta guardada la lista de todas las movimientos-->
@@ -62,7 +63,9 @@
                 <td th:if="${movimiento.concepto == '10'}" >Papeleria</td>
 
                 <td th:text="${movimiento.usuario.nombre}"></td>
-
+                <!-- formateo de las fechas para que se vean como se quiere-->
+                <td th:text="${#dates.format(movimiento.fechaMovimiento, 'dd/MM/yyyy')}"></td>
+                <td th:text="${#dates.format(movimiento.fechaRegistro, 'dd/MM/yyyy')}"></td>
 
                 <!--
                 Estos botones salen en cada fila de la tabla, al hacer click redireccionan a la vista editarmovimiento con el id automatico
@@ -118,7 +121,7 @@
     </script>
 
 
-    <script type="text/javascript" th:src="@{/js/Empleado/ValidarBotones.js}" ></script>
+    <script type="text/javascript" th:src="@{/js/Movimiento/ValidarBotones.js}" ></script>
 
 </body>
 </html>
