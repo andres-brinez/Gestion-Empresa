@@ -41,14 +41,15 @@
       <div class="form-group col-md-12">
         <label class="col-md-3" for="valor">Valor del movimiento:</label>
         <div class="col-md-6">
-          <input type="number" th:field="*{monto}" class="form-control" id="valor" required="required"></div>
+          <input type="number" th:field="*{monto}" class="form-control" id="valor" required="required">
+        </div>
       </div>
     </div>
 
     <!--Campo para Concepto-->
     <div class="row">
       <div class="form-group col-md-12">
-        <label class="col-md-3" for="rol">Concepto de la movimiento:</label>
+        <label class="col-md-3" for="concepto">Concepto de la movimiento:</label>
         <div class="col-md-6">
           <select th:field="*{concepto}" class="form-control" id="concepto" required="required">
             <!-- el value  es el valor a guardar en el campo rol del objeto movimiento-->
@@ -72,14 +73,39 @@
       <div class="form-group col-md-12">
         <label class="col-md-3" for="usuario">Usuario Responsable :</label>
         <div class="col-md-6">
-        <!-- el select va a alimentar el campo usuario del ebjeto movimiento -->
-        <select th:field="*{usuario}" class="form-control" id="usuario" required="required">
-          <!-- movlist es donde está la lista de los empleados
-          itera la lista de empresas (emplelist) y muestra la empresa con el nombre
-          al seleccionar la empresa se guarda el id-->
-          <option th:each="empleado : ${emplelist}" th:text="${empleado.nombre}" th:value="${empleado.id}"></option>
-        </select>
+          <!-- el select va a alimentar el campo usuario del ebjeto movimiento -->
+          <select th:field="*{usuario}" class="form-control" id="usuario" required="required">
+            <!-- movlist es donde está la lista de los empleados
+            itera la lista de empresas (emplelist) y muestra la empresa con el nombre
+            al seleccionar la empresa se guarda el id-->
+            <option th:each="empleado : ${emplelist}" th:text="${empleado.nombre}" th:value="${empleado.id}"></option>
+          </select>
+        </div>
+      </div>
     </div>
+
+
+    <!--Campo para la fecha del movimiento-->
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label class="col-md-3" for="fechaMovimiento">Fecha del movimiento : </label>
+        <div class="col-md-6">
+          <input type="date" th:field="*{fechaMovimiento}" class="form-control" id="fechaMovimiento" required="required">
+        </div>
+      </div>
+    </div>
+
+    <!--Campo para la fecha del registro-->
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label class="col-md-3" for="fechaRegistro">Fecha del Registro : </label>
+        <div class="col-md-6">
+          <input  type="date" th:field="*{fechaRegistro}" class="form-control" id="fechaRegistro" required="required"  readonly >
+        </div>
+      </div>
+    </div>
+
+
 
     <!--Boton para enviar all y ejecutar la accion que se especifica en el form -->
     <div class="row">

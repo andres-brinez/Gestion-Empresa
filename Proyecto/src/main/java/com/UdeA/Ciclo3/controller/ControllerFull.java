@@ -241,6 +241,7 @@ public class ControllerFull {
     @PostMapping("/ActualizarMovimiento")
     public String updateMovimiento(@ModelAttribute("mov") MovimientoDinero mov, RedirectAttributes redirectAttributes){
         if(movimientosService.saveOrUpdateMovimiento(mov)){
+
             redirectAttributes.addFlashAttribute("mensaje","updateOK");
             return "redirect:/VerMovimientos";
         }
