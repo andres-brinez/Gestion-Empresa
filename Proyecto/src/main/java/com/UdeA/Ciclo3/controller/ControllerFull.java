@@ -35,6 +35,13 @@ public class ControllerFull {
         return "Register";
     }
 
+    @GetMapping({"/Inicio"})
+    public String  Inicio (){
+        return "Inicio";
+    }
+
+
+
 
     @GetMapping({"/VerEmpresas"})// (/) es la página de inicio (home)
     // cuando se llame a cualquiera de  los dos recursos se ejecuta ese metodo
