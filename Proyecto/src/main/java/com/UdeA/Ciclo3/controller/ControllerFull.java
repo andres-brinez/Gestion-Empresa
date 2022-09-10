@@ -199,6 +199,8 @@ public class ControllerFull {
         List<MovimientoDinero> listaMovimientos= movimientosService.getAllMovimientos();
         model.addAttribute("movlist",listaMovimientos);
         model.addAttribute("mensaje",mensaje);
+        Long sumaMonto= movimientosService.obtenerSumaMontos();
+        model.addAttribute("sumaMontos",sumaMonto); // se manda la suma de todos los montos a la plantilla
         return "Movimiento/VerMovimientos"; //Llamamos al HTML
     }
 
@@ -213,7 +215,7 @@ public class ControllerFull {
         model.addAttribute("emplelist",listaEmpleados);
         return "Movimiento/AgregarMovimiento"; //Llamar HTML
     }
-/*
+
     @PostMapping("/GuardarMovimiento")
     public String guardarMovimiento(MovimientoDinero mov, RedirectAttributes redirectAttributes){
         if(movimientosService.saveOrUpdateMovimiento(mov)){
@@ -225,7 +227,7 @@ public class ControllerFull {
         redirectAttributes.addFlashAttribute("mensaje","saveError");
         return "redirect:/AgregarMovimiento";
     }
-*/
+
     @GetMapping("/EditarMovimiento/{id}")
     public String editarMovimento(Model model, @PathVariable Integer id, @ModelAttribute("mensaje") String mensaje){
         MovimientoDinero mov=movimientosService.getMovimientoById(id);
@@ -264,6 +266,8 @@ public class ControllerFull {
     public String movimientosPorEmpleado(@PathVariable("id")Integer id, Model model){
         List<MovimientoDinero> movlist = movimientosService.obtenerPorEmpleado(id);
         model.addAttribute("movlist",movlist);
+        Long sumaMonto= movimientosService.MontosPorEmpleado(id);
+        model.addAttribute("sumaMontos",sumaMonto); // se manda la suma de todos los montos a la plantilla
         return "Movimiento/VerMovimientos"; //Llamamos al HTML
     }
 
@@ -272,6 +276,8 @@ public class ControllerFull {
     public String movimientosPorEmpresa(@PathVariable("id")Integer id, Model model){
         List<MovimientoDinero> movlist = movimientosService.obtenerPorEmpresa(id);
         model.addAttribute("movlist",movlist);
+        Long sumaMonto= movimientosService.MontosPorEmpresa(id);
+        model.addAttribute("sumaMontos",sumaMonto); // se manda la suma de todos los montos a la plantilla
         return "Movimiento/VerMovimientos"; //Llamamos al HTML
     }
 
