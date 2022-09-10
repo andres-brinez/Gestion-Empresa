@@ -83,6 +83,11 @@
 
     </div>
 
+    <div class="container monto">
+        <p>Total Movimientos :</p>
+        <p  th:text="${sumaMontos}"></p> <!-- TODO mirar como solucionar el problema del $ que aparece, porbar con css -->
+    </div>
+
 
     <!-- Mostrar los mensajes que se pusieron en el controlador -->
     <script th:inline="javascript"> /*inline es para que se ejecute el codigo javascript con thymeleaf, lo que traemos desde el controlador */
