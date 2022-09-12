@@ -1,82 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Agregar nueva Empresa - Ciclo3</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-    a{
-    color:white;
-    }
-    a:hover {
-    color: black;
-    text-decoration:none;
-    }
-</style>
-</head>
-<body>
+  <head>
+    <title>Agregar nueva Empresa </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/3061/3061341.png" type="image/x-icon">
 
-<div class="container">
-  <h1> Agregue aqui los datos de Empresa</h1>
-  <br>
-  <!--Crear formulario para llenar los datos de la empresa y guardarlo en el objeto emp
-  al enviar el formulario ejecuta el servicio GuardarEmpreasa-->
-  <form th:action="@{/GuardarEmpresa}" th:object="${emp}" method="post">
-    <!--Campo para nombre-->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="nombre">Nombre de la Empresa:</label>
-        <div class="col-md-6">
-          <!-- th:field="*{nombre}" indica donde se guarda el valor ingresado en el objeto emp -->
-          <input type="text" th:field="*{nombre}" class="form-control" id="nombre" required="required"></div>
-      </div>
+    <!-- Estilos  -->
+    <link rel="stylesheet" th:href="@{css/Empresa/FormEmpresa.css}"/>
+
+
+
+    <!-- Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"/>
+
+  </head>
+  <body>
+    <a th:href="@{/VerEmpresas}"><img class="flecha" src="https://cdn-icons-png.flaticon.com/512/271/271218.png" alt=""></a>
+
+    <h1>Nueva Empresa</h1>
+
+    <div class="container-form">
+
+      <!--Crear formulario para llenar los datos de la empresa y guardarlo en el objeto emp
+      al enviar el formulario ejecuta el servicio GuardarEmpreasa-->
+      <form th:action="@{/GuardarEmpresa}" th:object="${emp}" method="post">
+
+        <label for="nombre">Nombre</label>
+        <input type="text" th:field="*{nombre}"  id="nombre" required="required">
+
+        <label for="ciudad">Ciudad</label>
+        <input type="text" th:field="*{direccion}" id="ciudad" required="required">
+
+        <label for="telefono">Telefono</label>
+        <input type="text" th:field="*{telefono}" class="form-control" id="telefono" required="required">
+
+        <label for="NIT">NIT</label>
+        <input type="text" th:field="*{NIT}"  id="NIT" required="required">
+
+        <button type="submit">Envíar</button>
+      </form>
+
     </div>
 
-    <!--Campo para direccion-->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="direccion">Direccion de la Empresa:</label>
-        <div class="col-md-6">
-          <input type="text" th:field="*{direccion}" class="form-control" id="direccion" required="required"></div>
-      </div>
-    </div>
-
-    <!--Campo para telefono-->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="telefono">Telefono de la Empresa:</label>
-        <div class="col-md-6">
-          <input type="text" th:field="*{telefono}" class="form-control" id="telefono" required="required"></div>
-      </div>
-    </div>
-
-    <!--Campo para NIT-->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="NIT">NIT o RUT de la Empresa:</label>
-        <div class="col-md-6">
-          <input type="text" th:field="*{NIT}" class="form-control" id="NIT" required="required"></div>
-      </div>
-    </div>
-
-
-    <!--Boton para enviar all y ejecutar la accion que se especifica en el form -->
-    <div class="row">
-      <div class="col-md-2">
-        <button class="btn btn-success">Crear Empresa</button>
-      </div>
-    </div>
-
-  </form>
-
-  <br>
-  <!--regresa a la página anterior-->
-  <a href="javascript: history.go(-1)" class="btn btn-info" role="button">Atrás</a>
-
-</div>
-</body>
+  </body>
 </html>
-<-->

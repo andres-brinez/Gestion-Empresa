@@ -1,95 +1,156 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Editar Empresa - Ciclo3</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-    a{
-    color:white;
-    }
-    a:hover {
-    color: black;
-    text-decoration:none;
-    }
-</style>
+    <title>Editar Empresa </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" type="image/x-icon">
+
+
+    <!-- Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"/>
+
 </head>
+<style>
+    /* toco ponerlos los estilos acá porque salia un error en el servidor (404)*/
+
+
+    body {
+        margin: 0%;
+        background-color: #D9D9D9;
+        font-family: 'Inter', sans-serif;
+
+    }
+
+    .flecha{
+        position: fixed;
+        top: 0;
+        width: 30px;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 40px;
+        font-weight: 600;
+        line-height: 29px;
+        letter-spacing: 0em;
+        margin:  70px 0 80px 0;
+    }
+
+    .container-form{
+        display: flex;
+        /* para alinear vertical y horizontal */
+        justify-content: center;
+        align-items: center;
+
+
+    }
+
+    form {
+        width: 25%;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    label {
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 18px;
+        letter-spacing: 0em;
+        text-align: left;
+        margin: 20px 0 ;
+
+    }
+
+    input{
+
+        padding: 5px ;
+        height: 40px;
+        width: 100%;
+        border: none;
+        font-size: 20px;
+
+    }
+
+
+    input:focus{
+        outline: none;
+    }
+
+    button {
+
+        width: 70%; /* esto ve con el width del form */
+        height: 50px;
+        margin: 30px auto;
+        background-color:  #9E9E9E;
+        border: none;
+        font-size: 20px;
+        color: #FFF;
+        font-weight:normal;
+        cursor: pointer;
+
+
+    }
+
+    button:hover {
+        background-color: #6D6D6D;
+    }
+
+
+
+
+    .atras{
+        text-align: center;
+        font-size: 20px;
+        font-weight: 600;
+        margin: 20px 0 ;
+        /* border:solid 1px red ; */
+
+
+    }
+
+</style>
 <body>
+<!-- redireciona a una página antes de la página actual-->
+<a href="javascript: history.go(-1)"><img class="flecha" src="https://cdn-icons-png.flaticon.com/512/271/271218.png" alt=""></a>
 
-<div class="container">
-  <h1> Edite aqui los datos de Empresa</h1>
-  <br>
-  <!--Crear formulario para llenar los datos de la empresa y guardarlo en el objeto emp -->
-
-  <form th:action="@{/ActualizarEmpresa}" th:object="${emp}" method="post">
-  <!-- action es lo que se va a ejecutar cuando se envie el formulario-->
-    <!--el objeto es de donde se trae la información, es decir el modelo declarado en el controller-->
-    <!--  th:field="*{nombre del valor a traer }" cual información traer-->
-
-    <!--Campo para id-->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="id">ID de la Empresa:</label>
-        <div class="col-md-6">
-          <!-- readonly no permite editar el  campo  -->
-          <input th:field="*{id}" class="form-control" id="id" required="required" readonly></div>
-      </div>
-    </div>
-
-    <!--Campo para nombre-->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="nombre">Nombre de la Empresa:</label>
-        <div class="col-md-6">
-          <input type="text" th:field="*{nombre}" class="form-control" id="nombre" required="required"></div>
-      </div>
-    </div>
-
-    <!--Campo para direccion-->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="direccion">Direccion de la Empresa:</label>
-        <div class="col-md-6">
-          <input type="text" th:field="*{direccion}" class="form-control" id="direccion" required="required"></div>
-      </div>
-    </div>
-
-    <!--Campo para telefono-->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="telefono">Telefono de la Empresa:</label>
-        <div class="col-md-6">
-          <input type="text" th:field="*{telefono}" class="form-control" id="telefono" required="required"></div>
-      </div>
-    </div>
-
-    <!--Campo para NIT-->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="NIT">NIT o RUT de la Empresa:</label>
-        <div class="col-md-6">
-          <input type="text" th:field="*{NIT}" class="form-control" id="NIT" required="required"></div>
-      </div>
-    </div>
+<h1>Editar Empresa</h1>
 
 
-    <!--Boton para enviar all y ejecutar accion -->
-    <div class="row">
-      <div class="col-md-2">
-        <button class="btn btn-success">Actualizar Empresa</button>
-      </div>
-    </div>
+<div class="container-form">
 
-  </form>
+    <!--Crear formulario para llenar los datos de la empresa y guardarlo en el objeto emp -->
 
-  <br>
-  // redireciona a una página antes de la página actual
-  <a href="javascript: history.go(-1)" class="btn btn-info" role="button">Atrás</a>
+    <form th:action="@{/ActualizarEmpresa}" th:object="${emp}" method="post">
+        <!-- action es lo que se va a ejecutar cuando se envie el formulario-->
+        <!--el objeto es de donde se trae la información, es decir el modelo declarado en el controller-->
+        <!--  th:field="*{nombre del valor a traer }" cual información traer-->
 
+        <label  for="id">ID de la Empresa:</label>
+        <!-- readonly no permite editar el  campo  -->
+        <input th:field="*{id}" class="form-control" id="id" required="required" readonly>
+
+        <label for="nombre">Nombre</label>
+        <input type="text" th:field="*{nombre}"  id="nombre" required="required">
+
+        <label for="ciudad">Ciudad</label>
+        <input type="text" th:field="*{direccion}" id="ciudad" required="required">
+
+        <label for="telefono">Telefono</label>
+        <input type="text" th:field="*{telefono}" class="form-control" id="telefono" required="required">
+
+        <label for="NIT">NIT</label>
+        <input type="text" th:field="*{NIT}"  id="NIT" required="required">
+
+        <button type="submit">Envíar</button>
+    </form>
 
 </div>
+
 </body>
 </html>
