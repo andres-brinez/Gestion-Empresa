@@ -75,6 +75,7 @@ buttonEliminar.addEventListener("click", function(e) {
 // Ver los movimientos del empleado seleccionado
 const buttonMovimiento = document.querySelector(".btnMovimientos")
 buttonMovimiento.addEventListener("click", function(e) {
+    e.preventDefault();
 
 
     try{
@@ -88,7 +89,7 @@ buttonMovimiento.addEventListener("click", function(e) {
 
         //redireciona a la página indicada con el atributo id
 
-        window.location.href = "Empleado/"+idempleado+"/Movimientos";
+        window.location.href = "/Empleado/"+idempleado+"/Movimientos";
 
 
     }
@@ -99,3 +100,4 @@ buttonMovimiento.addEventListener("click", function(e) {
 
 
 })
+
