@@ -2,126 +2,137 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org"><!--xmlns:th="http://www.thymeleaf.org me permite engrajar el código del MVC (java) en las platillas html    -->
 <head>
     <!-- TODO cambiar el titulo de la página dependiendo el nombre de la empresa -->
+
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/912/912267.png" type="image/x-icon">
     <title>Empleados </title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Mostrar Alertas  -->
-    <link rel="stylesheet" th:href="@{/css/VerEmpleados.css}">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Estilos  -->
+    <link rel="stylesheet" th:href="@{css/Empleado/VerEmpleados.css}"/>
+    <!-- Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"/>
+
 
 
 </head>
-<style>
-    h1{
-        text-align: center;
-        color: red;
-    }
-</style>
+
 <body>
-<!-- al usar th indica que se va a trabajaer con thymeleaf-->
+    <!-- al usar th indica que se va a trabajaer con thymeleaf-->
 
-<button type="button" class="btn btn-info"><a th:href="@{/AgregarEmpleado}">Agregar Nuevo Empleado</a></button>
-<button class="btnEditar" type="button" >Editar</button>
-<button class="btnEliminar" type="button">Eliminar</button>
-<button class="btnMovimientos" type="button">Ver Movimientos</button>
-
-
-<div class="container">
-    <h1> Lista de Empleados</h1>
-    <!--Dibujamos la tabla-->
-    <br>
-    <table class="table table-bordered">
-        <tr>
-            <th></th>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Empresa</th>
-            <th>Rol</th>
-
-        </tr>
-        <!--Llenamos la tabla dibujada-->
-        <!--En nuestro controller, creamos en viewempleado un modelo con un atributo llamado emplelist donde esta guardada la lista de todos los empleados-->
-        <tr th:each="empleado : ${emplelist}">
-            <!--th indica que es de  tipo thymeleaf
-            each itera
-            empleado: ${emplelist} es una lista de todos los empleados
-            each empleado , es  cada empelado que nos devuelve emplealist
-
-            En el modelo de la vista, creamos un atributo llamado id, que es el id del empleado
-            th:text es el tipo de dato a traer en tipo de texto
-            y le indicamos del tipo de dato indicado(empleado) se trae el valor-->
-            <td><input type="checkbox" name="check"  class="checkbox" th:value="${empleado.id}"></td><!-- el value es el id de la empleado-->
-            <td class="idempleado" th:text="${empleado.id}"></td>
-            <td th:text="${empleado.nombre}"></td>
-            <td th:text="${empleado.correo}"></td>
-            <td th:text="${empleado.empresa.nombre}"></td>
-            <!--paa saber que rol es-->
-            <td th:if = "${empleado.rol == '1'}" th:text="Administrativo"></td>
-            <td th:if = "${empleado.rol == '2'}" th:text="Operativo"></td>
-            <td th:if = "${empleado.rol == '3'}" th:text="Sistemas"></td>
-            <td th:if = "${empleado.rol == '4'}" th:text="Limpieza"></td>
-            <td th:if = "${empleado.rol == '5'}" th:text="Ejecutivo"></td>
-            <td th:if = "${empleado.rol == '6'}" th:text="Financiero"></td>
-            <td th:if = "${empleado.rol == '7'}" th:text="Programador"></td>
-            <td th:if = "${empleado.rol == '8'}" th:text="Desarrollador"></td>
-            <td th:if = "${empleado.rol == '9'}" th:text="Gestor de base de datos"></td>
-            <td th:if = "${empleado.rol == '10'}" th:text="Diseñador"></td>
-
-            <!--
-            Estos botones salen en cada fila de la tabla, al hacer click redireccionan a la vista editarempleado con el id automatico
-            <td><button class="eliminar" type="button" ><a th:href="@{/Editarempleado/{id}(id=${empleado.id})}" >Editar</a></button></td>
-            <td><button type="button"><a th:href="@{/Eliminarempleado/{id}(id=${empleado.id})}">Eliminar</a></button></td>
-
-            -->
-        </tr>
-
-    </table>
-
-    <!-- btn para ver la lista de empresas-->
-    <button type="button"><a th:href="@{/VerEmpresas}">Ver Epresas</a></button>
+    <div class="left">
+        <a  th:href="@{/Inicio}" >Inicio</a>
+        <a class="btnMovimientos" href="">Movimientos por empleado</a>
+    </div>
 
 
-</div>
-<!-- Mostrar los mensajes que se pusieron en el controlador -->
-<script th:inline="javascript"> /*inline es para que se ejecute el codigo javascript con thymeleaf, lo que traemos desde el controlador */
-    window.onload=function(){
 
-        let msg= [[${mensaje}]]; // [[${mensaje}]] indica que es  lo que viene de afuera , en este caso en el controlador  le  pusmos como nombre mensaje
+    <div class="right">
+        <h1>Sistema de gestión de Ingresos y Gastos</h1>
+        <h2>Empleados</h2>
 
-        //TODO cambiar el tipo de alerta que aparece
-        //TODO agrgar las alertas a los otros archivos
+        <div class="buttons">
 
-        // verificar que tipo de mensaje se recibe  desde el controlador
-        // toastr es una libreria de javascript que permite mostrar mensajes de alerta
-        if (msg === "saveOk"){
-            alert("empleado guardada con exito");
-            //Command : toastr["success"]("empleado creada con éxito!")
+            <button type="button" class="btn btn-info">
+                <a th:href="@{/AgregarEmpleado}">Nuevo</a>
+            </button>
+            <button class="btnEditar" type="button">Editar</button>
+            <button class="btnEliminar" type="button">Eliminar</button>
+        </div>
+
+        <!--Dibujamos la tabla-->
+
+        <table>
+            <tr>
+                <th></th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Empresa</th>
+                <th>Rol</th>
+            </tr>
+
+            <!--Llenamos la tabla dibujada-->
+            <!--En nuestro controller, creamos en viewempleado un modelo con un atributo llamado emplelist donde esta guardada la lista de todos los empleados-->
+            <tr th:each="empleado : ${emplelist}">
+                <!--th indica que es de  tipo thymeleaf
+                each itera
+                empleado: ${emplelist} es una lista de todos los empleados
+                each empleado , es  cada empelado que nos devuelve emplealist
+
+                En el modelo de la vista, creamos un atributo llamado id, que es el id del empleado
+                th:text es el tipo de dato a traer en tipo de texto
+                y le indicamos del tipo de dato indicado(empleado) se trae el valor-->
+                <td><input type="checkbox" name="check"  class="checkbox" th:value="${empleado.id}"></td><!-- el value es el id de la empleado-->
+
+                <td th:text="${empleado.nombre}"></td>
+                <td th:text="${empleado.correo}"></td>
+                <td th:text="${empleado.empresa.nombre}"></td>
+
+                <!--paa saber que rol es, ua que se guarda en la base de datos el número que tiene cada rolv al agregar el empleado-->
+                <td th:if = "${empleado.rol == '1'}" th:text="Administrativo"></td>
+                <td th:if = "${empleado.rol == '2'}" th:text="Operativo"></td>
+                <td th:if = "${empleado.rol == '3'}" th:text="Sistemas"></td>
+                <td th:if = "${empleado.rol == '4'}" th:text="Limpieza"></td>
+                <td th:if = "${empleado.rol == '5'}" th:text="Ejecutivo"></td>
+                <td th:if = "${empleado.rol == '6'}" th:text="Financiero"></td>
+                <td th:if = "${empleado.rol == '7'}" th:text="Programador"></td>
+                <td th:if = "${empleado.rol == '8'}" th:text="Desarrollador"></td>
+                <td th:if = "${empleado.rol == '9'}" th:text="Gestor de base de datos"></td>
+                <td th:if = "${empleado.rol == '10'}" th:text="Diseñador"></td>
+
+                <!--
+                Estos botones salen en cada fila de la tabla, al hacer click redireccionan a la vista editarempleado con el id automatico
+                <td><button class="eliminar" type="button" ><a th:href="@{/Editarempleado/{id}(id=${empleado.id})}" >Editar</a></button></td>
+                <td><button type="button"><a th:href="@{/Eliminarempleado/{id}(id=${empleado.id})}">Eliminar</a></button></td>
+
+                -->
+
+                <!--TODO mostrar los mensaje
+                 TODO hacer verificación de que no se  puede ingresar NIT repetidos-->
+        </table>
+    </div>
+
+    <!-- Mostrar los mensajes que se pusieron en el controlador -->
+    <script th:inline="javascript"> /*inline es para que se ejecute el codigo javascript con thymeleaf, lo que traemos desde el controlador */
+        window.onload=function(){
+
+            let msg= [[${mensaje}]]; // [[${mensaje}]] indica que es  lo que viene de afuera , en este caso en el controlador  le  pusmos como nombre mensaje
+
+            //TODO cambiar el tipo de alerta que aparece
+            //TODO agrgar las alertas a los otros archivos
+
+            // verificar que tipo de mensaje se recibe  desde el controlador
+            // toastr es una libreria de javascript que permite mostrar mensajes de alerta
+            if (msg === "saveOk"){
+                alert("empleado guardada con exito");
+                //Command : toastr["success"]("empleado creada con éxito!")
+                }
+            else if (msg === "updateOk"){
+                alert("empleado actualizada con exito");
+                //Command : toastr["success"]("empleado actualizada con éxito!")
             }
-        else if (msg === "updateOk"){
-            alert("empleado actualizada con exito");
-            //Command : toastr["success"]("empleado actualizada con éxito!")
+            else if (msg === "deleteOk"){
+                alert("empleado eliminada con exito");
+                //Command : toastr["error"]("empleado eliminada con éxito!")
+            }
+            else if (msg === "deleteError"){
+                alert("Error al eliminar la empleado ");
+                //Command : toastr["error"]("empleado no ha sido eliminada!")
+            }
+           /* toastr.options={
+                "positionClass": "toast-top-right", posicion de la alerta
+                "showDuration":"300", para que dura 3 segundos
+                "showMethod":"fadeIn", como debe aparecer
+                "hideMethod":"fadeOut", como debe desaparecer
+            }
+            */
         }
-        else if (msg === "deleteOk"){
-            alert("empleado eliminada con exito");
-            //Command : toastr["error"]("empleado eliminada con éxito!")
-        }
-        else if (msg === "deleteError"){
-            alert("Error al eliminar la empleado ");
-            //Command : toastr["error"]("empleado no ha sido eliminada!")
-        }
-       /* toastr.options={
-            "positionClass": "toast-top-right", posicion de la alerta
-            "showDuration":"300", para que dura 3 segundos
-            "showMethod":"fadeIn", como debe aparecer
-            "hideMethod":"fadeOut", como debe desaparecer
-        }
-        */
-    }
 
-</script>
+    </script>
 
-<!--Validar los botones -->
-<script type="text/javascript" th:src="@{/js/Empleado/ValidarBotones.js}" ></script>
+    <!--Validar los botones -->
+    <script type="text/javascript" th:src="@{/js/Empleado/ValidarBotones.js}" ></script>
 
 
 </body>
