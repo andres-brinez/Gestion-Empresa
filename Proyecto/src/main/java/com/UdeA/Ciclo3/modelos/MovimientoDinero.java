@@ -80,7 +80,9 @@ public class MovimientoDinero {
 
     // setters
 
-
+    public void setId(int id) {
+        this.id = id;
+    }
     public void setMonto(long monto) {
         this.monto = monto;
     }
