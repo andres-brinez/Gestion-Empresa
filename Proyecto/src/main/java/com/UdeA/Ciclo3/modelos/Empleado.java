@@ -16,6 +16,7 @@ public class Empleado {
     private String correo;
     private String rol;
 
+    private Boolean estado; //para saber si está activo o inactivo
 
     //relación - muchos a  uno
     // puede haber muchos empleados  para una empresa
@@ -26,7 +27,7 @@ public class Empleado {
     // constructor
     public Empleado() {}
 
-    public Empleado(String nombre, String correo, String rol, Empresa empresa) {
+    public Empleado(String nombre, String correo, String rol, Empresa empresa,Boolean estado) {
         this.nombre = nombre;
         this.correo = correo;
         this.rol = rol;
@@ -53,4 +54,11 @@ public class Empleado {
     public String getRol() {return rol;}
 
     public void setRol(String rol) {this.rol = rol;}
+
+    public Boolean getEstado() {return estado;
+    }
+
+    public void setEstado(Boolean estado) {this.estado = estado;
+    }
+
 }
