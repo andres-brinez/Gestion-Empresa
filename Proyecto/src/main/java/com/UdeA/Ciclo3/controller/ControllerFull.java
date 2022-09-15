@@ -3,9 +3,11 @@ package com.UdeA.Ciclo3.controller;
 import com.UdeA.Ciclo3.modelos.Empleado;
 import com.UdeA.Ciclo3.modelos.Empresa;
 import com.UdeA.Ciclo3.modelos.MovimientoDinero;
+import com.UdeA.Ciclo3.modelos.Usuario;
 import com.UdeA.Ciclo3.service.EmpleadoService;
 import com.UdeA.Ciclo3.service.EmpresaService;
 import com.UdeA.Ciclo3.service.MovimientosService;
+import com.UdeA.Ciclo3.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,24 +26,20 @@ public class ControllerFull {
     @Autowired
     MovimientosService movimientosService;
     // EMPRESAS
-
+    @Autowired
+    UsuarioService usuarioService;
     @GetMapping({"/","Login"})
     public String  login (){
         return "Login";
     }
 
-    @GetMapping({"/Register"})
-    public String  Register (){
-        return "Register";
-    }
+
 
     @GetMapping({"/Inicio"})
     public String  Inicio (){
         return "Inicio";
     }
-
-
-
+    
 
     @GetMapping({"/VerEmpresas"})// (/) es la página de inicio (home)
     // cuando se llame a cualquiera de  los dos recursos se ejecuta ese metodo
@@ -287,6 +285,97 @@ public class ControllerFull {
         model.addAttribute("sumaMontos",sumaMonto); // se manda la suma de todos los montos a la plantilla
         return "Movimiento/VerMovimientos"; //Llamamos al HTML
     }
+    
+    //USUARIOS
+
+
+    @GetMapping({"/VerUsuarios"})// (/) es la página de inicio (home)
+    // cuando se llame a cualquiera de  los dos recursos se ejecuta ese metodo
+    //  @ModelAttribute("mensaje") indica que va a recibir un mensaje del un objeto Modelo (Model) que se guarda como  mensaje
+    public String viewUsuarios( Model model, @ModelAttribute("mensaje") String mensaje){ // se  ingresa cualquier tipo de datos tipo modelo
+        List<Usuario> listaUsuarios=usuarioService.getAllUsuarios();// se obtienen todas las empresas
+        model.addAttribute("usualist",listaUsuarios); // el modelo emplist nos alimenta la tabla en html porque contiene todas las tablas
+        model.addAttribute("mensaje",mensaje); // añade el mensaje al modelo para poder visualizarlo en html
+        return "Usuario/VerUsuarios"; //redirect a la página
+    }
+
+    @GetMapping("/Register")
+    public String agregarUsuario(Model model, @ModelAttribute("mensaje") String mensaje){
+        Usuario usuario= new Usuario();
+        model.addAttribute("usu",usuario);
+        model.addAttribute("mensaje",mensaje);
+        return "Register"; //Llamar HTML
+    }
+
+
+    @PostMapping("/GuardarUsuario")
+    public String guardarUsuario(Usuario usu, RedirectAttributes redirectAttributes){
+        if(usuarioService.saveOrUpdateUsuario(usu)){
+            // si se guarda el usuario
+            redirectAttributes.addFlashAttribute("mensaje","saveOK");
+            return "redirect:/VerUsuarios";
+        }
+        // si no se guarda el usuario
+        redirectAttributes.addFlashAttribute("mensaje","saveError");
+        return "redirect:/Usuario";
+    }
+
+    @GetMapping("/EditarUsuario/{id}")
+    public String editarUsuario(Model model, @PathVariable Integer id, @ModelAttribute("mensaje") String mensaje){
+        Usuario usu=usuarioService.getUsuarioById(id);
+        //Creamos un atributo para el modelo, que se llame igualmente empl y es el que ira al html para llenar o alimentar campos
+        model.addAttribute("usu",usu);
+        model.addAttribute("mensaje", mensaje);
+        return "Usuario/EditarUsuario";
+    }
+
+    @PostMapping("/ActualizarUsuario")
+    public String updateUsuario(@ModelAttribute("usu") Usuario usu, RedirectAttributes redirectAttributes){
+
+        if(usuarioService.saveOrUpdateUsuario(usu)){
+
+            redirectAttributes.addFlashAttribute("mensaje","updateOK");
+            return "redirect:/VerUsuarios";
+        }
+        redirectAttributes.addFlashAttribute("mensaje","updateError");
+        return "redirect:/EditarUsuario/"+usu.getId();
+
+    }
+
+    @GetMapping("/EliminarUsuario/{id}")
+    public String eliminarUsuario(@PathVariable Integer id, RedirectAttributes redirectAttributes){
+        if (usuarioService.deleteUsuario(id)){
+            redirectAttributes.addFlashAttribute("mensaje","deleteOK");
+            return "redirect:/VerUsuarios";
+        }
+        redirectAttributes.addFlashAttribute("mensaje", "deleteError");
+        return "redirect:/VerUsuarios";
+    }
+
+     /*
+
+
+    @GetMapping("/Login")
+    public String login(Model model, @ModelAttribute("mensaje") String mensaje){
+        Usuario usuario= new Usuario();
+        model.addAttribute("usu",usuario);
+        model.addAttribute("mensaje",mensaje);
+        return "Usuario/Login"; //Llamar HTML
+    }
+
+    @PostMapping("/Login")
+    public String login(@ModelAttribute("usu") Usuario usu, RedirectAttributes redirectAttributes){
+        if(usuarioService.login(usu)){
+            // si se guarda el usuario
+            redirectAttributes.addFlashAttribute("mensaje","loginOK");
+            return "redirect:/VerUsuarios";
+        }
+        // si no se guarda el usuario
+        redirectAttributes.addFlashAttribute("mensaje","loginError");
+        return "redirect:/Login";
+    }
+
+    */
 
 
 
