@@ -80,8 +80,23 @@
       </div>
     </div>
 
+    <!--Campo para poner si es activo o inactivo -->
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label class="col-md-3" for="rol">Rol de la empleado:</label>
+        <div class="col-md-6">
+          <select th:field="*{}" class="form-control" id="rol" required="required">
+            <!-- el value  es el valor a guardar en el campo rol del objeto empleado-->
+            <option th:value=1>Activo</option>
+            <option th:value=2>Inactivo</option>
 
-    <!--Boton para enviar all y ejecutar la accion que se especifica en el form -->
+          </select>
+        </div>
+      </div>
+    </div>
+
+
+        <!--Boton para enviar all y ejecutar la accion que se especifica en el form -->
     <div class="row">
       <div class="col-md-2">
         <button class="btn btn-success">Crear empleado</button>
