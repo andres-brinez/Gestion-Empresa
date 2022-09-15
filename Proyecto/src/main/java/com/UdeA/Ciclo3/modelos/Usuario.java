@@ -2,7 +2,7 @@ package com.UdeA.Ciclo3.modelos;
 import javax.persistence.*;
 
 @Entity // Una entidad es la representación de información que nosotros necesitamos en nuestra aplicación.
-@Table(name="Usuarioo") // indicamos el nombre de la tabla en la base de datos
+@Table(name="Usuario") // indicamos el nombre de la tabla en la base de datos
 // la entidad está relacionada con una tabla de base  de datos
 public class Usuario {
 
@@ -10,36 +10,41 @@ public class Usuario {
     //@GeneratedValue(strategy = GenerationType.AUTO)  el id se auto incrementa
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     // Se basa en una columna de base de datos con incremento automático y permite que la base de datos genere un nuevo valor con cada operación de inserción
+    private int id;
+
+    // indicamos el nombre de la columna en la base de datos es unico
+    @Column(name="UserName", unique = true)
+    private String UserName;
     private String nombre;
     private String password;
     private String rol;
+    private String correo;
+    private String   telefono;
 
-
-    //relación - muchos a  uno
-    // puede haber muchos usuarios  para una empresa
-    @ManyToOne
-    @JoinColumn(name = "empresa_id")
-    private Empresa empresa;
 
     // constructor
     public Usuario() {
     }
 
-    public Usuario(String nombre, String password, String rol, Empresa empresa ) {
+    public Usuario(int id,String userName, String nombre, String password, String rol, String correo, String  telefono ) {
+        this.id = id;
+        this.UserName = userName;
         this.nombre = nombre;
         this.password = password;
         this.rol = rol;
-        this.empresa = empresa;
-    }
+        this.correo = correo;
+        this.telefono = telefono;
 
+    }
 
     // getters and setters
-    public Empresa getEmpresa() {
-        return empresa;
+
+    public String getUserName() {
+        return UserName;
     }
 
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
+    public void setUserName(String userName) {
+        UserName = userName;
     }
 
     public String getNombre() {
@@ -66,4 +71,28 @@ public class Usuario {
         this.rol = rol;
     }
 
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public  String  getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono( String  telefono) {
+        this.telefono = telefono;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
