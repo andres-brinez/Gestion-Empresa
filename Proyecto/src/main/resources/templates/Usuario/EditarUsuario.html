@@ -199,9 +199,9 @@
 
         <!-- seleccionar opciones -->
         <label for="rol">Rol</label>
-        <select name="rol" id="rol">
-          <option selected value="1">Administrador</option>
-          <option th:value=1 value="2">Personal Contable</option>
+        <select th:field="*{rol}" name="rol" id="rol">
+          <option  th:value=1 >Administrador</option>
+          <option  selected th:value=2 >Personal Contable</option>
         </select>
         
 

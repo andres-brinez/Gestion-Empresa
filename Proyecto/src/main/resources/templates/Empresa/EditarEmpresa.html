@@ -118,8 +118,10 @@
 
 </style>
 <body>
-<!-- redireciona a una página antes de la página actual-->
-<a href="javascript: history.go(-1)"><img class="flecha" src="https://cdn-icons-png.flaticon.com/512/271/271218.png" alt=""></a>
+<!-- redireciona a una página antes de la página actual
+href="javascript: history.go(-1)"
+-->
+<a th:href="@{/VerEmpresas}"><img class="flecha" src="https://cdn-icons-png.flaticon.com/512/271/271218.png" alt=""></a>
 
 <h1>Editar Empresa</h1>
 
