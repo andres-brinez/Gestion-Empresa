@@ -13,8 +13,9 @@ public class Usuario {
     private int id;
 
     // indicamos el nombre de la columna en la base de datos es unico
-    @Column(name="UserName", unique = true)
+    // @Column(name="UserName", unique = true)
     private String UserName;
+
     private String nombre;
     private String password;
     private String rol;
@@ -46,6 +47,7 @@ public class Usuario {
     public void setUserName(String userName) {
         UserName = userName;
     }
+
 
     public String getNombre() {
         return nombre;
