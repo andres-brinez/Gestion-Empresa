@@ -1,5 +1,6 @@
 package com.UdeA.Ciclo3.controller;
 
+import antlr.BaseAST;
 import com.UdeA.Ciclo3.modelos.Empleado;
 import com.UdeA.Ciclo3.modelos.Empresa;
 import com.UdeA.Ciclo3.modelos.MovimientoDinero;
@@ -9,6 +10,9 @@ import com.UdeA.Ciclo3.service.EmpresaService;
 import com.UdeA.Ciclo3.service.MovimientosService;
 import com.UdeA.Ciclo3.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,14 +32,14 @@ public class ControllerFull {
     // EMPRESAS
     @Autowired
     UsuarioService usuarioService;
-    @GetMapping({"/","Login"})
+    @GetMapping({"/login"})
     public String  login (){
         return "Login";
     }
 
 
 
-    @GetMapping({"/Inicio"})
+    @GetMapping({"/","/Inicio"})
     public String  Inicio (){
         return "Inicio";
     }
@@ -306,11 +310,24 @@ public class ControllerFull {
         model.addAttribute("mensaje",mensaje);
         return "Register"; //Llamar HTML
     }
+    //Metodo para encriptar contraseñas
+    public String encriptar(String password){
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(password);
+        return hashedPassword;
+    }
 
 
     @PostMapping("/GuardarUsuario")
     public String guardarUsuario(Usuario usu, RedirectAttributes redirectAttributes){
-        if(usuarioService.saveOrUpdateUsuario(usu)){
+        //encriptamr la contraseña
+        // para usar le seguridad de spring se debe encriptar la contraseña, de  lo contrario no se podra logear
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String passEncriptada= passwordEncoder.encode(usu.getPassword());
+        usu.setPassword(passEncriptada);
+        // para que se  ponga automaticamente el estado del usuario a true, porque el de la base de datos no funciona, es decir que se genere automaticamente
+        usu.setEstado(true);
+        if(usuarioService.saveOrUpdateUsuario(usu)==true){
             // si se guarda el usuario
             redirectAttributes.addFlashAttribute("mensaje","saveOK");
             return "redirect:/VerUsuarios";
@@ -331,9 +348,9 @@ public class ControllerFull {
 
     @PostMapping("/ActualizarUsuario")
     public String updateUsuario(@ModelAttribute("usu") Usuario usu, RedirectAttributes redirectAttributes){
-
+       // Integer id=empl.getId(); //Sacamos el id del objeto empl
+       // String Oldpass=empleadoService.getEmpleadoById(id).get().getPassword(); //Con ese id consultamos la contraseña que ya esta en la base
         if(usuarioService.saveOrUpdateUsuario(usu)){
-
             redirectAttributes.addFlashAttribute("mensaje","updateOK");
             return "redirect:/VerUsuarios";
         }
@@ -351,6 +368,9 @@ public class ControllerFull {
         redirectAttributes.addFlashAttribute("mensaje", "deleteError");
         return "redirect:/VerUsuarios";
     }
+
+
+
 
      /*
 
@@ -377,15 +397,6 @@ public class ControllerFull {
 
     */
 
-
-
-    // TODO consultar movimietos  por emepleados , clase minuto 24
-    // TODO  consultar movimientos  por empresa clase 16 minuto 24
-    // TODO sumar la cantidad de  movimientos por empleado Y EMPRESA
-
-
-
-
-
+    // actualizar usuario
 
 }
