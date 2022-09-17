@@ -19,97 +19,102 @@
 </head>
 <body>
 
-<div class="container">
-  <h1> Agregue aqui los datos del empleado</h1>
-  <br>
-  <!--Crear formulario para llenar los datos del  empleado y guardarlo en el objeto emple
-  al enviar el formulario ejecuta el servicio GuardarEmpleado-->
-  <form th:action="@{/GuardarEmpleado}" th:object="${empl}" method="post">
-    <!--Campo para nombre-->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="nombre">Nombre del empleado:</label>
-        <div class="col-md-6">
-          <!-- th:field="*{nombre}" indica donde se guarda el valor ingresado en el objeto emp -->
-          <input type="text" th:field="*{nombre}" class="form-control" id="nombre" required="required"></div>
-      </div>
-    </div>
-
-    <!--Campo para correo-->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="correo">Correo del empleado:</label>
-        <div class="col-md-6">
-          <input type="email" th:field="*{correo}" class="form-control" id="correo" required="required"></div>
-      </div>
-    </div>
-
-    <!--Campo para empresa-->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="empresa">Empresa a la que pertenece :</label>
-        <div class="col-md-6">
-        <!-- el select va a alimentar el campo empresa del ebjeto empleado -->
-        <select th:field="*{empresa}" class="form-control" id="empresa" required="required">
-          <!-- emplealist es donde está la lista de las empresas
-          itera la lista de empresas (emprelist) y muestra la empresa con el nombre
-          al seleccionar la empresa se guarda el id-->
-          <option th:each="empresa : ${emprelist}" th:text="${empresa.nombre}" th:value="${empresa.id}"></option>
-        </select>
-    </div>
-
-    <!--Campo para rol-->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="rol">Rol de la empleado:</label>
-        <div class="col-md-6">
-          <select th:field="*{rol}" class="form-control" id="rol" required="required">
-           <!-- el value  es el valor a guardar en el campo rol del objeto empleado-->
-            <option th:value=1>Administrativo</option>
-            <option th:value=2>Operativo</option>
-            <option th:value=3>Sistemas</option>
-            <option th:value=4>Limpieza</option>
-            <option th:value=5>Ejecutivo</option>
-            <option th:value=6>Financiero</option>
-            <option th:value=7>Programador</option>
-            <option th:value=8>Desarrollador</option>
-            <option th:value=9>Gestor de base de datos</option>
-            <option th:value=10>Diseñador</option>
-          </select>
+  <div class="container">
+    <h1> Agregue aqui los datos del empleado</h1>
+    <br>
+    <!--Crear formulario para llenar los datos del  empleado y guardarlo en el objeto emple
+    al enviar el formulario ejecuta el servicio GuardarEmpleado-->
+    <form th:action="@{/GuardarEmpleado}" th:object="${empl}" method="post">
+      <!--Campo para nombre-->
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label class="col-md-3" for="nombre">Nombre del empleado:</label>
+          <div class="col-md-6">
+            <!-- th:field="*{nombre}" indica donde se guarda el valor ingresado en el objeto emp -->
+            <input type="text" th:field="*{nombre}" class="form-control" id="nombre" required="required">
+          </div>
         </div>
       </div>
-    </div>
 
-    <!--Campo para poner si es activo o inactivo -->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="rol">Rol de la empleado:</label>
-        <div class="col-md-6">
-          <select th:field="*{}" class="form-control" id="rol" required="required">
-            <!-- el value  es el valor a guardar en el campo rol del objeto empleado-->
-            <option th:value=1>Activo</option>
-            <option th:value=2>Inactivo</option>
-
-          </select>
+      <!--Campo para correo-->
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label class="col-md-3" for="correo">Correo del empleado:</label>
+          <div class="col-md-6">
+            <input type="email" th:field="*{correo}" class="form-control" id="correo" required="required">
+          </div>
         </div>
       </div>
-    </div>
 
-
-        <!--Boton para enviar all y ejecutar la accion que se especifica en el form -->
-    <div class="row">
-      <div class="col-md-2">
-        <button class="btn btn-success">Crear empleado</button>
+      <!--Campo para empresa-->
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label class="col-md-3" for="empresa">Empresa a la que pertenece :</label>
+          <div class="col-md-6">
+          <!-- el select va a alimentar el campo empresa del ebjeto empleado -->
+          <select th:field="*{empresa}" class="form-control" id="empresa" required="required">
+            <!-- emplealist es donde está la lista de las empresas
+            itera la lista de empresas (emprelist) y muestra la empresa con el nombre
+            al seleccionar la empresa se guarda el id-->
+            <option th:each="empresa : ${emprelist}" th:text="${empresa.nombre}" th:value="${empresa.id}"></option>
+          </select>
+          </div>
+        </div>
       </div>
-    </div>
 
-  </form>
+      <!--Campo para rol-->
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label class="col-md-3" for="rol">Rol de la empleado:</label>
+          <div class="col-md-6">
+            <select th:field="*{rol}" class="form-control" id="rol" required="required">
+             <!-- el value  es el valor a guardar en el campo rol del objeto empleado-->
+              <option th:value=1>Administrativo</option>
+              <option th:value=2>Operativo</option>
+              <option th:value=3>Sistemas</option>
+              <option th:value=4>Limpieza</option>
+              <option th:value=5>Ejecutivo</option>
+              <option th:value=6>Financiero</option>
+              <option th:value=7>Programador</option>
+              <option th:value=8>Desarrollador</option>
+              <option th:value=9>Gestor de base de datos</option>
+              <option th:value=10>Diseñador</option>
+            </select>
+          </div>
+        </div>
+      </div>
 
-  <br>
-  <!--regresa a la página anterior-->
-  <a href="javascript: history.go(-1)" class="btn btn-info" role="button">Atrás</a>
+      <!--Campo para poner si es activo o inactivo -->
+      <!-- en el value se guarda como 1 o 0 pero en  lla base de datos se guarda como true o false-->
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label class="col-md-3" for="estado">Estado del empleado:</label>
+          <div class="col-md-6">
+            <select th:field="*{estado}" class="form-control" id="estado" required="required">
+              <!-- el value  es el valor a guardar en el campo rol del objeto empleado-->
+              <option th:value=1>Activo</option>
+              <option th:value=0>Inactivo</option>
 
-</div>
+            </select>
+          </div>
+        </div>
+      </div>
+
+
+          <!--Boton para enviar all y ejecutar la accion que se especifica en el form -->
+      <div class="row">
+        <div class="col-md-2">
+          <button class="btn btn-success">Crear empleado</button>
+        </div>
+      </div>
+
+    </form>
+
+    <br>
+    <!--regresa a la página anterior-->
+    <a href="javascript: history.go(-1)" class="btn btn-info" role="button">Atrás</a>
+
+  </div>
 </body>
 </html>
 <-->
