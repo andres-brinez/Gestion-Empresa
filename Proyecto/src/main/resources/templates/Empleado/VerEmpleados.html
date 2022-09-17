@@ -50,6 +50,7 @@
                 <th>Correo</th>
                 <th>Empresa</th>
                 <th>Rol</th>
+                <th>Estado</th>
             </tr>
 
             <!--Llenamos la tabla dibujada-->
@@ -80,6 +81,12 @@
                 <td th:if = "${empleado.rol == '8'}" th:text="Desarrollador"></td>
                 <td th:if = "${empleado.rol == '9'}" th:text="Gestor de base de datos"></td>
                 <td th:if = "${empleado.rol == '10'}" th:text="Diseñador"></td>
+
+                <!--paa saber estado está, ua que se guarda en la base de datos el número que tiene cada rolv al agregar el empleado-->
+                <!-- en el value se guarda como 1 o 0 pero en  lla base de datos se guarda como true o false-->
+                <td th:if = "${empleado.estado == true}" th:text="Activo"></td>
+                <td th:if = "${empleado.estado == false}" th:text="Inactivo"></td>
+
 
                 <!--
                 Estos botones salen en cada fila de la tabla, al hacer click redireccionan a la vista editarempleado con el id automatico
