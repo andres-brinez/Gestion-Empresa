@@ -22,12 +22,17 @@ public class Usuario {
     private String correo;
     private String   telefono;
 
+    // para saber si está  o no habilitado, se necesita tener  un valor booleano
+    // genera por defecto el valor en true
+    @Column(name="habilitado", columnDefinition = "boolean default true")
+    private Boolean estado;
+
 
     // constructor
     public Usuario() {
     }
 
-    public Usuario(int id,String userName, String nombre, String password, String rol, String correo, String  telefono ) {
+    public Usuario(int id,String userName, String nombre, String password, String rol, String correo, String  telefono,Boolean estado ) {
         this.id = id;
         this.UserName = userName;
         this.nombre = nombre;
@@ -35,6 +40,7 @@ public class Usuario {
         this.rol = rol;
         this.correo = correo;
         this.telefono = telefono;
+        this.estado = estado;
 
     }
 
@@ -96,5 +102,13 @@ public class Usuario {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 }
