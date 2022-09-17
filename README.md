@@ -11,6 +11,7 @@ Dependencias
 - Spring Data JPA sirve para la persistencia de datos
 - OAuth2 Client sirve para autenticar con Google
 - Thymeleaf sirve para crear plantillas HTML
+- security sirve para la seguridad de la aplicación
 
 Base de datos PostgresSQL
 
