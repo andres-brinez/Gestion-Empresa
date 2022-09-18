@@ -58,13 +58,12 @@
 
         </div>
 
-        <!-- seleccionar opciones -->
-        <label for="rol">Rol</label>
-        <select th:field="*{rol}" name="rol" id="rol">
-          <option selected th:value=1>Administrador</option>
-          <option th:value=2 >Personal Contable</option>
-        </select>
-        
+          <!-- seleccionar opciones -->
+          <label for="rol">Rol</label>
+          <select th:field="*{rol}" name="rol" id="rol">
+              <option  th:value="ROLE_ADMIN" >Administrador</option>
+              <option  selected th:value="ROLE_USER" >Personal Contable</option>
+          </select>
 
         <button type="submit">Registrarce</button>
       </form>
