@@ -11,6 +11,8 @@ import com.UdeA.Ciclo3.service.MovimientosService;
 import com.UdeA.Ciclo3.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -32,16 +34,29 @@ public class ControllerFull {
     // EMPRESAS
     @Autowired
     UsuarioService usuarioService;
+
     @GetMapping({"/login"})
     public String  login (){
         return "Login";
     }
 
 
+    //Controlador que me lleva al template de No autorizado
+    @RequestMapping(value="/Denegado")
+    public String accesoDenegado(){
+        return "accessDenied";
+    }
 
-    @GetMapping({"/","/Inicio"})
-    public String  Inicio (){
+
+    @GetMapping({"/Inicio"})
+    public String  Inicio (Model model){
+
+        Authentication auth= SecurityContextHolder.getContext().getAuthentication(); // obtenemos el usuario logeado, que en este caso es el username
+        String UserName= auth.getName(); // obtenemos el userName del usuario logeado
+        String Nombre_user= usuarioService.NamePorUserName(UserName); // obtenemos el nombre del usuario logeado por medio de un servicio creado que usa consultas sql
+        model.addAttribute("name_logeado",Nombre_user); // agregados al modelo el nombre del usuario logeado
         return "Inicio";
+
     }
     
 
@@ -335,28 +350,6 @@ public class ControllerFull {
         // si no se guarda el usuario
         redirectAttributes.addFlashAttribute("mensaje","saveError");
         return "redirect:/Usuario";
-    }
-
-    @GetMapping("/EditarUsuario/{id}")
-    public String editarUsuario(Model model, @PathVariable Integer id, @ModelAttribute("mensaje") String mensaje){
-        Usuario usu=usuarioService.getUsuarioById(id);
-        //Creamos un atributo para el modelo, que se llame igualmente empl y es el que ira al html para llenar o alimentar campos
-        model.addAttribute("usu",usu);
-        model.addAttribute("mensaje", mensaje);
-        return "Usuario/EditarUsuario";
-    }
-
-    @PostMapping("/ActualizarUsuario")
-    public String updateUsuario(@ModelAttribute("usu") Usuario usu, RedirectAttributes redirectAttributes){
-       // Integer id=empl.getId(); //Sacamos el id del objeto empl
-       // String Oldpass=empleadoService.getEmpleadoById(id).get().getPassword(); //Con ese id consultamos la contraseña que ya esta en la base
-        if(usuarioService.saveOrUpdateUsuario(usu)){
-            redirectAttributes.addFlashAttribute("mensaje","updateOK");
-            return "redirect:/VerUsuarios";
-        }
-        redirectAttributes.addFlashAttribute("mensaje","updateError");
-        return "redirect:/EditarUsuario/"+usu.getId();
-
     }
 
     @GetMapping("/EliminarUsuario/{id}")
