@@ -41,11 +41,15 @@ nav a:hover {
   height: 100%;
 }
 
+h1{
+  text-align: center;
+}
 .container {
   display: flex;
   align-items: center;
   justify-content: space-around;
-
+  align-content: center;
+  height: 80%;
 }
 
 .box {
