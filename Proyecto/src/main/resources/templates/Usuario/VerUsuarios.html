@@ -32,9 +32,7 @@
 
         <button type="button" class="btn btn-info">
             <a th:href="@{/Register}">Nuevo</a>
-
         </button>
-        <button class="btnEditar" type="button">Editar</button>
         <button class="btnEliminar" type="button">Eliminar</button>
     </div>
 
@@ -66,8 +64,8 @@
             <td th:text="${usuario.correo}"></td>
             <td th:text="${usuario.telefono}"></td>
             <!--paa saber que rol es con el value que se indica en el optioj -->
-            <td th:if="${usuario.rol == '1'}">Administrador</td>
-            <td th:if="${usuario.rol == '2'}">Personal Contable</td>
+            <td th:if="${usuario.rol == 'ROLE_ADMIN'}">Administrador</td>
+            <td th:if="${usuario.rol == 'ROLE_USER'}">Personal Contable</td>
 
             <!--
               Estos botones salen en cada fila de la tabla, al hacer click redireccionan a la vista editarUsuario con el id automatico
