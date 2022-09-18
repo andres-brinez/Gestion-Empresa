@@ -53,6 +53,11 @@ public class UsuarioService {
         return false;
     }
 
+    //servicio que trae el nombre de un usuario cuando tengo su user_name
+    public String NamePorUserName(String user_name){
+        return usuarioRepository.NamePorUserName(user_name);
+    }
+
 
 
 }
