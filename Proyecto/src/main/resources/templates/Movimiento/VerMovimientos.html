@@ -29,9 +29,10 @@
         <table class="table table-bordered">
             <tr>
                 <th></th>
-                <th>ID</th>
+                <th>N° Factura</th>
                 <th>Valor</th>
                 <th>Concepto</th>
+                <th>Tipo</th>
                 <th>Usuario Responsable</th>
                 <th>Fecha Movimiento</th>
                 <th>Fecha Registro</th>
@@ -48,9 +49,9 @@
                 th:text es el tipo de dato a traer en tipo de texto
                 y le indicamos del tipo de dato indicado(movimiento) se trae el valor-->
                 <td><input type="checkbox" name="check"  class="checkbox" th:value="${movimiento.id}"></td><!-- el value es el id de la movimiento-->
-                <td class="idmovimiento" th:text="${movimiento.id}"></td>
-                <!--Cambiar el formato en el que se ve el dinero del movimiento, se le agrega $ y .-->
 
+
+                <td class="monto" th:text="${movimiento.numeroFactura}"></td>
                 <td class="monto" th:text="${movimiento.monto}"></td>
                 <!--paa saber que Movimiento es -->
                 <td th:if="${movimiento.concepto == '1'}"> Gastos operativos</td>
@@ -63,6 +64,10 @@
                 <td th:if="${movimiento.concepto == '8'}" >Servicios publicos</td>
                 <td th:if="${movimiento.concepto == '9'}" >Cafeteria</td>
                 <td th:if="${movimiento.concepto == '10'}" >Papeleria</td>
+
+                <!--en la base de datos se  guarda el tipo de moviento como un numero, -->
+                <td th:if="${movimiento.tipo == '1'}"> Ingreso</td>
+                <td th:if="${movimiento.tipo == '2'}">Egreso</td>
 
                 <td th:text="${movimiento.usuario.nombre}"></td>
                 <!-- formateo de las fechas para que se vean como se quiere -->
