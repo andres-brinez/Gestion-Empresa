@@ -26,6 +26,16 @@
   al enviar el formulario ejecuta el servicio GuardarMovimiento-->
   <form th:action="@{/GuardarMovimiento}" th:object="${mov}" method="post">
 
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label class="col-md-3" for="id">N° Factura del Movimiento:</label>
+        <div class="col-md-6">
+
+          <input th:field="*{numeroFactura}" class="form-control" id="id" required="required">
+        </div>
+      </div>
+    </div>
+
     <!--Campo para Valorr-->
     <div class="row">
       <div class="form-group col-md-12">
@@ -52,6 +62,20 @@
             <option th:value=8>Servicios publicos</option>
             <option th:value=9>Cafeteria</option>
             <option th:value=10>Papeleria</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!--Campo para tipo-->
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label class="col-md-3" for="tipo">Tipo de movimiento:</label>
+        <div class="col-md-6">
+          <select th:field="*{tipo}" class="form-control" id="tipo" required="required">
+            <!-- el value  es el valor a guardar en el campo rol del objeto movimiento-->
+            <option th:value=1>Ingreso</option>
+            <option th:value=2>Egreso</option>
           </select>
         </div>
       </div>
