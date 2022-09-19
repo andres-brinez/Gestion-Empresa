@@ -65,10 +65,9 @@ public class secConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/AgregarMovimiento/**").hasAnyRole("ADMIN","USER")
             .antMatchers("/EditarMovimiento/**").hasAnyRole("ADMIN","USER")
             .antMatchers("/Inicio/**").hasAnyRole("ADMIN","USER")
+            .antMatchers("/").hasAnyRole("ADMIN","USER")
 
-            // todos  pueden tener acceso al login y  hacer logout
             .and()
-                // dependiendo el rol del usuario se le redirecciona a una pagina diferente, esto se hizo en customSuccessHandler
                 .formLogin().successHandler(customSuccessHandler)
                 .loginPage("/login") // donde será la pagina de login, es decir la ruta de la pagina de login
                 .permitAll() // permite el acceso a todos los usuarios
