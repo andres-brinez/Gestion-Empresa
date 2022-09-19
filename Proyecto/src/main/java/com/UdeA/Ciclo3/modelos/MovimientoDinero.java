@@ -18,9 +18,14 @@ public class MovimientoDinero {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Se basa en una columna de base de datos con incremento automático y permite que la base de datos genere un nuevo valor con cada operación de inserción
 
     private int id;
-
     private long  monto;
     private String concepto;
+
+    private String tipo;
+
+    private int numeroFactura;
+
+
 
     // Relacion- muchos a uno
     // un usuario (empleado ) pude hacer muchos movimientod
@@ -40,18 +45,18 @@ public class MovimientoDinero {
     public MovimientoDinero() {
     }
 
-    public MovimientoDinero(int id, long monto, String concepto, Empleado usuario, Date fechaMovimiento, Date fechaRegistro) {
+    public MovimientoDinero(int id, long monto, String concepto, String tipo, int numeroFactura, Empleado usuario, Date fechaMovimiento, Date fechaRegistro) {
         this.id = id;
         this.monto = monto;
         this.concepto = concepto;
+        this.tipo = tipo;
+        this.numeroFactura = numeroFactura;
         this.usuario = usuario;
-
         this.fechaMovimiento = fechaMovimiento;
         this.fechaRegistro = fechaRegistro;
-
-
     }
-// getters
+
+    // getters
 
     public int getId() {
         return id;
@@ -63,6 +68,14 @@ public class MovimientoDinero {
 
     public String getConcepto() {
         return concepto;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public int getNumeroFactura() {
+        return numeroFactura;
     }
 
     public Empleado getUsuario() {
@@ -80,15 +93,25 @@ public class MovimientoDinero {
 
     // setters
 
+
     public void setId(int id) {
         this.id = id;
     }
+
     public void setMonto(long monto) {
         this.monto = monto;
     }
 
     public void setConcepto(String concepto) {
         this.concepto = concepto;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setNumeroFactura(int numeroFactura) {
+        this.numeroFactura = numeroFactura;
     }
 
     public void setUsuario(Empleado usuario) {
@@ -102,5 +125,4 @@ public class MovimientoDinero {
     public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
-
 }
