@@ -20,11 +20,7 @@
   </head>
 
   <body>
-  <form th:action="@{/logout}" method="post">
-    <!-- al hacer click en input generar un confirm  -->
 
-    <input type="submit" value="Cerrar Sesion" onclick="return confirm('Are you sure?')" />
-  </form>
     <nav>
       <div class="logo">
         <img th:src="@{/img/Logo.png}" alt="Logo" />
@@ -44,8 +40,15 @@
     <!-- para saber que usuario está logeado -->
     <!--<h1  th:inline="text">'Bienvenido [[${#httpServletRequest.remoteUser}]] </h1> otra forma de saber el usuario logeado con su user_name que se definio puede ser el correo electronico o un nombre de usuario -->
     <main>
-      <h1 th:inline="text" >Bienvenido [[${name_logeado}]]</h1> <!-- en este caso quiero el nombre del usuario , no solo su username-->
-      <div class="container">
+     <div class="container bloque1 ">
+       <h1 th:inline="text" >Bienvenido [[${name_logeado}]]</h1> <!-- en este caso quiero el nombre del usuario , no solo su username-->
+       <!--para desloguearce -->
+       <form th:action="@{/logout}" method="post">
+         <!-- al hacer click en input generar un confirm  -->
+         <button id="btn-logout" onclick="return confirm('¿Quieres cerra Sesión?')" type="submit">Cerrar Sesion</button>
+       </form>
+     </div>
+      <div class="container bloque2">
         <div class="box"><p>Sistema de gestión de ingresos y gastos</p></div>
         <div class="box"><p>Sistema de gestión de usuarios Registrados</p></div>
         <div class="box"><p>Sistema de gestión de empresas</p></div>
