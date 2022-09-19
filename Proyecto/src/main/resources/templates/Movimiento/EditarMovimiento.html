@@ -26,12 +26,23 @@
   al enviar el formulario ejecuta el servicio GuardarMovimiento-->
   <form th:action="@{/ActualizarMovimiento}" th:object="${mov}" method="post">
 
+    <!-- se debe poner  el id en la plantilla porque al momento de enviar el formulario busca un id y si en el formulario no encuentra un id entonces en vez de editar crea un nuevo movimiento con un id diferente-->
     <div class="row">
       <div class="form-group col-md-12">
-        <label class="col-md-3" for="id">ID del Movimiento:</label>
+        <label class="col-md-3" for="registro">ID Registro:</label>
         <div class="col-md-6">
           <!-- readonly no permite editar el  campo  -->
-          <input th:field="*{id}" class="form-control" id="id" required="required" readonly>
+          <input th:field="*{id}" class="form-control" id="registro" required="required" readonly>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label class="col-md-3" for="id">N° Factura del Movimiento:</label>
+        <div class="col-md-6">
+
+          <input th:field="*{numeroFactura}" class="form-control" id="id" required="required">
         </div>
       </div>
     </div>
@@ -63,6 +74,21 @@
             <option th:value=8>Servicios publicos</option>
             <option th:value=9>Cafeteria</option>
             <option th:value=10>Papeleria</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+
+    <!--Campo para tipo-->
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label class="col-md-3" for="tipo">Tipo de movimiento:</label>
+        <div class="col-md-6">
+          <select th:field="*{tipo}" class="form-control" id="tipo"  required="required">
+            <!-- el value  es el valor a guardar en el campo rol del objeto movimiento-->
+            <option th:value=1>Ingreso</option>
+            <option th:value=2>Egreso</option>
           </select>
         </div>
       </div>
