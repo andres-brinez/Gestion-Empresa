@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Estilos  -->
-    <link rel="stylesheet" th:href="@{css/Init.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{css/Init.css}"/>
     <!-- Font-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,9 +18,8 @@
 
 <div class="left">
     <a  th:href="@{/Inicio}" >Inicio</a>
-    <a class="btnEmpleados" href="">Empleados por empresa</a>
-    <a class="btnMovimientos" href="">Movimientos por empresa</a>
-    <a  th:href="@{/VerEmpleados}"> Ver todos los empleados</a>
+    <a  th:href="@{/VerMovimientos}" >Movimientos</a>
+    <a  th:href="@{/VerEmpresas}">Empresas</a>
 </div>
 
 
@@ -33,6 +32,7 @@
         <button type="button" class="btn btn-info">
             <a th:href="@{/Register}">Nuevo</a>
         </button>
+        <button class="btnEditar" type="button">Editar</button>
         <button class="btnEliminar" type="button">Eliminar</button>
     </div>
 
@@ -75,8 +75,8 @@
 
               -->
 
-        <!--TODO mostrar los mensaje
-         TODO hacer verificación de que no se  puede ingresar NIT repetidos-->
+            <!--TODO mostrar los mensaje
+             TODO hacer verificación de que no se  puede ingresar NIT repetidos-->
     </table>
 </div>
 
@@ -138,11 +138,11 @@
             // saber cual checkbox esta seleccionado
             let checkboxSeleccionado = document.querySelector('input[type="checkbox"]:checked');
             // el value del checkbox es el id de la movimiento
-            let idmovimiento = checkboxSeleccionado.value;
+            let id = checkboxSeleccionado.value;
 
 
             //redireciona a la página indicada con el atributo id
-            window.location.href = "/EditarUsuario/"+idmovimiento;
+            window.location.href = "/EditarUsuario/"+id;
 
 
         }

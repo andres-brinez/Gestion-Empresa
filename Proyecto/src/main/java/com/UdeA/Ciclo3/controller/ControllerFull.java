@@ -48,7 +48,7 @@ public class ControllerFull {
     }
 
 
-    @GetMapping({"/Inicio"})
+    @GetMapping({"/","/Inicio"})
     public String  Inicio (Model model){
 
         Authentication auth= SecurityContextHolder.getContext().getAuthentication(); // obtenemos el usuario logeado, que en este caso es el username
@@ -224,6 +224,7 @@ public class ControllerFull {
         model.addAttribute("movlist",listaMovimientos);
         model.addAttribute("mensaje",mensaje);
         Long sumaMonto= movimientosService.obtenerSumaMontos();
+        System.out.println(sumaMonto);
         model.addAttribute("sumaMontos",sumaMonto); // se manda la suma de todos los montos a la plantilla
         return "Movimiento/VerMovimientos"; //Llamamos al HTML
     }
@@ -242,6 +243,16 @@ public class ControllerFull {
 
     @PostMapping("/GuardarMovimiento")
     public String guardarMovimiento(MovimientoDinero mov, RedirectAttributes redirectAttributes){
+
+        // pasar el monto a negativo  o positivo dependiendo el tipo de movimiento
+
+        if(mov.getTipo().equals("2")){ // 2 se guarda en la base de datos como egreso
+            mov.setMonto(mov.getMonto()*-1);
+        }
+        else if(mov.getTipo().equals("1")){ // 1 se guarda en la base de datos como ingreso
+            mov.setMonto(mov.getMonto()*1);
+        }
+
         if(movimientosService.saveOrUpdateMovimiento(mov)){
             // si se guarda el movimiento
             redirectAttributes.addFlashAttribute("mensaje","saveOK");
@@ -266,6 +277,18 @@ public class ControllerFull {
 
     @PostMapping("/ActualizarMovimiento")
     public String updateMovimiento(@ModelAttribute("mov") MovimientoDinero mov, RedirectAttributes redirectAttributes){
+
+        // pasar el monto a negativo  o positivo dependiendo el tipo de movimiento
+
+        if(mov.getTipo().equals("2")){ // 2 se guarda en la base de datos como egreso
+            System.out.println("es egreso");
+            mov.setMonto(mov.getMonto()*-1);
+        }
+        else if(mov.getTipo().equals("1")){ // 1 se guarda en la base de datos como ingreso
+            mov.setMonto(mov.getMonto()*1);
+            System.out.println("es ingreso");
+        }
+
         if(movimientosService.saveOrUpdateMovimiento(mov)){
 
             redirectAttributes.addFlashAttribute("mensaje","updateOK");
@@ -323,14 +346,9 @@ public class ControllerFull {
         Usuario usuario= new Usuario();
         model.addAttribute("usu",usuario);
         model.addAttribute("mensaje",mensaje);
-        return "Register"; //Llamar HTML
+        return "Usuario/Register"; //Llamar HTML
     }
-    //Metodo para encriptar contraseñas
-    public String encriptar(String password){
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hashedPassword = passwordEncoder.encode(password);
-        return hashedPassword;
-    }
+
 
 
     @PostMapping("/GuardarUsuario")
@@ -350,6 +368,34 @@ public class ControllerFull {
         // si no se guarda el usuario
         redirectAttributes.addFlashAttribute("mensaje","saveError");
         return "redirect:/Usuario";
+    }
+
+    //editar usuario
+    @GetMapping("/EditarUsuario/{id}")
+    public String editarUsuario(@PathVariable("id")Integer id, Model model, @ModelAttribute("mensaje") String mensaje){
+        Usuario usuario= usuarioService.getUsuarioById(id);
+        model.addAttribute("usu",usuario);
+        model.addAttribute("mensaje",mensaje);
+        return "Usuario/EditarUsuario"; //Llamar HTML
+    }
+
+    @PostMapping("/ActualizarUsuario")
+    public String actualizarUsuario(Usuario usu, RedirectAttributes redirectAttributes){
+        //encriptamr la contraseña
+        // para usar le seguridad de spring se debe encriptar la contraseña, de  lo contrario no se podra logear
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String passEncriptada= passwordEncoder.encode(usu.getPassword());
+        usu.setPassword(passEncriptada);
+        // para que se  ponga automaticamente el estado del usuario a true, porque el de la base de datos no funciona, es decir que se genere automaticamente
+        usu.setEstado(true);
+        if(usuarioService.saveOrUpdateUsuario(usu)==true){
+            // si se guarda el usuario
+            redirectAttributes.addFlashAttribute("mensaje","updateOK");
+            return "redirect:/VerUsuarios";
+        }
+        // si no se guarda el usuario
+        redirectAttributes.addFlashAttribute("mensaje","updateError");
+        return "redirect:/EditarUsuario/"+usu.getId();
     }
 
     @GetMapping("/EliminarUsuario/{id}")
