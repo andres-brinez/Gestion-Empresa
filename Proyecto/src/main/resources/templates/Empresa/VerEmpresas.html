@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Estilos  -->
-    <link rel="stylesheet" th:href="@{css/Empresa/VerEmpresas.css}"/>
+    <link rel="stylesheet" th:href="@{css/Init.css}"/>
     <!-- Font-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,8 +18,8 @@
 
 <div class="left">
     <a  th:href="@{/Inicio}" >Inicio</a>
-    <a class="btnEmpleados" href="">Empleados por empresa</a>
-    <a class="btnMovimientos" href="">Movimientos por empresa</a>
+    <a class="btnEmpleados-Empresa" >Empleados por empresa</a>
+    <a class="btnMovimientos" >Movimientos por empresa</a>
     <a  th:href="@{/VerEmpleados}"> Ver todos los empleados</a>
 </div>
 
@@ -73,49 +73,60 @@
 
 
               -->
-
-        <!--TODO mostrar los mensaje
-         TODO hacer verificación de que no se  puede ingresar NIT repetidos-->
     </table>
 </div>
 
-
-<script type="text/javascript" th:src="@{/js/Empresa/ValidarBotones.js}" ></script>
+<!-- trae la librerias de alerta -->
+<script type="text/javascript"  src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script  type="text/javascript" th:src="@{/js/Empresa/ValidarBotones.js}" ></script>
 
 <!-- Mostrar los mensajes que se pusieron en el controlador -->
 <script th:inline="javascript"> /*inline es para que se ejecute el codigo javascript con thymeleaf, lo que traemos desde el controlador */
     window.onload=function(){
 
-        let msg= [[${mensaje}]]; // [[${mensaje}]] indica que es  lo que viene de afuera , en este caso en el controlador  le  pusmos como nombre mensaje
-
-        //TODO cambiar el tipo de alerta que aparece
-        //TODO agrgar las alertas a los otros archivos
+        let msg= [[${mensaje}]]; //  indica que es  lo que viene de afuera , en este caso en el controlador  le  pusimos como nombre mensaje al objeto a enviar a la plantila
 
         // verificar que tipo de mensaje se recibe  desde el controlador
-        // toastr es una libreria de javascript que permite mostrar mensajes de alerta
+
         if (msg === "saveOk"){
-            alert("Empresa guardada con exito");
-            //Command : toastr["success"]("Empresa creada con éxito!")
+            mensajesOk("Empresa creada con éxito!");
+
             }
         else if (msg === "updateOk"){
-            alert("Empresa actualizada con exito");
-            //Command : toastr["success"]("Empresa actualizada con éxito!")
+            mensajesOk("Empresa actualizada con éxito!");
+
         }
         else if (msg === "deleteOk"){
-            alert("Empresa eliminada con exito");
-            //Command : toastr["error"]("Empresa eliminada con éxito!")
+            mensajesOk("Empresa eliminada con éxito!");
+
         }
         else if (msg === "deleteError"){
-            alert("Error al eliminar la empresa ");
-            //Command : toastr["error"]("Empresa no ha sido eliminada!")
+            mensajesError("No se pudo eliminar la empresa");
+
         }
-       /* toastr.options={
-            "positionClass": "toast-top-right", posicion de la alerta
-            "showDuration":"300", para que dura 3 segundos
-            "showMethod":"fadeIn", como debe aparecer
-            "hideMethod":"fadeOut", como debe desaparecer
-        }
-        */
+
+    }
+
+    function mensajesOk(mensaje){
+
+        Swal.fire({
+
+            icon: 'success',
+            title: mensaje,
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+
+    function mensajesError(mensaje){
+
+        Swal.fire({
+
+            icon: 'error',
+            title: mensaje,
+            showConfirmButton: false,
+            timer: 1500
+        })
     }
 
 </script>
