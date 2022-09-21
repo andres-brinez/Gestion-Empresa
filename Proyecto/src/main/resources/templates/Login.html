@@ -48,10 +48,10 @@
 
         </div>
 
-        <!--si hay un parametro de error -->
+        <!--si hay un parametro de error  en la url-->
         <p th:if="${param.error}" class="error">Usuario o contraseña incorrectos</p>
 
-        <!-- si se desloguea -->
+        <!-- si se desloguea, el la url aparece logout -->
         <p th:if="${param.logout}" class="logout">Sesión cerrada</p>
 
         <button type="submit">Ingresar</button>
@@ -61,7 +61,7 @@
 
     <div class="container-form__register">
       <p>¿No tienes cuenta?</p>
-      <a   th:href="@{Register}" target="_blank">Registrate</a>
+      <p>Pidele al Administrador que te Registre</p>
     </div>
 
 

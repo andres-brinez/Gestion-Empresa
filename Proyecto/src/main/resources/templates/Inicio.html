@@ -28,7 +28,7 @@
       </div>
 
       <!-- <div class="enlaces"> -->
-      <a  th:href="@{/VerMovimientos}" >Ingresos y gastos</a>
+      <a  th:href="@{/VerMovimientos}" >Movimientos</a>
       <a  th:href="@{/VerUsuarios}" >Usuarios Registrados</a>
       <a  th:href="@{/VerEmpresas}">Empresas</a>
       <!-- logout ya viene en la dependencia de seguridad y nos ayuda a deslogearnos -->
@@ -43,10 +43,12 @@
      <div class="container bloque1 ">
        <h1 th:inline="text" >Bienvenido [[${name_logeado}]]</h1> <!-- en este caso quiero el nombre del usuario , no solo su username-->
        <!--para desloguearce -->
-       <form th:action="@{/logout}" method="post">
+       <form id="form-logout" th:action="@{/logout}" method="post">
          <!-- al hacer click en input generar un confirm  -->
-         <button id="btn-logout" onclick="return confirm('¿Quieres cerra Sesión?')" type="submit">Cerrar Sesion</button>
+
+         <button id="btn-logout"  type="submit">Cerrar Sesion</button>
        </form>
+
      </div>
       <div class="container bloque2">
         <div class="box"><p>Sistema de gestión de ingresos y gastos</p></div>
@@ -57,4 +59,39 @@
 
 
   </body>
+  <!-- trae la librerias de alerta -->
+  <script type="text/javascript"  src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- mostrar alerta para logout-->
+  <script type="text/javascript" th:inline="javascript">
+
+
+    const btnLogout = document.querySelector('#btn-logout');
+
+    btnLogout.addEventListener('click', (e) => {
+      e.preventDefault() // para que  no se envíe el formulario al hacer click en el boton
+
+
+      // mostrar un mensaje de confirmacion
+        Swal.fire({
+            title: '¿Estas seguro?',
+            text: "No podras revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Cerrar Sesion!',
+            cancelButtonText: 'Cancelar'
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+              // si el usuario confirma el que quiere salir se envía el formulario que hace el action de logout
+              document.querySelector('#form-logout').submit();
+            }
+
+        })
+
+    });
+
+  </script>
+
 </html>
