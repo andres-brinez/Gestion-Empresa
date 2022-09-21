@@ -4,145 +4,193 @@
   <title>Editar Movimiento </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-    a{
-      color:white;
-    }
-    a:hover {
-      color: black;
-      text-decoration:none;
-    }
-  </style>
+  <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" type="image/x-icon">
+
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+          href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+          rel="stylesheet"
+  />
+
 </head>
+<style>
+  /*tocó poner  lo estilos acá porque salía un error en el nevegador que  no dejaba cargar el archivo css*/
+
+
+  body {
+    margin: 0%;
+    background-color: #D9D9D9;
+    font-family: 'Inter', sans-serif;
+
+  }
+
+  .flecha{
+    position: fixed;
+    top: 0;
+    width: 30px;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 29px;
+    letter-spacing: 0em;
+    margin:  70px 0 80px 0;
+  }
+
+  .container-form{
+    display: flex;
+    /* para alinear vertical y horizontal */
+    justify-content: center;
+    align-items: center;
+
+
+  }
+
+  form {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  label {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin: 20px 0 ;
+
+  }
+
+  input{
+
+    padding: 5px ;
+    height: 40px;
+    width: 100%;
+    border: none;
+    font-size: 20px;
+
+  }
+
+
+  input:focus{
+    outline: none;
+  }
+
+  select{
+    padding: 5px;
+    height: 45px;
+    width: 104%;
+    border: none;
+    font-size: 20px;
+    background-color: #fff;
+  }
+
+  button {
+
+    width: 70%; /* esto ve con el width del form */
+    height: 50px;
+    margin: 30px auto;
+    background-color:  #9E9E9E;
+    border: none;
+    font-size: 20px;
+    color: #FFF;
+    font-weight:normal;
+    cursor: pointer;
+
+
+  }
+
+  button:hover {
+    background-color: #6D6D6D;
+  }
+
+
+
+
+  .atras{
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 20px 0 ;
+    /* border:solid 1px red ; */
+
+
+  }
+
+</style>
 <body>
 
-<div class="container">
-  <h1> Modifique aqui los datos del movimiento</h1>
-  <br>
-  <!--Crear formulario para llenar los datos del  movimiento y guardarlo en el objeto mov
-  al enviar el formulario ejecuta el servicio GuardarMovimiento-->
-  <form th:action="@{/ActualizarMovimiento}" th:object="${mov}" method="post">
+  <a th:href="@{/VerMovimientos}"><img class="flecha" src="https://cdn-icons-png.flaticon.com/512/271/271218.png" alt=""></a>
+  <h1> Modifique aquí los datos del movimiento</h1>
 
-    <!-- se debe poner  el id en la plantilla porque al momento de enviar el formulario busca un id y si en el formulario no encuentra un id entonces en vez de editar crea un nuevo movimiento con un id diferente-->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="registro">ID Registro:</label>
-        <div class="col-md-6">
-          <!-- readonly no permite editar el  campo  -->
-          <input th:field="*{id}" class="form-control" id="registro" required="required" readonly>
-        </div>
-      </div>
-    </div>
+  <div class="container-form">
 
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="id">N° Factura del Movimiento:</label>
-        <div class="col-md-6">
+    <!--Crear formulario para llenar los datos del  movimiento y guardarlo en el objeto mov
+   al enviar el formulario ejecuta el servicio GuardarMovimiento-->
+    <form th:action="@{/ActualizarMovimiento}" th:object="${mov}" method="post">
 
-          <input th:field="*{numeroFactura}" class="form-control" id="id" required="required">
-        </div>
-      </div>
-    </div>
+      <!-- input oculto  -->
+      <!-- se debe poner  el id en la plantilla así sea oculto porque al momento de enviar el formulario busca un id y si en el formulario no encuentra un id entonces en vez de editar crea un nuevo movimiento con un id diferente-->
+      <input type="hidden" th:field="*{id}" >
 
-    <!--Campo para Valorr-->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="valor">Valor del movimiento:</label>
-        <div class="col-md-6">
-          <input type="number" th:field="*{monto}" class="form-control" id="valor" required="required">
-        </div>
-      </div>
-    </div>
+      <label for="facura">N° Factura </label>
+      <input  type="number" th:field="*{numeroFactura}"  id="facura" required="required">
 
-    <!--Campo para Concepto-->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="concepto">Concepto de la movimiento:</label>
-        <div class="col-md-6">
-          <select th:field="*{concepto}" class="form-control" id="concepto" required="required">
-            <!-- el value  es el valor a guardar en el campo rol del objeto movimiento-->
-            <option th:value=1>Gastos operativos</option>
-            <option th:value=2>Sueldos</option>
-            <option th:value=3>Maquinaria y equipo</option>
-            <option th:value=4>Limpieza</option>
-            <option th:value=5>Publicidad</option>
-            <option th:value=6>Caja Menor</option>
-            <option th:value=7>Tributarios</option>
-            <option th:value=8>Servicios publicos</option>
-            <option th:value=9>Cafeteria</option>
-            <option th:value=10>Papeleria</option>
-          </select>
-        </div>
-      </div>
-    </div>
+      <label for="valor">Valor</label>
+      <input   type="number" th:field="*{monto}" id="valor" required="required">
+
+      <label for="concepto">Concepto</label>
+      <select th:field="*{concepto}" class="form-control" id="concepto" required="required">
+        <!-- el value  es el valor a guardar en el campo rol del objeto movimiento-->
+        <option th:value=1>Gastos operativos</option>
+        <option th:value=2>Sueldos</option>
+        <option th:value=3>Maquinaria y equipo</option>
+        <option th:value=4>Limpieza</option>
+        <option th:value=5>Publicidad</option>
+        <option th:value=6>Caja Menor</option>
+        <option th:value=7>Tributarios</option>
+        <option th:value=8>Servicios publicos</option>
+        <option th:value=9>Cafeteria</option>
+        <option th:value=10>Papeleria</option>
+      </select>
+
+      <label for="tipo">Tipo</label>
+      <select th:field="*{tipo}" class="form-control" id="tipo" required="required">
+        <!-- el value  es el valor a guardar en el campo rol del objeto movimiento-->
+        <option th:value=1>Ingreso</option>
+        <option th:value=2>Egreso</option>
+      </select>
+
+      <label  for="usuario"> Responsable </label>
+      <!-- el select va a alimentar el campo usuario del ebjeto movimiento -->
+      <select th:field="*{usuario}" class="form-control" id="usuario" required="required">
+        <!-- movlist es donde está la lista de los empleados
+        itera la lista de empresas (emplelist) y muestra la empresa con el nombre
+        al seleccionar la empresa se guarda el id-->
+        <option th:each="empleado : ${emplelist}" th:text="${empleado.nombre}" th:value="${empleado.id}"></option>
+      </select>
+
+      <label  for="fechaMovimiento">Fecha del movimiento  </label>
+      <input type="date" th:field="*{fechaMovimiento}" class="form-control" id="fechaMovimiento" required="required">
 
 
-    <!--Campo para tipo-->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="tipo">Tipo de movimiento:</label>
-        <div class="col-md-6">
-          <select th:field="*{tipo}" class="form-control" id="tipo"  required="required">
-            <!-- el value  es el valor a guardar en el campo rol del objeto movimiento-->
-            <option th:value=1>Ingreso</option>
-            <option th:value=2>Egreso</option>
-          </select>
-        </div>
-      </div>
-    </div>
+      <label  for="fechaRegistro">Fecha del Registro  </label>
+      <input  type="date" th:field="*{fechaRegistro}"id="fechaRegistro" required="required" readonly>
 
-    <!--Campo para Usuario Responsable-->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="usuario">Usuario Responsable :</label>
-        <div class="col-md-6">
-          <!-- el select va a alimentar el campo usuario del ebjeto movimiento -->
-          <select th:field="*{usuario}" class="form-control" id="usuario" required="required">
-            <!-- movlist es donde está la lista de los empleados
-            itera la lista de empresas (emplelist) y muestra la empresa con el nombre
-            al seleccionar la empresa se guarda el id-->
-            <option th:each="empleado : ${emplelist}" th:text="${empleado.nombre}" th:value="${empleado.id}"></option>
-          </select>
-        </div>
-      </div>
-    </div>
+      <!--Boton para enviar all y ejecutar la accion que se especifica en el form -->
+      <button type="submit">Envíar</button>
+    </form>
 
-    <!--Campo para la fecha del movimiento-->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="fechaMovimiento">Fecha del movimiento : </label>
-        <div class="col-md-6">
-          <input type="date" th:field="*{fechaMovimiento}" class="form-control" id="fechaMovimiento" required="required">
-        </div>
-      </div>
-    </div>
-
-    <!--Campo para la fecha del registro-->
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="fechaRegistro">Fecha del Registro : </label>
-        <div class="col-md-6">
-          <input  type="date" th:field="*{fechaRegistro}" class="form-control" id="fechaRegistro" required="required"  readonly >
-        </div>
-      </div>
-    </div>
-
-    <!--Boton para enviar all y ejecutar la accion que se especifica en el form -->
-    <div class="row">
-      <div class="col-md-2">
-        <button class="btn btn-success">Actualizar movimiento</button>
-      </div>
-    </div>
-
-  </form>
-
-  <br>
-  <!--regresa a la página anterior-->
-  <a href="javascript: history.go(-1)" class="btn btn-info" role="button">Atrás</a>
-
-</div>
+  </div>
 </body>
+
 </html>
