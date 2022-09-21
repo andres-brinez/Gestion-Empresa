@@ -21,6 +21,7 @@ public class secConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     CustomSuccessHandler customSuccessHandler;
 
+    // hace la autenticacion de los usuarios
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
         auth.jdbcAuthentication().passwordEncoder(new BCryptPasswordEncoder())
