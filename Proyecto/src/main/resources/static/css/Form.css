@@ -66,6 +66,15 @@ input:focus{
     outline: none;
 }
 
+select{
+    padding: 5px;
+    height: 45px;
+    width: 104%;
+    border: none;
+    font-size: 20px;
+    background-color: #fff;
+}
+
 button {
 
     width: 70%; /* esto ve con el width del form */

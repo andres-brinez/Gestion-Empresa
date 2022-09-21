@@ -1,3 +1,5 @@
+/* Contiene  los estilos de las tablas  y otros elelmentos */
+
 body {
   font-family: 'Inter', sans-serif;
   margin: 0;
@@ -124,7 +126,10 @@ td:nth-child(1){
   text-align: right;
   width: 10px ;
 
+}
 
+#monto{
+  text-align: center;
 }
 
 
