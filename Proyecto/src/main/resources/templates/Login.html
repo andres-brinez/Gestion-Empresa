@@ -60,13 +60,32 @@
     </div>
 
     <div class="container-form__register">
-      <p>¿No tienes cuenta?</p>
-      <p>Pidele al Administrador que te Registre</p>
+      <p class="no-cuenta">¿No tienes cuenta?</p>
     </div>
 
 
     <script type="text/javascript" th:src="@{js/ver-ocult-Password.js}"></script>
-    <!--
-    <script type="text/javascript" th:src="@{/js/Empresa/ValidarBotones.js}" ></script>-->
+
+    <!-- trae la librerias de alerta -->
+    <script type="text/javascript"  src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <script>
+      // si toca el boton no-cuenta
+        document.querySelector(".no-cuenta").addEventListener("click", () => {
+          Swal.fire({
+
+            // ingresar codigo html
+            html: 'Ingresa con los siguientes datos! <br><br>' +
+                    '<b>Usuario:</b> administrador '+ '<b>contraseña:</b> admin33 <br>'+
+                    '<b>Usuario:</b> contable '+ '<b>contraseña:</b> cont33 <br>',
+            icon: 'info',
+
+
+          })
+
+        });
+
+    </script>
   </body>
 </html>

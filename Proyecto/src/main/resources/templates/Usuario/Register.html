@@ -4,8 +4,7 @@
     <meta charset="UTF-8" />
     <title>Registro</title>
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/1698/1698572.png" type="image/x-icon">
-    <link rel="stylesheet"  th:href="@{css/Register.css}" />
-    <!-- TODO  Agregar el responsive a register, como se hizo en login -->
+    <link rel="stylesheet"  th:href="@{css/Form.css}" />
 
     <!-- Font-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,6 +17,7 @@
   <body>
     <h1>Nuevo Usuario </h1>
 
+    <a th:href="@{/VerUsuarios}"><img class="flecha" src="https://cdn-icons-png.flaticon.com/512/271/271218.png" alt=""></a>
     <div class="container-form">
       <form  th:action="@{/GuardarUsuario}"   th:object="${usu}" method="post">
 <!-- action , es lo que se hara cuando se envie el formulario al hacer click en el boton submit
@@ -61,21 +61,16 @@
           <!-- seleccionar opciones -->
           <label for="rol">Rol</label>
           <select th:field="*{rol}" name="rol" id="rol">
+
               <option  th:value="ROLE_ADMIN" >Administrador</option>
               <option  selected th:value="ROLE_USER" >Personal Contable</option>
           </select>
 
-        <button type="submit">Registrarce</button>
+        <button type="submit">Envíar</button>
       </form>
 
     </div>
 
-    <div class="container-form__register">
-      <p>Tienes cuenta?</p>
-      <a  th:href="@{Login}" target="_blank">Inicia sesión</a>
-      
-      <!-- TODO al iniciar sesión o registrarce enviar  un mensaje de confirmación -->
-    </div>
       <script type="text/javascript"  th:src="@{js/ver-ocult-Password.js}"></script>
   </body>
 </html>
