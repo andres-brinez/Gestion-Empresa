@@ -161,8 +161,8 @@
 
     <div class="left">
         <a  th:href="@{/Inicio}" >Inicio</a>
-        <a class="btnMovimientos" href="">Movimientos por empresa</a>
-        <a class="btnMovimientos" href="">Movimientos por empleado</a>
+        <a  th:href="@{/VerEmpresas}" >Movimientos por empresa</a>
+        <a  th:href="@{/VerEmpleados}" >Movimientos por empleado</a>
     </div>
 
 
@@ -237,8 +237,7 @@
                 -->
 
 
-                <!--TODO mostrar los mensaje
-                 TODO hacer verificación de que no se  puede ingresar NIT repetidos-->
+
         </table>
 
 
@@ -250,68 +249,79 @@
 
     </div>
 
+    <!-- sumaMontos - para poner puntos decimales -->
+    <script th:inline="javascript">
 
-<script th:inline="javascript">
+        const monto = [[${sumaMontos}]]; // este  sumaMontoa viene desde java enviado en el objeto, haciendo una consula en la base de datos
 
-    const monto = [[${sumaMontos}]]; // este  sumaMontoa viene desde java enviado en el objeto, haciendo una consula en la base de datos
+        // poner puntos decimales
+        const formatoNumero= (number) => {
+            const exp = /(\d)(?=(\d{3})+(?!\d))/g;
+            const rep = '$1,';
+            let numero = number.toString().replace(exp, rep)
+            return numero.replace(/,/g, '.');
 
-    // poner puntos decimales
-    const formatoNumero= (number) => {
-        const exp = /(\d)(?=(\d{3})+(?!\d))/g;
-        const rep = '$1,';
-        let numero = number.toString().replace(exp, rep)
-        return numero.replace(/,/g, '.');
+        }
 
+
+        document.getElementById("monto").textContent="Total Movimientos : $ " + formatoNumero(monto) // esto se hace para que sea mas facil
+
+    </script>
+    <!-- Mostrar los mensajes que se pusieron en el controlador -->
+    <script th:inline="javascript"> /*inline es para que se ejecute el codigo javascript con thymeleaf, lo que traemos desde el controlador */
+    window.onload=function(){
+
+        let msg= [[${mensaje}]]; // [[${mensaje}]]  indica que es  lo que viene de afuera , en este caso en el controlador  le  pusimos como nombre mensaje al objeto a enviar a la plantila
+
+        
+        // verificar que tipo de mensaje se recibe  desde el controlador
+        
+        if (msg === "saveOK"){
+            mensajesOk("Movimiento guardado");
+            
+        }
+        else if (msg === "updateOK"){
+            mensajesOk("Movimiento actualizado");
+         
+        }
+        else if (msg === "deleteOK"){
+            mensajesOk("Movimiento eliminado");
+    
+        }
+        else if (msg === "deleteError"){
+            mensajesError("No se pudo eliminar el movimiento");
+          
+        }
+        
+        function mensajesOk(mensaje){
+
+            Swal.fire({
+
+                icon: 'success',
+                title: mensaje,
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+
+        function mensajesError(mensaje){
+
+            Swal.fire({
+
+                icon: 'error',
+                title: mensaje,
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
     }
 
-
-    document.getElementById("monto").textContent="Total Movimientos : $ " + formatoNumero(monto) // esto se hace para que sea mas facil
-
-</script>
-
-<!-- Mostrar los mensajes que se pusieron en el controlador -->
-<script th:inline="javascript"> /*inline es para que se ejecute el codigo javascript con thymeleaf, lo que traemos desde el controlador */
-window.onload=function(){
-
-    let msg= [[${mensaje}]]; // [[${mensaje}]] indica que es  lo que viene de afuera , en este caso en el controlador  le  pusmos como nombre mensaje
-
-    //TODO cambiar el tipo de alerta que aparece
-    //TODO agrgar las alertas a los otros archivos
-
-    // verificar que tipo de mensaje se recibe  desde el controlador
-    // toastr es una libreria de javascript que permite mostrar mensajes de alerta
-    if (msg === "saveOk"){
-        alert("movimiento guardada con exito");
-        //Command : toastr["success"]("movimiento creada con éxito!")
-    }
-    else if (msg === "updateOk"){
-        alert("movimiento actualizada con exito");
-        //Command : toastr["success"]("movimiento actualizada con éxito!")
-    }
-    else if (msg === "deleteOk"){
-        alert("movimiento eliminada con exito");
-        //Command : toastr["error"]("movimiento eliminada con éxito!")
-    }
-    else if (msg === "deleteError"){
-        alert("Error al eliminar la movimiento ");
-        //Command : toastr["error"]("movimiento no ha sido eliminada!")
-    }
-    /* toastr.options={
-         "positionClass": "toast-top-right", posicion de la alerta
-         "showDuration":"300", para que dura 3 segundos
-         "showMethod":"fadeIn", como debe aparecer
-         "hideMethod":"fadeOut", como debe desaparecer
-     }
-     */
-}
-
-</script>
-
-<script type="text/javascript" th:src="@{/js/Movimiento/FormatNumeros.js}" ></script>
-<script type="text/javascript" th:src="@{/js/Movimiento/ValidarBotones.js}" ></script>
+    </script>
 
 
-
+    <script type="text/javascript" th:src="@{/js/Movimiento/ValidarBotones.js}" ></script>
+    <!-- trae la librerias de alerta -->
+    <script type="text/javascript"  src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 
