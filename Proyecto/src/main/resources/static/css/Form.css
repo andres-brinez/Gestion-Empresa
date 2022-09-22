@@ -61,6 +61,22 @@ input{
 
 }
 
+/* para la opción de la contraseña*/
+.input_contraseña{
+    position: relative;
+
+}
+.input-icon {
+    cursor: pointer;
+    position: absolute;
+    width: 30px;
+    height: 25px;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
 
 input:focus{
     outline: none;
@@ -103,6 +119,15 @@ button:hover {
     font-weight: 600;
     margin: 20px 0 ;
     /* border:solid 1px red ; */
+
+
+}
+
+
+.container-form__register{
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
 
 
 }

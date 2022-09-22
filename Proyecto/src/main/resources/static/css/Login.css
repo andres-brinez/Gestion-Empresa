@@ -97,12 +97,10 @@ button:hover {
 
 }
 
-.container-form__register a{
-    text-decoration: none;
-    color: #000;
 
-}
 
-.container-form__register a:hover{
+.container-form__register p:hover{
     color: #9E9E9E;
+    cursor: pointer;
 }
+
