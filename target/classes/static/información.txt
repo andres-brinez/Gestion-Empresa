@@ -1,0 +1,7 @@
+Los archivos staticos como css y javaScript deben estar en la carpeta static
+Más información : https://stackoverflow.com/questions/33925712/spring-boot-add-html-and-javascript
+para anclar los archivos js en html se usa
+ th:src="@{ruta}"
+
+para anclar los archivos css en html se usa
+ th:href="@{ruta}"

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/4675/4675269.png" type="image/x-icon">
+    <!-- Estilos  -->
+    <link rel="stylesheet" th:href="@{css/Inicio.css}"/>
+
+    <!-- Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+    
+    <title>Inicio</title>
+  </head>
+
+  <body>
+
+    <nav>
+      <div class="logo">
+        <img th:src="@{/img/Logo.png}" alt="Logo" />
+
+      </div>
+
+
+      <a  th:href="@{/VerMovimientos}" >Movimientos</a>
+      <a  th:href="@{/VerUsuarios}" >Usuarios Registrados</a>
+      <a  th:href="@{/VerEmpresas}">Empresas</a>
+      <!-- logout ya viene en la dependencia de seguridad y nos ayuda a deslogearnos -->
+      <!--<a  th:href="@{/logout}">Cerrar sesión</a>-->
+
+    </nav>
+    <!-- para saber que usuario está logeado -->
+    <!--<h1  th:inline="text">'Bienvenido [[${#httpServletRequest.remoteUser}]] </h1> otra forma de saber el usuario logeado con su user_name que se definio puede ser el correo electronico o un nombre de usuario -->
+    <main>
+     <div class="container bloque1 ">
+       <h1 th:inline="text" >Bienvenido [[${name_logeado}]]</h1> <!-- en este caso quiero el nombre del usuario , no solo su username-->
+
+       <!--para desloguearce -->
+       <form id="form-logout" th:action="@{/logout}" method="post">
+         <button id="btn-logout"  type="submit">Cerrar Sesion</button>
+       </form>
+
+     </div>
+      <div class="container bloque2">
+        <div class="box"><p>Sistema de gestión de ingresos y gastos</p></div>
+        <div class="box"><p>Sistema de gestión de usuarios Registrados</p></div>
+        <div class="box"><p>Sistema de gestión de empresas</p></div>
+      </div>
+    </main>
+
+
+  </body>
+
+  <!-- trae la librerias de alerta -->
+  <script type="text/javascript"  src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- mostrar alerta para logout-->
+  <script type="text/javascript" th:inline="javascript">
+
+
+    const btnLogout = document.querySelector('#btn-logout');
+
+    btnLogout.addEventListener('click', (e) => {
+      e.preventDefault() // para que  no se envíe el formulario al hacer click en el boton
+
+
+      // mostrar un mensaje de confirmacion
+        Swal.fire({
+            title: '¿Estas seguro?',
+            text: "No podras revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Cerrar Sesion!',
+            cancelButtonText: 'Cancelar'
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+              // si el usuario confirma el que quiere salir se envía el formulario que hace el action de logout
+              document.querySelector('#form-logout').submit();
+            }
+
+        })
+
+    });
+
+  </script>
+
+
+
+</html>

@@ -1,0 +1,10 @@
+//mapeo, ejecuta una función o código  cuando se llame al recurso
+
+    /*
+    @GetMapping("/mapeo") // cuando se llame el recurso /mapeo
+    public  String ejemploMapeo ()
+    { // se ejecuta esta función
+        return "esto es  un ejemplo de mapeo";
+
+    }
+    */

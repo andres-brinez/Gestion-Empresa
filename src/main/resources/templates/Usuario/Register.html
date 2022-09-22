@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><!--xmlns:th="http://www.thymeleaf.org me permite engrajar el código del MVC (java) en las platillas html    -->
+  <head>
+    <meta charset="UTF-8" />
+    <title>Registro</title>
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/1698/1698572.png" type="image/x-icon">
+    <link rel="stylesheet"  th:href="@{css/Form.css}" />
+
+    <!-- Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <h1>Nuevo Usuario </h1>
+
+    <a th:href="@{/VerUsuarios}"><img class="flecha" src="https://cdn-icons-png.flaticon.com/512/271/271218.png" alt=""></a>
+    <div class="container-form">
+      <form  th:action="@{/GuardarUsuario}"   th:object="${usu}" method="post">
+<!-- action , es lo que se hara cuando se envie el formulario al hacer click en el boton submit
+    el objet es donde se guardan los datos, esto se configura en el controller
+    th field indica donde se guarda el dato-->
+
+        <label for="username">Nombre Usuario</label>
+        <input type="text" th:field="*{userName}" id="username" name="username" required="required"/>
+
+        <label for="username">Nombre </label>
+        <input type="text" th:field="*{nombre}" id="name" name="name" required="required" />
+
+        <label for="correo">Correo </label>
+        <input type="email" th:field="*{correo}" id="correo" name="correro" required="required"/>
+
+        <label for="telefono">Telefono  </label>
+        <input type="number" th:field="*{telefono}" id="telefono" name="telefono" placeholder=""/>
+
+        <label for="password">Contraseña</label>
+        <div class="input_contraseña">
+          <input type="password" th:field="*{password}" id="password" name="password" required="required"  />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="input-icon password-vista"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+            <path
+              fill-rule="evenodd"
+              d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+              clip-rule="evenodd"
+            />
+          </svg>
+
+          <!-- con js en ver password se decide si se ve o no  -->
+          <img alt="icono ojo cerrado" th:src="@{img/Ojo-cerrado.png}"  class="input-icon password-no-visto">
+
+        </div>
+
+          <!-- seleccionar opciones -->
+          <label for="rol">Rol</label>
+          <select th:field="*{rol}" name="rol" id="rol">
+
+              <option  th:value="ROLE_ADMIN" >Administrador</option>
+              <option  selected th:value="ROLE_USER" >Personal Contable</option>
+          </select>
+
+        <button type="submit">Envíar</button>
+      </form>
+
+    </div>
+
+      <script type="text/javascript"  th:src="@{js/ver-ocult-Password.js}"></script>
+  </body>
+</html>

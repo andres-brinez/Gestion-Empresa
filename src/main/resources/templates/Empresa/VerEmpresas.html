@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><!--xmlns:th="http://www.thymeleaf.org me permite engrajar el código del MVC (java) en las platillas html    -->
+<head>
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/3328/3328278.png" type="image/x-icon">
+    <title>Lista de Empresas </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Estilos  -->
+    <link rel="stylesheet" th:href="@{css/Init.css}"/>
+    <!-- Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"/>
+
+</head>
+
+<body><!-- al usar th indica que se va a trabajaer con thymeleaf-->
+
+<div class="left">
+    <a  th:href="@{/Inicio}" >Inicio</a>
+    <a class="btnEmpleados-Empresa" >Empleados por empresa</a>
+    <a class="btnMovimientos" >Movimientos por empresa</a>
+    <a  th:href="@{/VerEmpleados}"> Ver todos los empleados</a>
+</div>
+
+
+<div class="right">
+    <h1>Sistema de gestión de Ingresos y Gastos</h1>
+    <h2>Empresas</h2>
+
+    <div class="buttons">
+
+        <button type="button" class="btn btn-info">
+            <a th:href="@{/AgregarEmpresa}">Nueva</a>
+
+        </button>
+        <button class="btnEditar" type="button">Editar</button>
+        <button class="btnEliminar" type="button">Eliminar</button>
+    </div>
+
+    <!--Dibujamos la tabla-->
+
+    <table>
+        <tr>
+            <th></th>
+            <th>NIT</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Telefono</th>
+        </tr>
+        <!--Llenamos la tabla dibujada-->
+        <!--En nuestro controller, creamos en viewEmpresa un modelo con un atributo llamado emplist donde esta guardada la lista de todas las empresas-->
+        <tr th:class="${empresa.id}" th:each="empresa : ${emplist}">
+            <!--th indica que es de  tipo thymeleaf
+              each itera
+              empresa es el tipo de dato (clase ) que queremos iterar
+              ${emplist} es una lista de empresas, de donde trae los datos-->
+
+            <!--En el modelo de la vista, creamos un atributo llamado id, que es el id de la empresa
+              th:text es el tipo de dato a traer en tipo de texto
+              y le indicamos del tipo de dato indicado(empresa) se trae el valor-->
+            <td><input type="checkbox" name="check" class="checkbox" th:value="${empresa.id}"/></td>
+            <!-- el value es el id de la empresa-->
+            <td th:text="${empresa.NIT}"></td>
+            <td th:text="${empresa.nombre}"></td>
+            <td th:text="${empresa.direccion}"></td>
+            <td th:text="${empresa.telefono}"></td>
+
+            <!--
+              Estos botones salen en cada fila de la tabla, al hacer click redireccionan a la vista editarEmpresa con el id automatico
+              <td><button class="eliminar" type="button" ><a th:href="@{/EditarEmpresa/{id}(id=${empresa.id})}" >Editar</a></button></td>
+              <td><button type="button"><a th:href="@{/EliminarEmpresa/{id}(id=${empresa.id})}">Eliminar</a></button></td>
+
+
+              -->
+    </table>
+</div>
+
+<!-- trae la librerias de alerta -->
+<script type="text/javascript"  src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script  type="text/javascript" th:src="@{/js/Empresa/ValidarBotones.js}" ></script>
+
+<!-- Mostrar los mensajes que se pusieron en el controlador -->
+<script th:inline="javascript"> /*inline es para que se ejecute el codigo javascript con thymeleaf, lo que traemos desde el controlador */
+    window.onload=function(){
+
+        let msg= [[${mensaje}]]; //  indica que es  lo que viene de afuera , en este caso en el controlador  le  pusimos como nombre mensaje al objeto a enviar a la plantila
+
+        // verificar que tipo de mensaje se recibe  desde el controlador
+
+        if (msg === "saveOk"){
+            mensajesOk("Empresa creada con éxito!");
+
+            }
+        else if (msg === "updateOk"){
+            mensajesOk("Empresa actualizada con éxito!");
+
+        }
+        else if (msg === "deleteOk"){
+            mensajesOk("Empresa eliminada con éxito!");
+
+        }
+        else if (msg === "deleteError"){
+            mensajesError("No se pudo eliminar la empresa");
+
+        }
+
+    }
+
+    function mensajesOk(mensaje){
+
+        Swal.fire({
+
+            icon: 'success',
+            title: mensaje,
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+
+    function mensajesError(mensaje){
+
+        Swal.fire({
+
+            icon: 'error',
+            title: mensaje,
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+
+</script>
+
+</body>
+</html>

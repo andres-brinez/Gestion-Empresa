@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"><!--xmlns:th="http://www.thymeleaf.org me permite engrajar el código del MVC (java) en las platillas html    -->
+<head>
+
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/912/912267.png" type="image/x-icon">
+    <title>Empleados </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"/>
+
+
+
+</head>
+<style>
+    /*tocó poner los estilos acá porque en el navegador genera erro*/
+    /* Contiene  los estilos de las tablas  y otros elelmentos */
+
+    body {
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        display: flex;
+
+    }
+
+    .left{
+        padding:13% 0 ;
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        height: 100%;
+        background: #D9D9D9;
+    }
+
+    .left a{
+        font-size: 15px;
+        margin: 5% auto; /* para que se centre vertial  */
+        padding: 13px 0 13px 10px;
+        width: 80%;
+        text-decoration: none;
+        color: #fff;
+        background: #6F6F6F;
+        text-align: center;
+        border-radius: 2px;
+        cursor: pointer;
+
+
+    }
+
+    .left a:hover {
+        background: #4F4F4F;
+        font-size: 16px;
+        transition: 1s;
+        /* para que se demore  un poco en suceder   */
+    }
+
+
+    .right{
+        position: relative;
+        left: 20%;
+        width:80% ; /* lo que sobra del width del left */
+
+    }
+
+    .right h1{
+        text-align: center;
+        margin: 10px  0 50px 0 ;
+        font-weight: 500;
+        font-size: 30px;
+    }
+
+
+    .right h2{
+
+        font-weight: 400;
+        font-size: 25px;
+        line-height: 24px;
+        margin-left: 10%;
+        text-decoration: underline;
+
+    }
+
+
+
+    .buttons{
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 10%;
+    }
+
+    button{
+        cursor: pointer;
+        width: 130px;
+        height: 40px;
+        background: #D9D9D9;
+        border: none;
+        margin-left:2% ;
+        font-weight: 400;
+        font-size: 17px;
+
+    }
+
+    button:hover{
+        background-color: #BFBFBF;
+        transition: 1s;
+    }
+
+    button a {
+        text-decoration: none;
+        color: #000;
+
+    }
+    /* Tabla */
+
+    table {
+        width: 80%;
+        border-collapse: collapse;
+
+        margin: 50px auto;
+
+    }
+
+
+    th,td:not(:first-of-type) {
+        text-align: center;
+        padding: 10px 0;
+
+
+    }
+
+    th:not(:first-of-type) { /* para que no se aplique a la primera columna */
+        background: #CECDCD;
+
+    }
+
+    td:not(:first-of-type){
+        background: #D9D9D9;
+        border-bottom: 1px solid #9E9E9E;
+    }
+
+    /* Estilos botones checkbox */
+    td:nth-child(1){
+        text-align: right;
+        width: 10px ;
+
+    }
+
+
+
+
+
+</style>
+<body>
+    <!-- al usar th indica que se va a trabajaer con thymeleaf-->
+
+    <div class="left">
+        <a  th:href="@{/Inicio}" >Inicio</a>
+        <a  th:href="@{/VerEmpresas}"> Empresas</a>
+        <a class="btnMovimientos" href="">Movimientos por empleado</a>
+    </div>
+
+
+
+    <div class="right">
+        <h1>Sistema de gestión de Ingresos y Gastos</h1>
+        <h2>Empleados</h2>
+
+        <div class="buttons">
+
+            <button type="button" class="btn btn-info">
+                <a th:href="@{/AgregarEmpleado}">Nuevo</a>
+            </button>
+            <button class="btnEditar" type="button">Editar</button>
+            <button class="btnEliminar" type="button">Eliminar</button>
+        </div>
+
+        <!--Dibujamos la tabla-->
+
+        <table>
+            <tr>
+                <th></th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Empresa</th>
+                <th>Rol</th>
+                <th>Estado</th>
+            </tr>
+
+            <!--Llenamos la tabla dibujada-->
+            <!--En nuestro controller, creamos en viewempleado un modelo con un atributo llamado emplelist donde esta guardada la lista de todos los empleados-->
+            <tr th:each="empleado : ${emplelist}">
+                <!--th indica que es de  tipo thymeleaf
+                each itera
+                empleado: ${emplelist} es una lista de todos los empleados
+                each empleado , es  cada empelado que nos devuelve emplealist
+
+                En el modelo de la vista, creamos un atributo llamado id, que es el id del empleado
+                th:text es el tipo de dato a traer en tipo de texto
+                y le indicamos del tipo de dato indicado(empleado) se trae el valor-->
+                <td><input type="checkbox" name="check"  class="checkbox" th:value="${empleado.id}"></td><!-- el value es el id de la empleado-->
+
+                <td th:text="${empleado.nombre}"></td>
+                <td th:text="${empleado.correo}"></td>
+                <td th:text="${empleado.empresa.nombre}"></td>
+
+                <!--paa saber que rol es, ua que se guarda en la base de datos el número que tiene cada rolv al agregar el empleado-->
+                <td th:if = "${empleado.rol == '1'}" th:text="Administrativo"></td>
+                <td th:if = "${empleado.rol == '2'}" th:text="Operativo"></td>
+                <td th:if = "${empleado.rol == '3'}" th:text="Sistemas"></td>
+                <td th:if = "${empleado.rol == '4'}" th:text="Limpieza"></td>
+                <td th:if = "${empleado.rol == '5'}" th:text="Ejecutivo"></td>
+                <td th:if = "${empleado.rol == '6'}" th:text="Financiero"></td>
+                <td th:if = "${empleado.rol == '7'}" th:text="Programador"></td>
+                <td th:if = "${empleado.rol == '8'}" th:text="Desarrollador"></td>
+                <td th:if = "${empleado.rol == '9'}" th:text="Gestor de base de datos"></td>
+                <td th:if = "${empleado.rol == '10'}" th:text="Diseñador"></td>
+
+                <!--paa saber estado está, ua que se guarda en la base de datos el número que tiene cada rolv al agregar el empleado-->
+                <!-- en el value se guarda como 1 o 0 pero en  lla base de datos se guarda como true o false-->
+                <td th:if = "${empleado.estado == true}" th:text="Activo"></td>
+                <td th:if = "${empleado.estado == false}" th:text="Inactivo"></td>
+
+
+                <!--
+                Estos botones salen en cada fila de la tabla, al hacer click redireccionan a la vista editarempleado con el id automatico
+                <td><button class="eliminar" type="button" ><a th:href="@{/Editarempleado/{id}(id=${empleado.id})}" >Editar</a></button></td>
+                <td><button type="button"><a th:href="@{/Eliminarempleado/{id}(id=${empleado.id})}">Eliminar</a></button></td>
+
+                -->
+
+        </table>
+    </div>
+
+    <!-- trae la librerias de alerta -->
+    <script type="text/javascript"  src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--Validar los botones -->
+    <script type="text/javascript" th:src="@{/js/Empleado/ValidarBotones.js}" ></script>
+
+    <!-- Mostrar los mensajes que se pusieron en el controlador -->
+    <script th:inline="javascript"> /*inline es para que se ejecute el codigo javascript con thymeleaf, lo que traemos desde el controlador */
+    window.onload=function(){
+
+        let msg= [[${mensaje}]]; // [[${mensaje}]]    indica que es  lo que viene de afuera , en este caso en el controlador  le  pusimos como nombre mensaje al objeto a enviar a la plantila
+        console.log("mensaje: "+msg);
+
+        // verificar que tipo de mensaje se recibe  desde el controlador
+        if (msg === "saveOK"){
+            mensajesOk("Empleado creado");
+
+        }
+        else if (msg === "updateOK"){
+            mensajesOk("Empleado actualizado");
+        }
+        else if (msg === "deleteOK"){
+            mensajesOk("Empleado eliminado");
+        }
+        else if (msg === "deleteError"){
+            mensajesError("Error al eliminar el empleado ");
+
+        }
+
+        function mensajesOk(mensaje){
+
+            Swal.fire({
+
+                icon: 'success',
+                title: mensaje,
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+
+        function mensajesError(mensaje){
+
+            Swal.fire({
+
+                icon: 'error',
+                title: mensaje,
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+
+    }
+
+    </script>
+
+
+</body>
+</html>

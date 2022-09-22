@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><!--xmlns:th="http://www.thymeleaf.org me permite engrajar el código del MVC (java) en las platillas html    -->
+<head>
+    <meta charset="UTF-8" />
+    <title> Usuario</title>
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/1698/1698572.png" type="image/x-icon">
+    <!-- <link rel="stylesheet"  th:href="@{css/Form.css}" /> -->
+
+    <!-- Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+            rel="stylesheet"
+    />
+</head>
+<style>
+    /* toco usaer el estilo acá porque el navegador genera un error al cargar el archivo */
+    body {
+        margin: 0;
+        background-color: #D9D9D9;
+        font-family: 'Inter', sans-serif;
+        max-height: 100vh; /* solo puede tener el tamaño de toda la pantalla */
+
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 40px;
+        font-weight: 600;
+        line-height: 29px;
+        letter-spacing: 0;
+        margin:  40px  0 45px 0;
+    }
+
+    .flecha{
+        position: fixed;
+        top: 0;
+        width: 30px;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    .container-form{
+        display: flex;
+        /* para alinear vertical y horizontal */
+        justify-content: center;
+        align-items: center;
+
+
+    }
+
+    form {
+        width: 25%;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    label {
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 18px;
+        letter-spacing: 0;
+        text-align: left;
+        margin: 20px 0 ;
+
+    }
+
+    input{
+
+        padding: 5px ;
+        height: 33px;
+        width: 100%;
+        border: none;
+        font-size: 20px;
+
+    }
+
+    .input_contraseña{
+        position: relative;
+
+    }
+    .input-icon {
+        cursor: pointer;
+        position: absolute;
+        width: 30px;
+        height: 25px;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    input:focus{
+        outline: none;
+    }
+
+
+    select{
+        padding: 5px 10px;
+        height: 50px;
+        width: 102%;
+        border: none;
+        font-size: 20px;
+    }
+
+    select:focus{
+        outline: none;
+    }
+
+    option{
+        padding: 5px 10px;
+        height: 25px;
+        width: 100%;
+        border: none;
+        font-size: 20px;
+    }
+    button {
+
+        width: 70%; /* esto ve con el width del form */
+        height: 50px;
+        margin: 30px auto;
+        background-color:  #9E9E9E;
+        border: none;
+        font-size: 18px;
+        color: #FFF;
+        font-weight:normal;
+        cursor: pointer;
+
+
+    }
+
+    button:hover {
+        background-color: #6D6D6D;
+    }
+
+
+    .container-form__register a{
+        text-decoration: none;
+        color: #000;
+
+    }
+
+    .container-form__register a:hover{
+        color: #9E9E9E;
+    }
+
+</style>
+<body>
+<a th:href="@{/VerUsuarios}"><img class="flecha" src="https://cdn-icons-png.flaticon.com/512/271/271218.png" alt=""></a>
+
+<h1>Editar  Usuario </h1>
+
+<div class="container-form">
+    <form  th:action="@{/GuardarUsuario}"   th:object="${usu}" method="post">
+        <!-- action , es lo que se hara cuando se envie el formulario al hacer click en el boton submit
+            el objet es donde se guardan los datos, esto se configura en el controller
+            th field indica donde se guarda el dato-->
+
+        <!-- input oculto  -->
+        <!-- se debe poner  el id en la plantilla así sea oculto porque al momento de enviar el formulario busca un id y si en el formulario no encuentra un id entonces en vez de editar crea un nuevo movimiento con un id diferente-->
+        <input type="hidden" th:field="*{id}">
+
+        <label for="username">Nombre Usuario</label>
+        <input type="text" th:field="*{userName}" id="username" name="username" required="required"/>
+
+        <label for="username">Nombre </label>
+        <input type="text" th:field="*{nombre}" id="name" name="name" required="required" />
+
+        <label for="correo">Correo </label>
+        <input type="email" th:field="*{correo}" id="correo" name="correo" required="required"/>
+
+        <label for="telefono">Telefono  </label>
+        <input type="number" th:field="*{telefono}" id="telefono" name="telefono" placeholder=""/>
+
+        <label for="password">Contraseña</label>
+        <div class="input_contraseña">
+            <input type="password" th:field="*{password}" id="password" name="password" required="required"  />
+            <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="input-icon password-vista"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+            >
+                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                <path
+                        fill-rule="evenodd"
+                        d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                        clip-rule="evenodd"
+                />
+            </svg>
+
+            <!-- con js en ver password se decide si se ve o no  -->
+            <!--type imagen-->
+
+            <img alt="icon ojo cerrado" src="https://cdn-icons-png.flaticon.com/512/1695/1695844.png"  class="input-icon password-no-visto">
+
+        </div>
+
+        <!-- seleccionar opciones -->
+        <label for="rol">Rol</label>
+        <select th:field="*{rol}" name="rol" id="rol">
+            <option  th:value="ROLE_ADMIN" >Administrador</option>
+            <option  selected th:value="ROLE_USER" >Personal Contable</option>
+        </select>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+</div>
+
+
+<!-- boton de mostrar  y ocultar contraseña -->
+<script type="text/javascript" >
+
+
+    let passwordvista = document.querySelector(".password-vista");
+    let passwordnovista = document.querySelector(".password-no-visto");
+    let input_contrasena = document.querySelector("#password");
+
+    if (input_contrasena.type==="password") {
+        passwordvista.style.display = "block";
+        passwordnovista.style.display = "none";
+    }
+    else {
+        passwordvista.style.display = "none";
+        passwordnovista.style.display = "block";
+    }
+
+    // cuando quiero ver el password
+    passwordvista.addEventListener("click", () => {
+
+        input_contrasena.type = "text";
+        passwordvista.style.display = "none";
+        passwordnovista.style.display = "block";
+
+    });
+
+    // cuando quiero ocultar el password
+    passwordnovista.addEventListener("click", () => {
+
+        input_contrasena.type = "password"; // se cambia el tipo de input
+        passwordnovista.style.display = "none"; // se oculta el icon para no ver la contraseña
+        passwordvista.style.display = "block"; // se muestra el icon para ver la contras{a}
+
+
+    });
+
+
+</script>
+</body>
+</html>
