@@ -17,7 +17,7 @@
 <style>
     /* toco usaer el estilo acá porque el navegador genera un error al cargar el archivo */
     body {
-        margin: 0%;
+        margin: 0;
         background-color: #D9D9D9;
         font-family: 'Inter', sans-serif;
         max-height: 100vh; /* solo puede tener el tamaño de toda la pantalla */
@@ -29,7 +29,7 @@
         font-size: 40px;
         font-weight: 600;
         line-height: 29px;
-        letter-spacing: 0em;
+        letter-spacing: 0;
         margin:  40px  0 45px 0;
     }
 
@@ -61,7 +61,7 @@
         font-size: 20px;
         font-weight: 600;
         line-height: 18px;
-        letter-spacing: 0em;
+        letter-spacing: 0;
         text-align: left;
         margin: 20px 0 ;
 
@@ -135,14 +135,6 @@
     }
 
 
-    .container-form__register{
-        text-align: center;
-        font-size: 15px;
-        font-weight: 600;
-
-
-    }
-
     .container-form__register a{
         text-decoration: none;
         color: #000;
@@ -176,7 +168,7 @@
         <input type="text" th:field="*{nombre}" id="name" name="name" required="required" />
 
         <label for="correo">Correo </label>
-        <input type="email" th:field="*{correo}" id="correo" name="correro" required="required"/>
+        <input type="email" th:field="*{correo}" id="correo" name="correo" required="required"/>
 
         <label for="telefono">Telefono  </label>
         <input type="number" th:field="*{telefono}" id="telefono" name="telefono" placeholder=""/>
@@ -201,7 +193,7 @@
             <!-- con js en ver password se decide si se ve o no  -->
             <!--type imagen-->
 
-            <img  src="https://cdn-icons-png.flaticon.com/512/1695/1695844.png"  class="input-icon password-no-visto">
+            <img alt="icon ojo cerrado" src="https://cdn-icons-png.flaticon.com/512/1695/1695844.png"  class="input-icon password-no-visto">
 
         </div>
 
@@ -224,9 +216,9 @@
 
     let passwordvista = document.querySelector(".password-vista");
     let passwordnovista = document.querySelector(".password-no-visto");
-    let input_contraseña = document.querySelector("#password");
+    let input_contrasena = document.querySelector("#password");
 
-    if (input_contraseña.type==="password") {
+    if (input_contrasena.type==="password") {
         passwordvista.style.display = "block";
         passwordnovista.style.display = "none";
     }
@@ -238,7 +230,7 @@
     // cuando quiero ver el password
     passwordvista.addEventListener("click", () => {
 
-        input_contraseña.type = "text";
+        input_contrasena.type = "text";
         passwordvista.style.display = "none";
         passwordnovista.style.display = "block";
 
@@ -247,7 +239,7 @@
     // cuando quiero ocultar el password
     passwordnovista.addEventListener("click", () => {
 
-        input_contraseña.type = "password"; // se cambia el tipo de input
+        input_contrasena.type = "password"; // se cambia el tipo de input
         passwordnovista.style.display = "none"; // se oculta el icon para no ver la contraseña
         passwordvista.style.display = "block"; // se muestra el icon para ver la contras{a}
 

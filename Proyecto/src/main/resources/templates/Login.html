@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"><!--xmlns:th="http://www.thymeleaf.org me permite engrajar el código del MVC (java) en las platillas html    -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <!--xmlns:th="http://www.thymeleaf.org me permite engrajar el código del MVC (java) en las platillas html    -->
   <head>
     <meta charset="UTF-8" />
     <title>Ingreso</title>
-    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/2170/2170153.png" type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href="https://cdn-icons-png.flaticon.com/512/2170/2170153.png"
+      type="image/x-icon"
+    />
     <!-- Estilos -->
-    <link rel="stylesheet" th:href="@{css/Login.css}"/>
-
+    <link rel="stylesheet" th:href="@{css/Login.css}" />
 
     <!-- Font-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,7 +25,6 @@
 
     <div class="container-form">
       <form th:action="@{/login}" method="post">
-
         <label for="username">Nombre Usuario</label>
         <input type="text" id="username" name="username" />
 
@@ -43,49 +46,54 @@
           </svg>
 
           <!-- con js en ver password se decide si se ve o no  -->
-          <img th:src="@{img/Ojo-cerrado.png}"  class="input-icon password-no-visto">
-
-
+          <img
+            alt="icono de ojo cerrado"
+            th:src="@{img/Ojo-cerrado.png}"
+            class="input-icon password-no-visto"
+          />
         </div>
 
         <!--si hay un parametro de error  en la url-->
-        <p th:if="${param.error}" class="error">Usuario o contraseña incorrectos</p>
+        <p th:if="${param.error}" class="error">
+          Usuario o contraseña incorrectos
+        </p>
 
         <!-- si se desloguea, el la url aparece logout -->
         <p th:if="${param.logout}" class="logout">Sesión cerrada</p>
 
         <button type="submit">Ingresar</button>
       </form>
-
     </div>
 
     <div class="container-form__register">
       <p class="no-cuenta">¿No tienes cuenta?</p>
     </div>
 
-
-    <script type="text/javascript" th:src="@{js/ver-ocult-Password.js}"></script>
+    <script
+      type="text/javascript"
+      th:src="@{js/ver-ocult-Password.js}"
+    ></script>
 
     <!-- trae la librerias de alerta -->
-    <script type="text/javascript"  src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script
+      type="text/javascript"
+      src="//cdn.jsdelivr.net/npm/sweetalert2@11"
+    ></script>
 
     <script>
       // si toca el boton no-cuenta
-        document.querySelector(".no-cuenta").addEventListener("click", () => {
-          Swal.fire({
-
-            // ingresar codigo html
-            html: 'Ingresa con los siguientes datos! <br><br>' +
-                    '<b>Usuario:</b> administrador '+ '<b>contraseña:</b> admin33 <br>'+
-                    '<b>Usuario:</b> contable '+ '<b>contraseña:</b> cont33 <br>',
-            icon: 'info',
-
-
-          })
-
+      document.querySelector(".no-cuenta").addEventListener("click", () => {
+        Swal.fire({
+          // ingresar codigo html
+          html:
+            "Ingresa con los siguientes datos! <br><br>" +
+            "<b>Usuario:</b> administrador " +
+            "<b>contraseña:</b> admin33 <br>" +
+            "<b>Usuario:</b> contable " +
+            "<b>contraseña:</b> cont33 <br>",
+          icon: "info",
         });
-
+      });
     </script>
   </body>
 </html>
