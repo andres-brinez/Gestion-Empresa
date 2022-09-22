@@ -1,14 +1,16 @@
-//---------Validar los botones que hay en la vista de Empleados--------------------
+//---------Validar los botones que hay en la vista de Usuarios--------------------
 
 // seleccionar solo un checkbox, llama la función creada
 soloUnCheckbox()
 
+
 const buttonEliminar = document.querySelector(".btnEliminar")
 buttonEliminar.addEventListener("click", function(e) {EditarEliminar("eliminar")})
 
-//boton editar movimiento
+//boton editar usuario
 const buttonEditar = document.querySelector('.btnEditar');
-buttonEditar.addEventListener('click', function(e){EditarEliminar("editar");});
+buttonEditar.addEventListener('click', function(e){EditarEliminar("editar")});
+
 
 //------------------------FUNCIONES---------------------
 
@@ -36,14 +38,14 @@ function EditarEliminar(tipo){
         // saber cual checkbox esta seleccionado
         let checkboxSeleccionado = document.querySelector('input[type="checkbox"]:checked');
 
-        // el value del checkbox es el id de la movimiento
-        let idmovimiento = checkboxSeleccionado.value;
+        // el value del checkbox es el id del usuario
+        let idUsuario = checkboxSeleccionado.value;
 
         if (tipo == "eliminar") {
 
             Swal.fire({
-                title: "¿Estás seguro que desea eliminar este movimiento?",
-                text: "No podras revertir esto!",
+                title: "¿Estás seguro que desea eliminar este usuario?",
+                text: "No podrás revertir esto!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -54,25 +56,25 @@ function EditarEliminar(tipo){
                 .then((result) => {
                     if (result.isConfirmed) {
                         //redireciona a la página indicada con el atributo id
-                        window.location.href = "/EliminarMovimiento/"+idmovimiento;
+                        window.location.href = "/EliminarUsuario/"+idUsuario;
                     }
 
                 })
         } else if (tipo == "editar") {
 
             //redireciona a la página indicada con el atributo id
-            window.location.href = "/EditarMovimiento/"+idmovimiento;
+            window.location.href = "/EditarUsuario/"+idUsuario;
         }
 
 
     } catch (e) {
         // si no hay ningun checkbox seleccionado
+        console.log(e);
         Swal.fire({
-            title: 'No hay ningún movimiento seleccionado',
+            title: 'No hay ningún usuario seleccionado',
             icon: 'question',
 
         })
     }
 
 }
-
