@@ -75,85 +75,14 @@
 
               -->
 
-            <!--TODO mostrar los mensaje
-             TODO hacer verificación de que no se  puede ingresar NIT repetidos-->
     </table>
 </div>
 
 
-<!-- <script type="text/javascript" th:src="@{/js/Usuario/ValidarBotones.js}" ></script> -->
-<script>
-    // seleccionar solo un checkbox
-    let checkboxes = document.querySelectorAll('input[type="checkbox"]')
+ <script type="text/javascript" th:src="@{/js/Usuario/ValidarBotones.js}" ></script>
+<!-- trae la librerias de alerta -->
+<script type="text/javascript"  src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    checkboxes.forEach(function(checkbox) {
-        checkbox.addEventListener('change', function() {
-            checkboxes.forEach(function(otherCheckbox) {
-                if (otherCheckbox !== checkbox)
-                    otherCheckbox.checked = false
-            })
-        })
-    })
-
-
-
-
-    const buttonEliminar = document.querySelector(".btnEliminar")
-    buttonEliminar.addEventListener("click", function(e) {
-
-
-        try{
-
-            // saber cual checkbox esta seleccionado
-            let checkboxSeleccionado = document.querySelector('input[type="checkbox"]:checked');
-
-            // el value del checkbox es el id de la movimiento
-            let idmovimiento = checkboxSeleccionado.value;
-
-            // confirmar si se quiere eliminar la movimiento
-            let confirmacion = confirm("¿Está seguro que desea eliminar el usuario?");
-            if(confirmacion){
-                //redireciona a la página indicada con el atributo id
-                window.location.href = "/EliminarUsuario/"+idmovimiento;
-            }
-
-
-
-        }
-        catch (e) {
-
-            alert("No hay ninguna usuario seleccionado");
-        }
-
-
-    })
-
-    //boton editar movimiento
-    const buttonEditar = document.querySelector('.btnEditar');
-
-    buttonEditar.addEventListener('click', function(e){
-
-        try{
-
-            // saber cual checkbox esta seleccionado
-            let checkboxSeleccionado = document.querySelector('input[type="checkbox"]:checked');
-            // el value del checkbox es el id de la movimiento
-            let id = checkboxSeleccionado.value;
-
-
-            //redireciona a la página indicada con el atributo id
-            window.location.href = "/EditarUsuario/"+id;
-
-
-        }
-        catch (e) {
-
-            alert("No hay ninguna movimiento  seleccionada");
-        }
-
-
-    });
-</script>
 
 <!-- Mostrar los mensajes que se pusieron en el controlador -->
 <script th:inline="javascript"> /*inline es para que se ejecute el codigo javascript con thymeleaf, lo que traemos desde el controlador */
@@ -161,34 +90,45 @@
 
         let msg= [[${mensaje}]]; // [[${mensaje}]] indica que es  lo que viene de afuera , en este caso en el controlador  le  pusmos como nombre mensaje
 
-        //TODO cambiar el tipo de alerta que aparece
-        //TODO agrgar las alertas a los otros archivos
 
         // verificar que tipo de mensaje se recibe  desde el controlador
-        // toastr es una libreria de javascript que permite mostrar mensajes de alerta
-        if (msg === "saveOk"){
-            alert("Usuario guardada con exito");
-            //Command : toastr["success"]("Usuario creada con éxito!")
+
+        if (msg === "saveOK"){
+            mensajesOk("Usuario guardado");
             }
-        else if (msg === "updateOk"){
-            alert("Usuario actualizada con exito");
-            //Command : toastr["success"]("Usuario actualizada con éxito!")
+        else if (msg === "updateOK"){
+            mensajesOk("Usuario actualizado");
         }
-        else if (msg === "deleteOk"){
-            alert("Usuario eliminada con exito");
-            //Command : toastr["error"]("Usuario eliminada con éxito!")
+        else if (msg === "deleteOK"){
+            mensajesOk("Usuario eliminado");
+
         }
         else if (msg === "deleteError"){
-            alert("Error al eliminar la usuario ");
-            //Command : toastr["error"]("Usuario no ha sido eliminada!")
+            mensajesError("No se pudo eliminar el usuario");
+
         }
-       /* toastr.options={
-            "positionClass": "toast-top-right", posicion de la alerta
-            "showDuration":"300", para que dura 3 segundos
-            "showMethod":"fadeIn", como debe aparecer
-            "hideMethod":"fadeOut", como debe desaparecer
+
+        function mensajesOk(mensaje){
+
+            Swal.fire({
+
+                icon: 'success',
+                title: mensaje,
+                showConfirmButton: false,
+                timer: 1500
+            })
         }
-        */
+
+        function mensajesError(mensaje){
+
+            Swal.fire({
+
+                icon: 'error',
+                title: mensaje,
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
     }
 
 </script>
