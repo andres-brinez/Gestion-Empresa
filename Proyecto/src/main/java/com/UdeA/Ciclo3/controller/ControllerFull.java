@@ -1,4 +1,4 @@
-package com.UdeA.Ciclo3.handler.controller;
+package com.UdeA.Ciclo3.controller;
 
 import antlr.BaseAST;
 import com.UdeA.Ciclo3.modelos.Empleado;
