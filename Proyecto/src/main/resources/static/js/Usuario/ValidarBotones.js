@@ -41,7 +41,7 @@ function EditarEliminar(tipo){
         // el value del checkbox es el id del usuario
         let idUsuario = checkboxSeleccionado.value;
 
-        if (tipo == "eliminar") {
+        if (tipo === "eliminar") {
 
             Swal.fire({
                 title: "¿Estás seguro que desea eliminar este usuario?",
@@ -60,7 +60,7 @@ function EditarEliminar(tipo){
                     }
 
                 })
-        } else if (tipo == "editar") {
+        } else if (tipo === "editar") {
 
             //redireciona a la página indicada con el atributo id
             window.location.href = "/EditarUsuario/"+idUsuario;

@@ -39,7 +39,7 @@ function EditarEliminar(tipo){
         // el value del checkbox es el id de la movimiento
         let idmovimiento = checkboxSeleccionado.value;
 
-        if (tipo == "eliminar") {
+        if (tipo === "eliminar") {
 
             Swal.fire({
                 title: "¿Estás seguro que desea eliminar este movimiento?",
@@ -58,7 +58,7 @@ function EditarEliminar(tipo){
                     }
 
                 })
-        } else if (tipo == "editar") {
+        } else if (tipo === "editar") {
 
             //redireciona a la página indicada con el atributo id
             window.location.href = "/EditarMovimiento/"+idmovimiento;
