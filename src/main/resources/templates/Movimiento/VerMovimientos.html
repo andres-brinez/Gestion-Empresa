@@ -254,6 +254,7 @@
 
         const monto = [[${sumaMontos}]]; // este  sumaMontoa viene desde java enviado en el objeto, haciendo una consula en la base de datos
 
+
         // poner puntos decimales
         const formatoNumero= (number) => {
             const exp = /(\d)(?=(\d{3})+(?!\d))/g;
@@ -263,7 +264,10 @@
 
         }
 
-
+        // si es  monto es negativo poner estilo rojo
+        if (monto < 0) {
+            document.getElementById("monto").style.color = "red";
+        }
         document.getElementById("monto").textContent="Total Movimientos : $ " + formatoNumero(monto) // esto se hace para que sea mas facil
 
     </script>
