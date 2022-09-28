@@ -54,12 +54,12 @@
         </div>
 
         <!--si hay un parametro de error  en la url-->
-        <p th:if="${param.error}" class="error">
+        <p style="color:red" th:if="${param.error}" class="error">
           Usuario o contraseña incorrectos
         </p>
 
         <!-- si se desloguea, el la url aparece logout -->
-        <p th:if="${param.logout}" class="logout">Sesión cerrada</p>
+        <p style="color:green" th:if="${param.logout}" class="logout">Sesión cerrada</p>
 
         <button type="submit">Ingresar</button>
       </form>
