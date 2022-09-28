@@ -1,6 +1,5 @@
 package com.UdeA.Ciclo3.controller;
 
-import antlr.BaseAST;
 import com.UdeA.Ciclo3.modelos.Empleado;
 import com.UdeA.Ciclo3.modelos.Empresa;
 import com.UdeA.Ciclo3.modelos.MovimientoDinero;
@@ -10,7 +9,6 @@ import com.UdeA.Ciclo3.service.EmpresaService;
 import com.UdeA.Ciclo3.service.MovimientosService;
 import com.UdeA.Ciclo3.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -360,7 +358,7 @@ public class ControllerFull {
         usu.setPassword(passEncriptada);
         // para que se  ponga automaticamente el estado del usuario a true, porque el de la base de datos no funciona, es decir que se genere automaticamente
         usu.setEstado(true);
-        if(usuarioService.saveOrUpdateUsuario(usu)==true){
+        if(usuarioService.saveOrUpdateUsuario(usu)){
             // si se guarda el usuario
             redirectAttributes.addFlashAttribute("mensaje","saveOK");
             return "redirect:/VerUsuarios";
@@ -388,7 +386,7 @@ public class ControllerFull {
         usu.setPassword(passEncriptada);
         // para que se  ponga automaticamente el estado del usuario a true, porque el de la base de datos no funciona, es decir que se genere automaticamente
         usu.setEstado(true);
-        if(usuarioService.saveOrUpdateUsuario(usu)==true){
+        if(usuarioService.saveOrUpdateUsuario(usu)){
             // si se guarda el usuario
             redirectAttributes.addFlashAttribute("mensaje","updateOK");
             return "redirect:/VerUsuarios";
