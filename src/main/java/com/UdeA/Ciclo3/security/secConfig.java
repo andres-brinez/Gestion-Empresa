@@ -60,7 +60,7 @@ public class secConfig extends WebSecurityConfigurerAdapter {
             // como por ejemplo    /Empresa/Editar, /Empresa/Eliminar etc
             .antMatchers("/VerEmpresas/**").hasRole("ADMIN")
             .antMatchers("/VerUsuarios/**").hasRole("ADMIN")
-            .antMatchers("/Empresa/**").hasRole("ADMIN")
+            .antMatchers("/VerEmpleados/**").hasRole("ADMIN")
             .antMatchers("/Empleado/**").hasRole("ADMIN")
             .antMatchers("/VerMovimientos/**").hasAnyRole("ADMIN","USER")
             .antMatchers("/AgregarMovimiento/**").hasAnyRole("ADMIN","USER")
