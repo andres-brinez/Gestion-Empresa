@@ -20,13 +20,17 @@ Adicionalmente, debido a que las transacciones contables son supremamente delica
   <li>Visualizar todos los Empleados  registradas </li>
   <li>Agregar, editar  y eliminar un ingreso de dinero a la empresa</li>
   <li>Agregar, editar  y eliminar un egreso a la empresa</li>
-  <li>Visualizar todos los movimientos de la empresa </li>
-
-  
+  <li>Visualizar todos los movimientos de la empresa </li>  
 </ul>
-<li></li>
-<p> </P>
-<p> </P>
+
+<ul>
+  <p>Personal Contable </P>
+  <li>Agregar, editar  y eliminar un ingreso de dinero a la empresa</li>
+  <li>Agregar, editar  y eliminar un egreso a la empresa</li>
+  <li>Visualizar todos los movimientos de la empresa </li>  
+  <li>No tiene acceso a las demas  áreas de la  página  </li>  
+</ul>
+
 
 
 
