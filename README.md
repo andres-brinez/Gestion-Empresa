@@ -21,6 +21,8 @@ Adicionalmente, debido a que las transacciones contables son supremamente delica
   <li>Agregar, editar  y eliminar un ingreso de dinero a la empresa</li>
   <li>Agregar, editar  y eliminar un egreso a la empresa</li>
   <li>Visualizar todos los movimientos de la empresa </li>  
+   <li>Agregar, editar  y eliminar Usuarios  </li>
+  <li>Visualizar todos los usuarios registrados </li>  
 </ul>
 
 <ul>
