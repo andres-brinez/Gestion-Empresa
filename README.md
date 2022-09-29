@@ -10,7 +10,21 @@ tedioso, por lo que el administrador del sistema puede decidir delegar el regist
 creación de nuevos usuarios que deben tener la posibilidad de efectuar nuevos movimientos de dinero. Sin embargo, dichos usuarios no deben ser
 capaces de modificar información sensible de la empresa, ni tampoco crear nuevos usuarios, con el fin de evitar riesgos de corrupción.
 Adicionalmente, debido a que las transacciones contables son supremamente delicadas, el sistema debería permitir llevar una trazabilidad de quién registró cada transacción, por lo cual el sistema debe contar con un sistema de autenticación.</P>
-<p> </P>
+
+# Acciones
+<ul>
+  <p>Administrador </P>
+  <li>Crear, editar  y eliminar  empresas en el sistema</li>
+  <li>Visualizar todas los Empresas  registradas </li>
+  <li>Agregar, editar  y eliminar un nuevo empleado a la empresa</li>
+  <li>Visualizar todos los Empleados  registradas </li>
+  <li>Agregar, editar  y eliminar un ingreso de dinero a la empresa</li>
+  <li>Agregar, editar  y eliminar un egreso a la empresa</li>
+  <li>Visualizar todos los movimientos de la empresa </li>
+
+  
+</ul>
+<li></li>
 <p> </P>
 <p> </P>
 
