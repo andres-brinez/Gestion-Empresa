@@ -13,14 +13,15 @@ Adicionalmente, debido a que las transacciones contables son supremamente delica
 
 # Tecnologías utilizadas
 <ul>
-HTML
-CSS 
-JAVA - SPRINGBOOT
-JAVASCRIPT
-SQL- POSTGRES
+  <li>HTML</li>
+  <li>CSS </li>
+  <li>JAVA - SPRINGBOOT</li>
+  <li>JAVASCRIPT - Alertas y validaciones</li>
+  <li>SQL- POSTGRES</li>
+
 </ul>
+
 # Acciones
-<ul>
   <p>Administrador </P>
   <li>Crear, editar  y eliminar  empresas en el sistema</li>
   <li>Visualizar todas los Empresas  registradas </li>
