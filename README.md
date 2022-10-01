@@ -11,6 +11,14 @@ creación de nuevos usuarios que deben tener la posibilidad de efectuar nuevos m
 capaces de modificar información sensible de la empresa, ni tampoco crear nuevos usuarios, con el fin de evitar riesgos de corrupción.
 Adicionalmente, debido a que las transacciones contables son supremamente delicadas, el sistema debería permitir llevar una trazabilidad de quién registró cada transacción, por lo cual el sistema debe contar con un sistema de autenticación.</P>
 
+# Tecnologías utilizadas
+<ul>
+HTML
+CSS 
+JAVA - SPRINGBOOT
+JAVASCRIPT
+SQL- POSTGRES
+</ul>
 # Acciones
 <ul>
   <p>Administrador </P>
